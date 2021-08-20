@@ -16,16 +16,17 @@ abstract class _PokemonStoreBase with Store {
   @observable
   ObservableList<Pokemon> pokemons = ObservableList<Pokemon>().asObservable();
 
-  int _LIMITE = 20;
+  int _offset = -20;
 
   @action
   getPokemons() async {
+    _offset += 20;
     Dio dio = Dio();
     Response response;
     try {
       statusRequest = StatusRequest.loading;
       response = await dio
-          .get('${BaseUrl.url}/pokemon/?offset=0&limit=${_LIMITE.toString()}');
+          .get('${BaseUrl.url}/pokemon/?offset=${_offset.toString()}&limit=20');
 
       List listaPokemons = response.data['results'];
 

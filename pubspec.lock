@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.1"
+  animated_card:
+    dependency: "direct main"
+    description:
+      name: animated_card
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   args:
     dependency: transitive
     description:
@@ -284,6 +291,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  google_fonts:
+    dependency: "direct main"
+    description:
+      name: google_fonts
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   graphs:
     dependency: transitive
     description:

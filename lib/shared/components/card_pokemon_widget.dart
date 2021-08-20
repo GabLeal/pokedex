@@ -23,7 +23,7 @@ class CarPokemonWidget extends StatelessWidget {
         children: [
           Center(
               child: Opacity(
-                  opacity: 1,
+                  opacity: 0.6,
                   child: Image.asset(
                     AppImages.whitePokeball,
                     width: 90,
@@ -61,8 +61,9 @@ class CarPokemonWidget extends StatelessWidget {
               top: 10,
               child: Text(
                 "${pokemon.name}",
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: Colors.black,
+                ),
               )),
         ],
       ),

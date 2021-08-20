@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/shared/components/card_pokemon_widget.dart';
+import 'package:pokedex/shared/components/loading.dart';
 
 import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
@@ -15,10 +16,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PokemonStore _pokemonStore = PokemonStore();
+  var _controller = ScrollController();
 
   @override
   void initState() {
     _pokemonStore.getPokemons();
+
+    // Setup the listener.
+    _controller.addListener(() {
+      if (_controller.position.atEdge) {
+        if (_controller.position.pixels == 0) {
+          // You're at the top.
+        } else {
+          // You're at the bottom.
+        }
+      }
+    });
     super.initState();
   }
 
@@ -65,7 +78,21 @@ class _HomePageState extends State<HomePage> {
           //     ],
           //   ),
           // ),
-          _listaPokemons()
+          _listaPokemons(),
+          Observer(builder: (_) {
+            if (_pokemonStore.statusRequest == StatusRequest.loading) {
+              return Container(
+                height: size.height,
+                width: size.width,
+                color: Colors.black.withOpacity(0.5),
+                child: Center(
+                  child: Loading(),
+                ),
+              );
+            } else {
+              return Container();
+            }
+          })
         ],
       ),
     );
@@ -74,31 +101,41 @@ class _HomePageState extends State<HomePage> {
   Widget _listaPokemons() {
     return Observer(builder: (_) {
       switch (_pokemonStore.statusRequest) {
-        case StatusRequest.success:
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 3 / 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10),
-                itemCount: _pokemonStore.pokemons.length,
-                itemBuilder: (context, index) {
-                  var pokemon = _pokemonStore.pokemons[index];
-                  return CarPokemonWidget(
-                    pokemon: pokemon,
-                  );
-                }),
-          );
         case StatusRequest.error:
           return Container(
               child: ElevatedButton(
             child: Text("Tentar novamente"),
             onPressed: _pokemonStore.getPokemons,
           ));
+
         default:
-          return LoadingWidget();
+          return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: NotificationListener<ScrollEndNotification>(
+                onNotification: (scrollEnd) {
+                  var metrics = scrollEnd.metrics;
+                  if (metrics.atEdge) {
+                    if (metrics.pixels == 0)
+                      print('At top');
+                    else
+                      _pokemonStore.getPokemons();
+                  }
+                  return true;
+                },
+                child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10),
+                    itemCount: _pokemonStore.pokemons.length,
+                    itemBuilder: (context, index) {
+                      var pokemon = _pokemonStore.pokemons[index];
+                      return CarPokemonWidget(
+                        pokemon: pokemon,
+                      );
+                    }),
+              ));
       }
     });
   }
