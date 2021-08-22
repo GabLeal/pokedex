@@ -2,10 +2,9 @@ import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/util/base_url.dart';
+import 'package:pokedex/util/enums.dart';
 
 part 'pokemon_store.g.dart';
-
-enum StatusRequest { loading, empty, success, error }
 
 class PokemonStore = _PokemonStoreBase with _$PokemonStore;
 

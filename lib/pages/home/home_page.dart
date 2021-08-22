@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/shared/components/card_pokemon_widget.dart';
 import 'package:pokedex/shared/components/loading.dart';
-
-import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
-import 'package:pokedex/util/app_images.dart';
+import 'package:pokedex/util/enums.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,80 +19,128 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _pokemonStore.getPokemons();
-
-    // Setup the listener.
-    _controller.addListener(() {
-      if (_controller.position.atEdge) {
-        if (_controller.position.pixels == 0) {
-          // You're at the top.
-        } else {
-          // You're at the bottom.
-        }
-      }
-    });
     super.initState();
+  }
+
+  TextEditingController _searchQueryController = TextEditingController();
+  bool _isSearching = false;
+  String searchQuery = "Search query";
+
+  Widget _buildSearchField() {
+    return TextField(
+      controller: _searchQueryController,
+      autofocus: true,
+      decoration: InputDecoration(
+        hintText: "Search Data...",
+        border: InputBorder.none,
+        hintStyle: TextStyle(color: Colors.white30),
+      ),
+      style: TextStyle(color: Colors.white, fontSize: 16.0),
+      onChanged: (query) => updateSearchQuery(query),
+    );
+  }
+
+  List<Widget> _buildActions() {
+    if (_isSearching) {
+      return <Widget>[
+        IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            if (_searchQueryController == null ||
+                _searchQueryController.text.isEmpty) {
+              Navigator.pop(context);
+              return;
+            }
+            _clearSearchQuery();
+          },
+        ),
+      ];
+    }
+
+    return <Widget>[
+      IconButton(
+        icon: const Icon(Icons.search),
+        onPressed: _startSearch,
+      ),
+    ];
+  }
+
+  void _startSearch() {
+    ModalRoute.of(context)!
+        .addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
+
+    setState(() {
+      _isSearching = true;
+    });
+  }
+
+  void updateSearchQuery(String newQuery) {
+    setState(() {
+      searchQuery = newQuery;
+    });
+  }
+
+  void _stopSearching() {
+    _clearSearchQuery();
+
+    setState(() {
+      _isSearching = false;
+    });
+  }
+
+  void _clearSearchQuery() {
+    setState(() {
+      _searchQueryController.clear();
+      updateSearchQuery("");
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double statusBar = MediaQuery.of(context).padding.top;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          // _logoPokeBall(size: size),
-          // Container(
-          //   child: Column(
-          //     children: [
-          //       Container(height: statusBar),
-          //       Padding(
-          //         padding:
-          //             const EdgeInsets.symmetric(horizontal: 9.0, vertical: 50),
-          //         child: Column(
-          //           children: [
-          //             Container(
-          //               child: Row(
-          //                 mainAxisAlignment: MainAxisAlignment.end,
-          //                 children: [
-          //                   IconButton(onPressed: () {}, icon: Icon(Icons.menu))
-          //                 ],
-          //               ),
-          //             ),
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.start,
-          //               children: [
-          //                 Text(
-          //                   'Pokedex',
-          //                   style: TextStyle(
-          //                       fontWeight: FontWeight.bold, fontSize: 18),
-          //                 ),
-          //               ],
-          //             ),
-          //           ],
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // ),
-          _listaPokemons(),
-          Observer(builder: (_) {
-            if (_pokemonStore.statusRequest == StatusRequest.loading) {
-              return Container(
-                height: size.height,
-                width: size.width,
-                color: Colors.black.withOpacity(0.5),
-                child: Center(
-                  child: Loading(),
-                ),
-              );
-            } else {
-              return Container();
-            }
-          })
-        ],
-      ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          appBar: AppBar(
+              leading: _isSearching ? const BackButton() : Container(),
+              title: _isSearching ? _buildSearchField() : Text('Pokedex'),
+              actions: _buildActions(),
+              backgroundColor: Color(0xFFFF0000),
+              centerTitle: true,
+              bottom: TabBar(
+                indicatorColor: Colors.white,
+                labelPadding: EdgeInsets.only(bottom: 10, top: 10),
+                tabs: <Widget>[
+                  Text("Pokemons"),
+                  Text("Favoritos"),
+                ],
+              )),
+          backgroundColor: Colors.white,
+          body: TabBarView(
+            children: <Widget>[
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  _listaPokemons(),
+                  Observer(builder: (_) {
+                    if (_pokemonStore.statusRequest == StatusRequest.loading) {
+                      return Container(
+                        height: size.height,
+                        width: size.width,
+                        color: Colors.black.withOpacity(0.5),
+                        child: Center(
+                          child: Loading(),
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  })
+                ],
+              ),
+              Text("Segunda guia selecionada")
+            ],
+          )),
     );
   }
 
@@ -115,10 +161,7 @@ class _HomePageState extends State<HomePage> {
                 onNotification: (scrollEnd) {
                   var metrics = scrollEnd.metrics;
                   if (metrics.atEdge) {
-                    if (metrics.pixels == 0)
-                      print('At top');
-                    else
-                      _pokemonStore.getPokemons();
+                    if (metrics.pixels != 0) _pokemonStore.getPokemons();
                   }
                   return true;
                 },
@@ -138,18 +181,5 @@ class _HomePageState extends State<HomePage> {
               ));
       }
     });
-  }
-
-  Widget _logoPokeBall({required Size size}) {
-    return Positioned(
-        top: -(240 / 4.7),
-        left: size.width - (240 / 1.6),
-        child: Opacity(
-            opacity: 0.2,
-            child: Image.asset(
-              AppImages.blackPokeball,
-              height: 240,
-              width: 240,
-            )));
   }
 }

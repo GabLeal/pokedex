@@ -19,7 +19,6 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         fontFamily: 'PreStart2P',
         textTheme: TextTheme(bodyText1: TextStyle(fontSize: 14.0)),
       ),

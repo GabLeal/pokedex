@@ -24,10 +24,33 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
     });
   }
 
+  final _$pokemonsAtom = Atom(name: '_PokemonStoreBase.pokemons');
+
+  @override
+  ObservableList<Pokemon> get pokemons {
+    _$pokemonsAtom.reportRead();
+    return super.pokemons;
+  }
+
+  @override
+  set pokemons(ObservableList<Pokemon> value) {
+    _$pokemonsAtom.reportWrite(value, super.pokemons, () {
+      super.pokemons = value;
+    });
+  }
+
+  final _$getPokemonsAsyncAction = AsyncAction('_PokemonStoreBase.getPokemons');
+
+  @override
+  Future getPokemons() {
+    return _$getPokemonsAsyncAction.run(() => super.getPokemons());
+  }
+
   @override
   String toString() {
     return '''
-statusRequest: ${statusRequest}
+statusRequest: ${statusRequest},
+pokemons: ${pokemons}
     ''';
   }
 }

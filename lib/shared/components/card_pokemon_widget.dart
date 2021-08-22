@@ -65,6 +65,13 @@ class CarPokemonWidget extends StatelessWidget {
                   color: Colors.black,
                 ),
               )),
+          Positioned(
+              left: 10,
+              bottom: 10,
+              child: Text(
+                "${pokemon.order.toString().padLeft(3, '0')}",
+                style: TextStyle(color: Colors.black, fontSize: 10),
+              )),
         ],
       ),
     );
