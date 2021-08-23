@@ -28,12 +28,8 @@ dependencies:
   provider: ^5.0.0
   dio: ^4.0.0
   cached_network_image: ^3.1.0
-  flutter_svg: ^0.22.0
   flutter_staggered_animations: ^1.0.0
-  google_fonts: ^2.1.0
   animated_card: ^2.0.0
-  hive: ^2.0.4
-  flutter_cache_manager: ^3.1.2
   shared_preferences: ^2.0.6
 
 
