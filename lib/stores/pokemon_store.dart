@@ -56,7 +56,7 @@ abstract class _PokemonStoreBase with Store {
     }
   }
 
-  searchPokemonByName(String name) async {
+  Future<Pokemon?> searchPokemonByName(String name) async {
     statusRequest = StatusRequest.loading;
     Dio dio = Dio();
     Response response;
@@ -66,11 +66,13 @@ abstract class _PokemonStoreBase with Store {
       var pokemonResponse = response.data;
 
       Pokemon pokemon = Pokemon.fromJson(pokemonResponse);
-      pokemons.add(pokemon);
+      // pokemons.add(pokemon);
       statusRequest = StatusRequest.success;
+      return pokemon;
     } catch (erro) {
-      statusRequest = StatusRequest.error;
+      statusRequest = StatusRequest.success;
       print(erro);
+      return null;
     }
   }
 }

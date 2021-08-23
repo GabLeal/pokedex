@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pokedex/shared/components/app_bar_widget.dart';
 import 'package:pokedex/shared/components/card_pokemon_widget.dart';
 import 'package:pokedex/shared/components/loading.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:pokedex/util/enums.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,117 +15,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PokemonStore _pokemonStore = PokemonStore();
   var _controller = ScrollController();
 
   @override
   void initState() {
-    _pokemonStore.getPokemons();
+    final pokemonStore = context.read<PokemonStore>();
+
+    pokemonStore.getPokemons();
     super.initState();
-  }
-
-  TextEditingController _searchQueryController = TextEditingController();
-  bool _isSearching = false;
-  String searchQuery = "Search query";
-
-  Widget _buildSearchField() {
-    return TextField(
-      controller: _searchQueryController,
-      autofocus: true,
-      decoration: InputDecoration(
-        hintText: "Search pokemon...",
-        border: InputBorder.none,
-        hintStyle: TextStyle(color: Colors.white60, fontSize: 13.0),
-      ),
-      style: TextStyle(color: Colors.white, fontSize: 16.0),
-      onSubmitted: (query) => updateSearchQuery(query),
-    );
-  }
-
-  List<Widget> _buildActions() {
-    if (_isSearching) {
-      return <Widget>[
-        IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            if (_searchQueryController == null ||
-                _searchQueryController.text.isEmpty) {
-              Navigator.pop(context);
-              return;
-            }
-            _clearSearchQuery();
-          },
-        ),
-      ];
-    }
-
-    return <Widget>[
-      IconButton(
-        icon: const Icon(Icons.search),
-        onPressed: _startSearch,
-      ),
-    ];
-  }
-
-  void _startSearch() {
-    ModalRoute.of(context)!
-        .addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
-
-    setState(() {
-      _isSearching = true;
-    });
-  }
-
-  void updateSearchQuery(String newQuery) {
-    setState(() {
-      searchQuery = newQuery;
-    });
-
-    _pokemonStore.searchPokemonByName(newQuery.toLowerCase());
-  }
-
-  void _stopSearching() {
-    _clearSearchQuery();
-
-    setState(() {
-      _isSearching = false;
-    });
-  }
-
-  void _clearSearchQuery() {
-    setState(() {
-      _searchQueryController.clear();
-      updateSearchQuery("");
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    PokemonStore _pokemonStore = Provider.of<PokemonStore>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-          appBar: AppBar(
-              leading: _isSearching ? const BackButton() : Container(),
-              title: _isSearching ? _buildSearchField() : Text('Pokedex'),
-              actions: _buildActions(),
-              backgroundColor: Color(0xFFFF0000),
-              centerTitle: true,
-              bottom: TabBar(
-                indicatorColor: Colors.white,
-                labelPadding: EdgeInsets.only(bottom: 10, top: 10),
-                tabs: <Widget>[
-                  Text("Pokemons"),
-                  Text("Favoritos"),
-                ],
-              )),
+          appBar: AppBarWidget(),
           backgroundColor: Colors.white,
           body: TabBarView(
             children: <Widget>[
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  _listaPokemons(),
+                  _listaPokemons(_pokemonStore),
                   Observer(builder: (_) {
                     if (_pokemonStore.statusRequest == StatusRequest.loading) {
                       return Container(
@@ -146,14 +62,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _listaPokemons() {
+  Widget _listaPokemons(PokemonStore pokemonStore) {
     return Observer(builder: (_) {
-      switch (_pokemonStore.statusRequest) {
+      switch (pokemonStore.statusRequest) {
         case StatusRequest.error:
           return Container(
               child: ElevatedButton(
             child: Text("Tentar novamente"),
-            onPressed: _pokemonStore.getPokemons,
+            onPressed: pokemonStore.getPokemons,
           ));
 
         default:
@@ -163,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                 onNotification: (scrollEnd) {
                   var metrics = scrollEnd.metrics;
                   if (metrics.atEdge) {
-                    if (metrics.pixels != 0) _pokemonStore.getPokemons();
+                    if (metrics.pixels != 0) pokemonStore.getPokemons();
                   }
                   return true;
                 },
@@ -173,9 +89,9 @@ class _HomePageState extends State<HomePage> {
                         childAspectRatio: 3 / 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10),
-                    itemCount: _pokemonStore.pokemons.length,
+                    itemCount: pokemonStore.pokemons.length,
                     itemBuilder: (context, index) {
-                      var pokemon = _pokemonStore.pokemons[index];
+                      var pokemon = pokemonStore.pokemons[index];
                       return CarPokemonWidget(
                         pokemon: pokemon,
                       );

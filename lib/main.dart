@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/pages/home/home_page.dart';
+import 'package:pokedex/stores/pokemon_store.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(App());
@@ -15,14 +17,16 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        fontFamily: 'PreStart2P',
-        textTheme: TextTheme(bodyText1: TextStyle(fontSize: 14.0)),
-      ),
-      home: HomePage(),
-    );
+    return MultiProvider(
+        providers: [Provider<PokemonStore>(create: (_) => PokemonStore())],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            fontFamily: 'PreStart2P',
+            textTheme: TextTheme(bodyText1: TextStyle(fontSize: 14.0)),
+          ),
+          home: HomePage(),
+        ));
   }
 }

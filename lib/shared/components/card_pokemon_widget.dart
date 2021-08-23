@@ -15,35 +15,35 @@ class CarPokemonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: ColorstypePokemon.colorType[pokemon.types![0].type!.name],
-          borderRadius: BorderRadius.circular(10)),
-      child: Stack(
-        children: [
-          Center(
-              child: Opacity(
-                  opacity: 0.6,
-                  child: Image.asset(
-                    AppImages.whitePokeball,
-                    width: 90,
-                  ))),
-          Positioned(
-            right: 0,
-            bottom: 0,
-            child: Column(
-              children: [
-                // Text("${pokemon.name}"),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => InfoPokemonPage(
-                                  pokemon: pokemon,
-                                )));
-                  },
-                  child: Hero(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => InfoPokemonPage(
+                      pokemon: pokemon,
+                    )));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: ColorstypePokemon.colorType[pokemon.types![0].type!.name],
+            borderRadius: BorderRadius.circular(10)),
+        child: Stack(
+          children: [
+            Center(
+                child: Opacity(
+                    opacity: 0.6,
+                    child: Image.asset(
+                      AppImages.whitePokeball,
+                      width: 90,
+                    ))),
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: Column(
+                children: [
+                  // Text("${pokemon.name}"),
+                  Hero(
                     tag: pokemon.order ?? 'dash',
                     child: CachedNetworkImage(
                       imageUrl: "${pokemon.sprites!.frontDefault}",
@@ -51,28 +51,28 @@ class CarPokemonWidget extends StatelessWidget {
                           CircularProgressIndicator(),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-          Positioned(
-              left: 10,
-              top: 10,
-              child: Text(
-                "${pokemon.name}",
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              )),
-          Positioned(
-              left: 10,
-              bottom: 10,
-              child: Text(
-                "${pokemon.order.toString().padLeft(3, '0')}",
-                style: TextStyle(color: Colors.black, fontSize: 10),
-              )),
-        ],
+            Positioned(
+                left: 10,
+                top: 10,
+                child: Text(
+                  "${pokemon.name}",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                )),
+            Positioned(
+                left: 10,
+                bottom: 10,
+                child: Text(
+                  "${pokemon.order.toString().padLeft(3, '0')}",
+                  style: TextStyle(color: Colors.black, fontSize: 10),
+                )),
+          ],
+        ),
       ),
     );
   }
