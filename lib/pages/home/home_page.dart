@@ -31,12 +31,12 @@ class _HomePageState extends State<HomePage> {
       controller: _searchQueryController,
       autofocus: true,
       decoration: InputDecoration(
-        hintText: "Search Data...",
+        hintText: "Search pokemon...",
         border: InputBorder.none,
-        hintStyle: TextStyle(color: Colors.white30),
+        hintStyle: TextStyle(color: Colors.white60, fontSize: 13.0),
       ),
       style: TextStyle(color: Colors.white, fontSize: 16.0),
-      onChanged: (query) => updateSearchQuery(query),
+      onSubmitted: (query) => updateSearchQuery(query),
     );
   }
 
@@ -78,6 +78,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       searchQuery = newQuery;
     });
+
+    _pokemonStore.searchPokemonByName(newQuery.toLowerCase());
   }
 
   void _stopSearching() {

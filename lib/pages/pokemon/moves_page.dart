@@ -1,11 +1,10 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
-
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/shared/components/loading.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
+import 'package:pokedex/stores/ability_store.dart';
 import 'package:pokedex/stores/move_store.dart';
 import 'package:pokedex/util/app_colors.dart';
 import 'package:pokedex/util/enums.dart';
@@ -18,6 +17,7 @@ class MovesPage extends StatelessWidget {
   }) : super(key: key);
 
   MoveStore _moveStore = MoveStore();
+  AbilityStore _abilityStore = AbilityStore();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -35,7 +35,8 @@ class MovesPage extends StatelessWidget {
                 return _cardMoveOrAbility(
                     text: e.ability!.name,
                     context: context,
-                    url: e.ability!.url);
+                    url: e.ability!.url,
+                    isAbility: true);
               }).toList(),
             ),
             _title('Moves', size),
@@ -60,7 +61,10 @@ class MovesPage extends StatelessWidget {
   }
 
   Widget _cardMoveOrAbility(
-      {String? text, BuildContext? context, String? url}) {
+      {String? text,
+      BuildContext? context,
+      String? url,
+      bool isAbility = false}) {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(vertical: 5),
@@ -80,7 +84,9 @@ class MovesPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              _showInfoMove(context, url);
+              isAbility
+                  ? _showInfoAbility(context, url)
+                  : _showInfoMove(context, url);
             },
             child: Icon(Icons.search),
           )
@@ -104,7 +110,66 @@ class MovesPage extends StatelessWidget {
     );
   }
 
-  void _showInfoAbility() {}
+  Widget _infoAblity(String label, String? value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 7.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label),
+          SizedBox(height: 10),
+          Text(
+            value != null ? value.toString() : '-',
+            style: TextStyle(color: Colors.black54, wordSpacing: 5),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showInfoAbility(context, url) {
+    _abilityStore.getAbilityDetails(url);
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Padding(
+              padding: const EdgeInsets.all(15),
+              child: Observer(builder: (_) {
+                switch (_abilityStore.statusRequestAbility) {
+                  case StatusRequest.loading:
+                    return Center(
+                      child: Loading(),
+                    );
+                  case StatusRequest.error:
+                    return Text("deu ruim");
+                  case StatusRequest.success:
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("${_abilityStore.abilityDetails!.name}"),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          height: 1,
+                          color: ColorstypePokemon
+                              .colorType[pokemon.types!.first.type!.name],
+                        ),
+                        _infoAblity(
+                            'effect',
+                            _abilityStore
+                                .abilityDetails!.effectEntries!.last.effect),
+                        _infoAblity(
+                            'short effect',
+                            _abilityStore.abilityDetails!.effectEntries!.last
+                                .shortEffect),
+                      ],
+                    );
+                  default:
+                    return Container();
+                }
+              }));
+        });
+  }
 
   void _showInfoMove(context, url) {
     _moveStore.getMovie(url);

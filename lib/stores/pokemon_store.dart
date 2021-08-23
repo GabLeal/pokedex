@@ -55,4 +55,22 @@ abstract class _PokemonStoreBase with Store {
       print(erro);
     }
   }
+
+  searchPokemonByName(String name) async {
+    statusRequest = StatusRequest.loading;
+    Dio dio = Dio();
+    Response response;
+    try {
+      response = await dio.get('${BaseUrl.url}/pokemon/$name');
+
+      var pokemonResponse = response.data;
+
+      Pokemon pokemon = Pokemon.fromJson(pokemonResponse);
+      pokemons.add(pokemon);
+      statusRequest = StatusRequest.success;
+    } catch (erro) {
+      statusRequest = StatusRequest.error;
+      print(erro);
+    }
+  }
 }
