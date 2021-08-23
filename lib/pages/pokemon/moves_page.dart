@@ -132,42 +132,44 @@ class MovesPage extends StatelessWidget {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return Padding(
-              padding: const EdgeInsets.all(15),
-              child: Observer(builder: (_) {
-                switch (_abilityStore.statusRequestAbility) {
-                  case StatusRequest.loading:
-                    return Center(
-                      child: Loading(),
-                    );
-                  case StatusRequest.error:
-                    return Text("deu ruim");
-                  case StatusRequest.success:
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text("${_abilityStore.abilityDetails!.name}"),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 10),
-                          height: 1,
-                          color: ColorstypePokemon
-                              .colorType[pokemon.types!.first.type!.name],
-                        ),
-                        _infoAblity(
-                            'effect',
-                            _abilityStore
-                                .abilityDetails!.effectEntries!.last.effect),
-                        _infoAblity(
-                            'short effect',
-                            _abilityStore.abilityDetails!.effectEntries!.last
-                                .shortEffect),
-                      ],
-                    );
-                  default:
-                    return Container();
-                }
-              }));
+          return SingleChildScrollView(
+            child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Observer(builder: (_) {
+                  switch (_abilityStore.statusRequestAbility) {
+                    case StatusRequest.loading:
+                      return Center(
+                        child: Loading(),
+                      );
+                    case StatusRequest.error:
+                      return Text("deu ruim");
+                    case StatusRequest.success:
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text("${_abilityStore.abilityDetails!.name}"),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            height: 1,
+                            color: ColorstypePokemon
+                                .colorType[pokemon.types!.first.type!.name],
+                          ),
+                          _infoAblity(
+                              'effect',
+                              _abilityStore
+                                  .abilityDetails!.effectEntries!.last.effect),
+                          _infoAblity(
+                              'short effect',
+                              _abilityStore.abilityDetails!.effectEntries!.last
+                                  .shortEffect),
+                        ],
+                      );
+                    default:
+                      return Container();
+                  }
+                })),
+          );
         });
   }
 

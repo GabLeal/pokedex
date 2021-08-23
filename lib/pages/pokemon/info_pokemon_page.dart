@@ -2,12 +2,13 @@ import 'package:animated_card/animated_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/model/model.dart';
+import 'package:pokedex/pages/pokemon/damage_page.dart';
 import 'package:pokedex/pages/pokemon/moves_page.dart';
 import 'package:pokedex/pages/pokemon/stats_page.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
 import 'package:pokedex/util/app_colors.dart';
 
-enum Info { STATS, MOVES, OUTRO }
+enum Info { STATS, MOVES, DAMAGE }
 
 class InfoPokemonPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -91,9 +92,9 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
                     _info = Info.MOVES;
                   });
                 }),
-                _itemMenu("Rotas", () {
+                _itemMenu("Damage", () {
                   setState(() {
-                    _info = Info.OUTRO;
+                    _info = Info.DAMAGE;
                   });
                 })
               ],
@@ -108,6 +109,11 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: MovesPage(pokemon: widget.pokemon),
+            )
+          else if (_info == Info.DAMAGE)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: DamagePage(pokemon: widget.pokemon),
             )
         ]))
       ],
