@@ -3,7 +3,7 @@ import 'package:pokedex/pages/home/home_page.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   runApp(App());
 }
 

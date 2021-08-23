@@ -1,12 +1,14 @@
-import 'package:animated_card/animated_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/pages/pokemon/damage_page.dart';
 import 'package:pokedex/pages/pokemon/moves_page.dart';
 import 'package:pokedex/pages/pokemon/stats_page.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
+import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:pokedex/util/app_colors.dart';
+import 'package:provider/provider.dart';
 
 enum Info { STATS, MOVES, DAMAGE }
 
@@ -25,6 +27,7 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    PokemonStore _pokemonStore = Provider.of<PokemonStore>(context);
     return Scaffold(
         body: CustomScrollView(
       slivers: [
@@ -39,7 +42,19 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
             "${widget.pokemon.name}",
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.star_border))
+            IconButton(onPressed: () {
+              if (_pokemonStore.favoritesPokemons.contains(widget.pokemon)) {
+                _pokemonStore.removeFavoritePokemon(widget.pokemon);
+              } else {
+                _pokemonStore.favoritePokemon(widget.pokemon);
+              }
+            }, icon: Observer(builder: (_) {
+              if (_pokemonStore.favoritesPokemons.contains(widget.pokemon)) {
+                return Icon(Icons.stacked_bar_chart_sharp);
+              } else {
+                return Icon(Icons.star_border);
+              }
+            }))
           ],
           expandedHeight: 220.0,
           flexibleSpace: FlexibleSpaceBar(
@@ -138,9 +153,5 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
         ),
       ),
     );
-  }
-
-  Widget _localization() {
-    return Column(children: [Text("${widget.pokemon.locationAreaEncounters}")]);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
+import 'package:pokedex/cache/cache_favorites.dart';
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/util/base_url.dart';
 import 'package:pokedex/util/enums.dart';
@@ -15,7 +16,33 @@ abstract class _PokemonStoreBase with Store {
   @observable
   ObservableList<Pokemon> pokemons = ObservableList<Pokemon>().asObservable();
 
+  @observable
+  ObservableList<Pokemon> favoritesPokemons =
+      ObservableList<Pokemon>().asObservable();
+
   int _offset = -20;
+
+  CacheFavorites _cacheFavorites = CacheFavorites();
+
+  getFavoritesPokemons() async {
+    List<Pokemon> poke = await _cacheFavorites.getFavoritesPokemons();
+
+    if (poke.isNotEmpty) {
+      favoritesPokemons.addAll(poke);
+    }
+  }
+
+  favoritePokemon(Pokemon pokemon) async {
+    bool isSave = await _cacheFavorites.favoritePokemon(pokemon);
+    if (isSave) favoritesPokemons.add(pokemon);
+  }
+
+  removeFavoritePokemon(Pokemon pokemon) async {
+    bool isremove = await _cacheFavorites.removeFavoritePokemon(pokemon);
+    if (isremove) {
+      favoritesPokemons.removeWhere((p) => p.name == pokemon.name);
+    }
+  }
 
   @action
   getPokemons() async {

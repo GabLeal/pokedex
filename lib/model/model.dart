@@ -144,7 +144,7 @@ class Moves {
     if (this.move != null) {
       data['move'] = this.move!.toJson();
     }
-    data['url'] = this.url!;
+    data['url'] = this.url;
     return data;
   }
 }

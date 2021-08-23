@@ -39,6 +39,22 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
     });
   }
 
+  final _$favoritesPokemonsAtom =
+      Atom(name: '_PokemonStoreBase.favoritesPokemons');
+
+  @override
+  ObservableList<Pokemon> get favoritesPokemons {
+    _$favoritesPokemonsAtom.reportRead();
+    return super.favoritesPokemons;
+  }
+
+  @override
+  set favoritesPokemons(ObservableList<Pokemon> value) {
+    _$favoritesPokemonsAtom.reportWrite(value, super.favoritesPokemons, () {
+      super.favoritesPokemons = value;
+    });
+  }
+
   final _$getPokemonsAsyncAction = AsyncAction('_PokemonStoreBase.getPokemons');
 
   @override
@@ -50,7 +66,8 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
   String toString() {
     return '''
 statusRequest: ${statusRequest},
-pokemons: ${pokemons}
+pokemons: ${pokemons},
+favoritesPokemons: ${favoritesPokemons}
     ''';
   }
 }

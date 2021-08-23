@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/shared/components/app_bar_widget.dart';
-import 'package:pokedex/shared/components/card_pokemon_widget.dart';
+import 'package:pokedex/shared/components/grid_pokemons_widget.dart';
 import 'package:pokedex/shared/components/loading.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:pokedex/util/enums.dart';
@@ -15,13 +15,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _controller = ScrollController();
-
   @override
   void initState() {
     final pokemonStore = context.read<PokemonStore>();
 
     pokemonStore.getPokemons();
+    pokemonStore.getFavoritesPokemons();
     super.initState();
   }
 
@@ -56,7 +55,21 @@ class _HomePageState extends State<HomePage> {
                   })
                 ],
               ),
-              Text("Segunda guia selecionada")
+              Observer(builder: (_) {
+                if (_pokemonStore.favoritesPokemons.isEmpty) {
+                  return Center(
+                      child: Text(
+                    'Você ainda não possuim pokemons favoritos. Adicone eles a sua lista.',
+                    textAlign: TextAlign.center,
+                  ));
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridPokemonsWidget(
+                        pokemons: _pokemonStore.favoritesPokemons),
+                  );
+                }
+              })
             ],
           )),
     );
@@ -76,27 +89,14 @@ class _HomePageState extends State<HomePage> {
           return Padding(
               padding: const EdgeInsets.all(8.0),
               child: NotificationListener<ScrollEndNotification>(
-                onNotification: (scrollEnd) {
-                  var metrics = scrollEnd.metrics;
-                  if (metrics.atEdge) {
-                    if (metrics.pixels != 0) pokemonStore.getPokemons();
-                  }
-                  return true;
-                },
-                child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200,
-                        childAspectRatio: 3 / 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10),
-                    itemCount: pokemonStore.pokemons.length,
-                    itemBuilder: (context, index) {
-                      var pokemon = pokemonStore.pokemons[index];
-                      return CarPokemonWidget(
-                        pokemon: pokemon,
-                      );
-                    }),
-              ));
+                  onNotification: (scrollEnd) {
+                    var metrics = scrollEnd.metrics;
+                    if (metrics.atEdge) {
+                      if (metrics.pixels != 0) pokemonStore.getPokemons();
+                    }
+                    return true;
+                  },
+                  child: GridPokemonsWidget(pokemons: pokemonStore.pokemons)));
       }
     });
   }
