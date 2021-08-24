@@ -20,7 +20,7 @@ abstract class _PokemonStoreBase with Store {
   ObservableList<Pokemon> favoritesPokemons =
       ObservableList<Pokemon>().asObservable();
 
-  int _offset = -20;
+  int _offset = 20;
 
   CacheFavorites _cacheFavorites = CacheFavorites();
 
@@ -46,7 +46,6 @@ abstract class _PokemonStoreBase with Store {
 
   @action
   getPokemons() async {
-    _offset += 20;
     Dio dio = Dio();
     Response response;
     try {
@@ -59,7 +58,7 @@ abstract class _PokemonStoreBase with Store {
       for (int i = 0; i < listaPokemons.length; i++) {
         await loadingPokemon(listaPokemons[i]['url']);
       }
-
+      _offset += 20;
       statusRequest = StatusRequest.success;
     } catch (erro) {
       statusRequest = StatusRequest.error;

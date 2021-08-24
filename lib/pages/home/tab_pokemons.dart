@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pokedex/shared/components/button_retry.dart';
 import 'package:pokedex/shared/components/grid_pokemons_widget.dart';
 import 'package:pokedex/shared/components/loading.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:pokedex/util/enums.dart';
 import 'package:provider/provider.dart';
 
-class TabPokemons extends StatefulWidget {
-  const TabPokemons({Key? key}) : super(key: key);
-
-  @override
-  _TabPokemonsState createState() => _TabPokemonsState();
-}
-
-class _TabPokemonsState extends State<TabPokemons> {
-  @override
-  void initState() {
-    final pokemonStore = context.read<PokemonStore>();
-
-    pokemonStore.getPokemons();
-
-    super.initState();
-  }
-
+class TabPokemons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -53,11 +38,7 @@ class _TabPokemonsState extends State<TabPokemons> {
     return Observer(builder: (_) {
       switch (pokemonStore.statusRequest) {
         case StatusRequest.error:
-          return Container(
-              child: ElevatedButton(
-            child: Text("Tentar novamente"),
-            onPressed: pokemonStore.getPokemons,
-          ));
+          return ButtonRetry(onTap: pokemonStore.getPokemons);
 
         default:
           return Padding(

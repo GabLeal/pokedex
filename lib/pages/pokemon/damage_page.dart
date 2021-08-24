@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/model/type_damage.dart';
+import 'package:pokedex/shared/components/button_retry.dart';
 import 'package:pokedex/shared/components/loading.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
 import 'package:pokedex/stores/type_damage_store.dart';
@@ -34,7 +35,18 @@ class _DamagePageState extends State<DamagePage> {
             child: Loading(),
           );
         case StatusRequest.error:
-          return Text('Deu ruim');
+          return Column(
+            children: [
+              Text(
+                  "Não estamos conseguindo conectar com a internet no momento."),
+              ButtonRetry(
+                onTap: () {
+                  _typeDamageStore
+                      .getTypeDamage(widget.pokemon.types!.first.type!.url);
+                },
+              )
+            ],
+          );
         case StatusRequest.success:
           var damageRelations = _typeDamageStore.typeDamage!.damageRelations;
           return AnimatedCard(

@@ -4,22 +4,7 @@ import 'package:pokedex/shared/components/grid_pokemons_widget.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:provider/provider.dart';
 
-class TabFavorites extends StatefulWidget {
-  const TabFavorites({Key? key}) : super(key: key);
-
-  @override
-  _TabFavoritesState createState() => _TabFavoritesState();
-}
-
-class _TabFavoritesState extends State<TabFavorites> {
-  @override
-  void initState() {
-    final pokemonStore = context.read<PokemonStore>();
-
-    pokemonStore.getFavoritesPokemons();
-    super.initState();
-  }
-
+class TabFavorites extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PokemonStore _pokemonStore = Provider.of<PokemonStore>(context);
