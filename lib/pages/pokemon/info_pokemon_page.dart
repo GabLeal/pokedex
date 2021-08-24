@@ -49,7 +49,7 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
               }
             }, icon: Observer(builder: (_) {
               if (_pokemonStore.favoritesPokemons.contains(widget.pokemon)) {
-                return Icon(Icons.stacked_bar_chart_sharp);
+                return Icon(Icons.star);
               } else {
                 return Icon(Icons.star_border);
               }
