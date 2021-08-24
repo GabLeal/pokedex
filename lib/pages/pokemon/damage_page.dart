@@ -28,11 +28,15 @@ class _DamagePageState extends State<DamagePage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Observer(builder: (_) {
       switch (_typeDamageStore.statusRequestTypedamage) {
         case StatusRequest.loading:
-          return Center(
-            child: Loading(),
+          return Container(
+            height: size.height / 2.5,
+            child: Center(
+              child: Loading(),
+            ),
           );
         case StatusRequest.error:
           return Column(
@@ -56,14 +60,18 @@ class _DamagePageState extends State<DamagePage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _damageItem(
-                        'Double Damage To', damageRelations!.doubleDamageTo!),
-                    _damageItem('Double Damage From',
-                        damageRelations.doubleDamageFrom!),
-                    _damageItem(
-                        'Half Damage To', damageRelations.halfDamageTo!),
-                    _damageItem(
-                        'Half Damage From', damageRelations.halfDamageFrom!),
+                    if (damageRelations!.doubleDamageTo!.isNotEmpty)
+                      _damageItem(
+                          'Double Damage To', damageRelations!.doubleDamageTo!),
+                    if (damageRelations.doubleDamageFrom!.isNotEmpty)
+                      _damageItem('Double Damage From',
+                          damageRelations.doubleDamageFrom!),
+                    if (damageRelations.halfDamageTo!.isNotEmpty)
+                      _damageItem(
+                          'Half Damage To', damageRelations.halfDamageTo!),
+                    if (damageRelations.halfDamageFrom!.isNotEmpty)
+                      _damageItem(
+                          'Half Damage From', damageRelations.halfDamageFrom!),
                   ]));
         default:
           return Container();
@@ -72,21 +80,24 @@ class _DamagePageState extends State<DamagePage> {
   }
 
   Widget _damageItem(String title, List<Damage> damages) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Wrap(
-            runSpacing: 5,
-            direction: Axis.horizontal,
-            children: damages.map((damage) {
-              return TypeWidget(nameType: damage.name);
-            }).toList(),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Wrap(
+              runSpacing: 5,
+              direction: Axis.horizontal,
+              children: damages.map((damage) {
+                return TypeWidget(nameType: damage.name);
+              }).toList(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

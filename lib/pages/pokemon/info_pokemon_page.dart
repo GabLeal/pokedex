@@ -117,17 +117,20 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
           ),
           if (_info == Info.STATS)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
               child: StatsPage(pokemon: widget.pokemon),
             )
           else if (_info == Info.MOVES)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
               child: MovesPage(pokemon: widget.pokemon),
             )
           else if (_info == Info.DAMAGE)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
               child: DamagePage(pokemon: widget.pokemon),
             )
         ]))

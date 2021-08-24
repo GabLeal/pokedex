@@ -34,7 +34,7 @@ class _StatsPageState extends State<StatsPage> {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 30),
           child: AnimatedCard(
             direction: AnimatedCardDirection.right,
             duration: Duration(milliseconds: 400),
