@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:pokedex/model/move_details.dart';
 
@@ -12,6 +14,7 @@ class MoveDetailsRepository {
       var response = await dio.get(url);
 
       var moveDetailsResponse = response.data;
+      log(response.data.toString());
 
       MoveDetails moveDetails = MoveDetails.fromJson(moveDetailsResponse);
 

@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/model/type_damage.dart';
 import 'package:pokedex/repository/type_damage_repository.dart';
+import 'package:pokedex/util/base_url.dart';
 
 class DioMock extends Mock implements Dio {}
 
@@ -15,7 +15,7 @@ main() {
 
   test('Deve pega Typedamage', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
-        requestOptions: RequestOptions(path: path),
+        requestOptions: RequestOptions(path: BaseUrl.url),
         data: json,
         statusCode: 200));
 
@@ -23,18 +23,8 @@ main() {
 
     expect(typeDamage, isNotNull);
   });
-
-  test('Deve retornar null caso request falhe', () async {
-    when(() => dio.get(any())).thenAnswer((_) async =>
-        Response(requestOptions: RequestOptions(path: path), statusCode: 500));
-
-    TypeDamage? typeDamage = await repository.getTypeDamage(url);
-
-    expect(typeDamage, isNull);
-  });
 }
 
-var path = 'https://pokeapi.co/api/v2/';
 var url = 'https://pokeapi.co/api/v2/type/12/';
 var json = jsonDecode('''
 {
