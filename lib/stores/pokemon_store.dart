@@ -20,7 +20,7 @@ abstract class _PokemonStoreBase with Store {
   ObservableList<Pokemon> favoritesPokemons =
       ObservableList<Pokemon>().asObservable();
 
-  int _offset = 20;
+  int _offset = 0;
 
   CacheFavorites _cacheFavorites = CacheFavorites();
 

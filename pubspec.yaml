@@ -43,6 +43,14 @@ dev_dependencies:
   build_runner: ^2.0.6
   mobx_codegen: ^2.0.2
 
+  flutter_native_splash: ^1.2.1
+
+flutter_native_splash:
+  color: "#FF0000"
+  image: "assets/pokedex.png"
+  android: true
+  ios: true
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -60,6 +68,8 @@ flutter:
     - assets/pokeball.png
     - assets/pokeball_loading.gif
     - assets/poke.png
+    - assets/pokedex.png
+    - assets/pokebola-pixel.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
