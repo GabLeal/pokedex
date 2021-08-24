@@ -6,10 +6,16 @@ class ButtonRetry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: ElevatedButton(
-      child: Text("Tentar novamente"),
-      onPressed: onTap,
-    ));
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Não estamos conseguindo conectar com a internet no momento."),
+        Container(
+            child: ElevatedButton(
+          child: Text("Tentar novamente"),
+          onPressed: onTap,
+        ))
+      ],
+    );
   }
 }

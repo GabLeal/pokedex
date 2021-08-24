@@ -39,17 +39,21 @@ class _DamagePageState extends State<DamagePage> {
             ),
           );
         case StatusRequest.error:
-          return Column(
-            children: [
-              Text(
-                  "Não estamos conseguindo conectar com a internet no momento."),
-              ButtonRetry(
-                onTap: () {
-                  _typeDamageStore
-                      .getTypeDamage(widget.pokemon.types!.first.type!.url);
-                },
-              )
-            ],
+          return Container(
+            height: size.height / 2.5,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                    "Não estamos conseguindo conectar com a internet no momento."),
+                ButtonRetry(
+                  onTap: () {
+                    _typeDamageStore
+                        .getTypeDamage(widget.pokemon.types!.first.type!.url);
+                  },
+                )
+              ],
+            ),
           );
         case StatusRequest.success:
           var damageRelations = _typeDamageStore.typeDamage!.damageRelations;

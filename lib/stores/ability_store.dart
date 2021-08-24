@@ -17,13 +17,13 @@ abstract class _AbilityStoreBase with Store {
 
   void getAbilityDetails(String url) async {
     statusRequestAbility = StatusRequest.loading;
-    try {
-      abilityDetails = await _abilityDetailsRepository.getAbilityDetails(url);
 
+    abilityDetails = await _abilityDetailsRepository.getAbilityDetails(url);
+
+    if (abilityDetails != null) {
       statusRequestAbility = StatusRequest.success;
-    } catch (erro) {
+    } else {
       statusRequestAbility = StatusRequest.error;
-      print(erro);
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/model/model.dart';
+import 'package:pokedex/shared/components/button_retry.dart';
 import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
 import 'package:pokedex/stores/ability_store.dart';
@@ -65,32 +66,32 @@ class MovesPage extends StatelessWidget {
       BuildContext? context,
       String? url,
       bool isAbility = false}) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(vertical: 5),
-      decoration: BoxDecoration(
-          border: Border.all(
-              color:
-                  ColorstypePokemon.colorType[pokemon.types![0].type!.name] ??
-                      Colors.white,
-              width: 1),
-          borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            text!,
-            style: TextStyle(fontSize: 10),
-          ),
-          GestureDetector(
-            onTap: () {
-              isAbility
-                  ? _showInfoAbility(context, url)
-                  : _showInfoMove(context, url);
-            },
-            child: Icon(Icons.search),
-          )
-        ],
+    return GestureDetector(
+      onTap: () {
+        isAbility
+            ? _showInfoAbility(context, url)
+            : _showInfoMove(context, url);
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(vertical: 5),
+        decoration: BoxDecoration(
+            border: Border.all(
+                color:
+                    ColorstypePokemon.colorType[pokemon.types![0].type!.name] ??
+                        Colors.white,
+                width: 1),
+            borderRadius: BorderRadius.circular(10)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              text!,
+              style: TextStyle(fontSize: 10),
+            ),
+            Icon(Icons.search)
+          ],
+        ),
       ),
     );
   }
@@ -142,7 +143,7 @@ class MovesPage extends StatelessWidget {
                         child: LoadingWidget(),
                       );
                     case StatusRequest.error:
-                      return Text("deu ruim");
+                      return ButtonRetry(onTap: () {});
                     case StatusRequest.success:
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,7 +188,7 @@ class MovesPage extends StatelessWidget {
                       child: LoadingWidget(),
                     );
                   case StatusRequest.error:
-                    return Text("deu ruim");
+                    return ButtonRetry(onTap: () {});
                   case StatusRequest.success:
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
