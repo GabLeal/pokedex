@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/util/app_images.dart';
+import 'package:pokedex/themes/app_images.dart';
 
 class LoadingWidget extends StatefulWidget {
   const LoadingWidget({Key? key}) : super(key: key);

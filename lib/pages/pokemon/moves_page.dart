@@ -6,7 +6,7 @@ import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
 import 'package:pokedex/stores/ability_store.dart';
 import 'package:pokedex/stores/move_store.dart';
-import 'package:pokedex/util/app_colors.dart';
+import 'package:pokedex/themes/app_colors.dart';
 import 'package:pokedex/util/enums.dart';
 
 class MovesPage extends StatelessWidget {

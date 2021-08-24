@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/util/app_colors.dart';
+import 'package:pokedex/themes/app_colors.dart';
 
 class TypeWidget extends StatelessWidget {
   String? nameType;

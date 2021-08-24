@@ -7,7 +7,7 @@ import 'package:pokedex/pages/pokemon/moves_page.dart';
 import 'package:pokedex/pages/pokemon/stats_page.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
-import 'package:pokedex/util/app_colors.dart';
+import 'package:pokedex/themes/app_colors.dart';
 import 'package:provider/provider.dart';
 
 enum Info { STATS, MOVES, DAMAGE }

@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/pages/pokemon/info_pokemon_page.dart';
-import 'package:pokedex/util/app_colors.dart';
-import 'package:pokedex/util/app_images.dart';
+import 'package:pokedex/themes/app_colors.dart';
+import 'package:pokedex/themes/app_images.dart';
 
 class CarPokemonWidget extends StatelessWidget {
   final Pokemon pokemon;
