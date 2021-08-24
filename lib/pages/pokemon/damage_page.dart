@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/model/type_damage.dart';
 import 'package:pokedex/shared/components/button_retry.dart';
-import 'package:pokedex/shared/components/loading.dart';
+import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
 import 'package:pokedex/stores/type_damage_store.dart';
 import 'package:pokedex/util/enums.dart';
@@ -35,7 +35,7 @@ class _DamagePageState extends State<DamagePage> {
           return Container(
             height: size.height / 2.5,
             child: Center(
-              child: Loading(),
+              child: LoadingWidget(),
             ),
           );
         case StatusRequest.error:

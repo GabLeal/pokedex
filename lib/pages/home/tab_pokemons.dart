@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/shared/components/button_retry.dart';
 import 'package:pokedex/shared/components/grid_pokemons_widget.dart';
-import 'package:pokedex/shared/components/loading.dart';
+import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:pokedex/util/enums.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +23,7 @@ class TabPokemons extends StatelessWidget {
               width: size.width,
               color: Colors.black.withOpacity(0.5),
               child: Center(
-                child: Loading(),
+                child: LoadingWidget(),
               ),
             );
           } else {

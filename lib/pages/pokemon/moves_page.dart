@@ -2,7 +2,7 @@ import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/model/model.dart';
-import 'package:pokedex/shared/components/loading.dart';
+import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
 import 'package:pokedex/stores/ability_store.dart';
 import 'package:pokedex/stores/move_store.dart';
@@ -139,7 +139,7 @@ class MovesPage extends StatelessWidget {
                   switch (_abilityStore.statusRequestAbility) {
                     case StatusRequest.loading:
                       return Center(
-                        child: Loading(),
+                        child: LoadingWidget(),
                       );
                     case StatusRequest.error:
                       return Text("deu ruim");
@@ -184,7 +184,7 @@ class MovesPage extends StatelessWidget {
                 switch (_moveStore.statusRequestMove) {
                   case StatusRequest.loading:
                     return Center(
-                      child: Loading(),
+                      child: LoadingWidget(),
                     );
                   case StatusRequest.error:
                     return Text("deu ruim");

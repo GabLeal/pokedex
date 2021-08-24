@@ -4,6 +4,7 @@ import 'package:pokedex/cache/cache_favorites.dart';
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/util/base_url.dart';
 import 'package:pokedex/util/enums.dart';
+import 'package:bot_toast/bot_toast.dart';
 
 part 'pokemon_store.g.dart';
 
@@ -98,6 +99,10 @@ abstract class _PokemonStoreBase with Store {
     } catch (erro) {
       statusRequest = StatusRequest.success;
       print(erro);
+      BotToast.showText(
+          duration: Duration(seconds: 3),
+          text: "Pokemon not found. Try again."); //popup a text toast;
+
       return null;
     }
   }

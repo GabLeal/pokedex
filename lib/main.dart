@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/pages/home/home_page.dart';
 import 'package:pokedex/splash_screen.dart';
@@ -21,6 +22,8 @@ class _AppState extends State<App> {
     return MultiProvider(
         providers: [Provider<PokemonStore>(create: (_) => PokemonStore())],
         child: MaterialApp(
+          builder: BotToastInit(), //1. call BotToastInit
+          navigatorObservers: [BotToastNavigatorObserver()],
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
