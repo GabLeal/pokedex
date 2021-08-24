@@ -38,9 +38,8 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
           floating: true,
           snap: true,
           centerTitle: true,
-          title: Text(
-            "${widget.pokemon.name}",
-          ),
+          title: Text("${widget.pokemon.name}".replaceFirst(
+              widget.pokemon.name![0], widget.pokemon.name![0].toUpperCase())),
           actions: [
             IconButton(onPressed: () {
               if (_pokemonStore.favoritesPokemons.contains(widget.pokemon)) {
@@ -97,21 +96,9 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _itemMenu("Stats", () {
-                  setState(() {
-                    _info = Info.STATS;
-                  });
-                }),
-                _itemMenu("Moves", () {
-                  setState(() {
-                    _info = Info.MOVES;
-                  });
-                }),
-                _itemMenu("Damage", () {
-                  setState(() {
-                    _info = Info.DAMAGE;
-                  });
-                })
+                _itemMenu("Stats", Info.STATS),
+                _itemMenu("Moves", Info.MOVES),
+                _itemMenu("Damage", Info.DAMAGE)
               ],
             ),
           ),
@@ -138,21 +125,29 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
     ));
   }
 
-  Widget _itemMenu(String label, Function() ontap) {
+  Widget _itemMenu(String label, Info info) {
+    Color color =
+        ColorstypePokemon.colorType[widget.pokemon.types![0].type!.name]!;
     return GestureDetector(
-      onTap: ontap,
-      child: Container(
+      onTap: () {
+        setState(() {
+          _info = info;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(seconds: 1),
+        curve: Curves.easeIn,
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            border: Border.all(
-                color: ColorstypePokemon
-                        .colorType[widget.pokemon.types![0].type!.name] ??
-                    Colors.white,
-                width: 1),
+            color: _info == info ? color : Colors.white,
+            border: Border.all(color: color, width: 1.5),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           label,
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(
+              fontSize: 13,
+              color: _info == info ? Colors.white : color,
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

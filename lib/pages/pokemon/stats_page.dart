@@ -50,17 +50,17 @@ class _StatsPageState extends State<StatsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Altura ${widget.pokemon.height}",
+                        "Height ${widget.pokemon.height}",
                         style: TextStyle(fontSize: 10),
                       ),
                       Container(
                         height: size.height * 0.05,
-                        width: 1,
+                        width: 2,
                         color: ColorstypePokemon
                             .colorType[widget.pokemon.types![0].type!.name],
                       ),
                       Text(
-                        "Peso ${widget.pokemon.weight}",
+                        "Weight ${widget.pokemon.weight}",
                         style: TextStyle(fontSize: 10),
                       )
                     ],
@@ -89,7 +89,8 @@ class _StatsPageState extends State<StatsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${e.stat!.name}",
+                            "${e.stat!.name}".replaceFirst(e.stat!.name![0],
+                                e.stat!.name![0].toUpperCase()),
                             style: TextStyle(fontSize: 10),
                           ),
                           Text("${e.baseStat}", style: TextStyle(fontSize: 10)),
@@ -112,7 +113,7 @@ class _StatsPageState extends State<StatsPage> {
                           child: Stack(
                             children: [
                               Container(
-                                height: 3,
+                                height: 5,
                                 width: size.width,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
@@ -121,7 +122,7 @@ class _StatsPageState extends State<StatsPage> {
                               AnimatedContainer(
                                 duration: Duration(seconds: 1),
                                 curve: Curves.easeIn,
-                                height: 3,
+                                height: 5,
                                 width: updateStats
                                     ? size.width *
                                         (e.baseStat!.toDouble() / 100)

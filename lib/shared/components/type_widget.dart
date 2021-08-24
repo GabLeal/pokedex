@@ -22,7 +22,7 @@ class TypeWidget extends StatelessWidget {
                 color: ColorstypePokemon.colorType[nameType] ?? Colors.black,
                 borderRadius: BorderRadius.circular(7)),
             child: Text(
-              nameType!,
+              nameType!.replaceFirst(nameType![0], nameType![0].toUpperCase()),
               style: TextStyle(color: Colors.white),
             )),
       ),

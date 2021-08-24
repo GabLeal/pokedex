@@ -92,7 +92,7 @@ abstract class _PokemonStoreBase with Store {
       var pokemonResponse = response.data;
 
       Pokemon pokemon = Pokemon.fromJson(pokemonResponse);
-      // pokemons.add(pokemon);
+
       statusRequest = StatusRequest.success;
       return pokemon;
     } catch (erro) {

@@ -59,7 +59,8 @@ class CarPokemonWidget extends StatelessWidget {
                 left: 10,
                 top: 10,
                 child: Text(
-                  "${pokemon.name}",
+                  "${pokemon.name}".replaceFirst(
+                      pokemon.name![0], pokemon.name![0].toUpperCase()),
                   style: TextStyle(
                     color: Colors.black,
                   ),
