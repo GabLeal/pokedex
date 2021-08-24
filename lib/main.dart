@@ -1,7 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/pages/home/home_page.dart';
-import 'package:pokedex/splash_screen.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:provider/provider.dart';
 

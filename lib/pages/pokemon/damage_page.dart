@@ -62,7 +62,7 @@ class _DamagePageState extends State<DamagePage> {
                   children: [
                     if (damageRelations!.doubleDamageTo!.isNotEmpty)
                       _damageItem(
-                          'Double Damage To', damageRelations!.doubleDamageTo!),
+                          'Double Damage To', damageRelations.doubleDamageTo!),
                     if (damageRelations.doubleDamageFrom!.isNotEmpty)
                       _damageItem('Double Damage From',
                           damageRelations.doubleDamageFrom!),

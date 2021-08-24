@@ -2,7 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
 import 'package:pokedex/model/model.dart';
-import 'package:pokedex/util/base_url.dart';
+import 'package:pokedex/repository/pokemon_repository.dart';
 import 'package:pokedex/util/enums.dart';
 import 'package:bot_toast/bot_toast.dart';
 
@@ -11,6 +11,9 @@ part 'pokemon_store.g.dart';
 class PokemonStore = _PokemonStoreBase with _$PokemonStore;
 
 abstract class _PokemonStoreBase with Store {
+  PokemonRepository _pokemonRepository = PokemonRepository(dio: Dio());
+  CacheFavorites _cacheFavorites = CacheFavorites();
+
   @observable
   StatusRequest statusRequest = StatusRequest.empty;
 
@@ -20,10 +23,6 @@ abstract class _PokemonStoreBase with Store {
   @observable
   ObservableList<Pokemon> favoritesPokemons =
       ObservableList<Pokemon>().asObservable();
-
-  int _offset = 0;
-
-  CacheFavorites _cacheFavorites = CacheFavorites();
 
   getFavoritesPokemons() async {
     List<Pokemon> poke = await _cacheFavorites.getFavoritesPokemons();
@@ -47,58 +46,29 @@ abstract class _PokemonStoreBase with Store {
 
   @action
   getPokemons() async {
-    Dio dio = Dio();
-    Response response;
     try {
       statusRequest = StatusRequest.loading;
-      response = await dio
-          .get('${BaseUrl.url}/pokemon/?offset=${_offset.toString()}&limit=20');
 
-      List listaPokemons = response.data['results'];
+      List<Pokemon> listPokemons = await _pokemonRepository.getPokemons();
 
-      for (int i = 0; i < listaPokemons.length; i++) {
-        await loadingPokemon(listaPokemons[i]['url']);
-      }
-      _offset += 20;
+      pokemons.addAll(listPokemons);
       statusRequest = StatusRequest.success;
     } catch (erro) {
       statusRequest = StatusRequest.error;
-      print(erro);
-    }
-  }
-
-  Future<void> loadingPokemon(String urlPokemon) async {
-    Dio dio = Dio();
-    Response response;
-    try {
-      response = await dio.get(urlPokemon);
-
-      var pokemonResponse = response.data;
-
-      Pokemon pokemon = Pokemon.fromJson(pokemonResponse);
-      pokemons.add(pokemon);
-    } catch (erro) {
-      statusRequest = StatusRequest.error;
-      print(erro);
     }
   }
 
   Future<Pokemon?> searchPokemonByName(String name) async {
     statusRequest = StatusRequest.loading;
-    Dio dio = Dio();
-    Response response;
-    try {
-      response = await dio.get('${BaseUrl.url}/pokemon/$name');
 
-      var pokemonResponse = response.data;
+    Pokemon? pokemon = await _pokemonRepository.searchPokemonByName(name);
 
-      Pokemon pokemon = Pokemon.fromJson(pokemonResponse);
-
+    if (pokemon != null) {
       statusRequest = StatusRequest.success;
       return pokemon;
-    } catch (erro) {
+    } else {
       statusRequest = StatusRequest.success;
-      print(erro);
+
       BotToast.showText(
           duration: Duration(seconds: 3),
           text: "Pokemon not found. Try again."); //popup a text toast;
