@@ -10,8 +10,11 @@ class AbilityStore = _AbilityStoreBase with _$AbilityStore;
 
 abstract class _AbilityStoreBase with Store {
   AbilityDetails? abilityDetails;
-  AbilityDetailsRepository _abilityDetailsRepository =
-      AbilityDetailsRepository(dio: Dio());
+  AbilityDetailsRepository _abilityDetailsRepository;
+
+  _AbilityStoreBase([AbilityDetailsRepository? repository])
+      : _abilityDetailsRepository =
+            repository ?? AbilityDetailsRepository(dio: Dio());
   @observable
   StatusRequest statusRequestAbility = StatusRequest.empty;
 

@@ -10,7 +10,10 @@ class TypeDamageStore = _TypeDamageStoreBase with _$TypeDamageStore;
 
 abstract class _TypeDamageStoreBase with Store {
   TypeDamage? typeDamage;
-  TypeDamageRepository _typeDamageRepository = TypeDamageRepository(dio: Dio());
+  TypeDamageRepository _typeDamageRepository;
+
+  _TypeDamageStoreBase([TypeDamageRepository? repository])
+      : _typeDamageRepository = repository ?? TypeDamageRepository(dio: Dio());
 
   @observable
   StatusRequest statusRequestTypedamage = StatusRequest.empty;

@@ -11,8 +11,11 @@ class MoveStore = _MoveStoreBase with _$MoveStore;
 abstract class _MoveStoreBase with Store {
   MoveDetails? moveDetails;
 
-  MoveDetailsRepository _moveDetailsRepository =
-      MoveDetailsRepository(dio: Dio());
+  MoveDetailsRepository _moveDetailsRepository;
+
+  _MoveStoreBase([MoveDetailsRepository? repository])
+      : _moveDetailsRepository =
+            repository ?? MoveDetailsRepository(dio: Dio());
 
   @observable
   StatusRequest statusRequestMove = StatusRequest.empty;
