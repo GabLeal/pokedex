@@ -32,8 +32,8 @@ class _SlideImageWidgetState extends State<SlideImageWidget> {
       width: isActive ? 18.0 : 10.0,
       decoration: BoxDecoration(
         color: isActive
-            ? Colors.black.withOpacity(0.7)
-            : Colors.black.withOpacity(0.6),
+            ? Colors.white.withOpacity(0.7)
+            : Colors.white.withOpacity(0.6),
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
