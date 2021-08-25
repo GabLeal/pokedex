@@ -2,6 +2,11 @@
 
 Pokedex é um aplicativo onde o usuário pode consultar os pokemons e saber informações relevantes sobre o mesmo. Além disso, é possível favoritar seus pokemons para ter acesso a eles de forma mais rápida, inclusive quando você estiver offline.
 
+<div align='center'>
+  <img src="screenshot-readme/demostracao.gif" height="500">
+</div>
+
+
 ## Design da aplicação
 
 <img src="screenshot-readme/splash.jpeg" height="500"> <img src="screenshot-readme/pokemons.jpeg" height="500">
