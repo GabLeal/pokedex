@@ -52,14 +52,14 @@ abstract class _PokemonStoreBase with Store {
 
   @action
   getPokemons() async {
-    try {
-      statusRequest = StatusRequest.loading;
+    statusRequest = StatusRequest.loading;
 
-      List<Pokemon> listPokemons = await _pokemonRepository.getPokemons();
+    List<Pokemon> listPokemons = await _pokemonRepository.getPokemons();
 
+    if (listPokemons.isNotEmpty) {
       pokemons.addAll(listPokemons);
       statusRequest = StatusRequest.success;
-    } catch (erro) {
+    } else {
       statusRequest = StatusRequest.error;
     }
   }

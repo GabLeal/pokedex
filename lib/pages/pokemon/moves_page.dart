@@ -143,7 +143,9 @@ class MovesPage extends StatelessWidget {
                         child: LoadingWidget(),
                       );
                     case StatusRequest.error:
-                      return ButtonRetry(onTap: () {});
+                      return ButtonRetry(onTap: () {
+                        _abilityStore.getAbilityDetails(url);
+                      });
                     case StatusRequest.success:
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -188,7 +190,9 @@ class MovesPage extends StatelessWidget {
                       child: LoadingWidget(),
                     );
                   case StatusRequest.error:
-                    return ButtonRetry(onTap: () {});
+                    return ButtonRetry(onTap: () {
+                      _moveStore.getMovie(url);
+                    });
                   case StatusRequest.success:
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
