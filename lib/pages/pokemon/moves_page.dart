@@ -121,7 +121,7 @@ class MovesPage extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             value != null ? value.toString() : '-',
-            style: TextStyle(color: Colors.black54, wordSpacing: 5),
+            style: TextStyle(color: Colors.black54, height: 1.5),
           ),
         ],
       ),
@@ -195,6 +195,12 @@ class MovesPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("${_moveStore.moveDetails!.name}"),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          height: 1,
+                          color: ColorstypePokemon
+                              .colorType[pokemon.types!.first.type!.name],
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 7.0),
                           child: Row(

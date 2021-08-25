@@ -14,7 +14,6 @@ class MoveDetailsRepository {
       var response = await dio.get(url);
 
       var moveDetailsResponse = response.data;
-      log(response.data.toString());
 
       MoveDetails moveDetails = MoveDetails.fromJson(moveDetailsResponse);
 

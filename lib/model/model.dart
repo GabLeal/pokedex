@@ -150,43 +150,19 @@ class Moves {
 }
 
 class Sprites {
-  Other? other;
+  String? backDefault;
   String? frontDefault;
-  Sprites({this.other, this.frontDefault});
+  Sprites({this.backDefault, this.frontDefault});
 
   Sprites.fromJson(Map<String, dynamic> json) {
     frontDefault = json['front_default'];
-    other = json['other'] != null ? new Other.fromJson(json['other']) : null;
+    backDefault = json['back_default'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['front_default'] = this.frontDefault;
-
-    if (this.other != null) {
-      data['other'] = this.other!.toJson();
-    }
-
-    return data;
-  }
-}
-
-class Other {
-  DreamWorld? dreamWorld;
-
-  Other({this.dreamWorld});
-
-  Other.fromJson(Map<String, dynamic> json) {
-    dreamWorld = json['dream_world'] != null
-        ? new DreamWorld.fromJson(json['dream_world'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.dreamWorld != null) {
-      data['dream_world'] = this.dreamWorld!.toJson();
-    }
+    data['back_default'] = this.backDefault;
 
     return data;
   }

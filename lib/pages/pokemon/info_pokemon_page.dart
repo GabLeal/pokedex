@@ -5,6 +5,8 @@ import 'package:pokedex/model/model.dart';
 import 'package:pokedex/pages/pokemon/damage_page.dart';
 import 'package:pokedex/pages/pokemon/moves_page.dart';
 import 'package:pokedex/pages/pokemon/stats_page.dart';
+import 'package:pokedex/shared/components/cache_image_widget.dart';
+import 'package:pokedex/shared/components/slide_image_widget.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:pokedex/themes/app_colors.dart';
@@ -62,14 +64,14 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
               children: [
                 Center(
                   child: Hero(
-                    tag: widget.pokemon.order ?? 'dash',
-                    child: CachedNetworkImage(
-                      imageUrl: "${widget.pokemon.sprites!.frontDefault}",
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  ),
+                      tag: widget.pokemon.order ?? 'dash',
+                      child: SlideImageWidget(children: [
+                        CacheImageWidget(
+                            pathImage:
+                                '${widget.pokemon.sprites!.frontDefault}'),
+                        CacheImageWidget(
+                            pathImage: '${widget.pokemon.sprites!.backDefault}')
+                      ])),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -84,7 +86,7 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
                       }).toList(),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           )),

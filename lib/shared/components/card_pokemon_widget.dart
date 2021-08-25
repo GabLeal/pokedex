@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/model/model.dart';
 import 'package:pokedex/pages/pokemon/info_pokemon_page.dart';
+import 'package:pokedex/shared/components/cache_image_widget.dart';
 import 'package:pokedex/themes/app_colors.dart';
 import 'package:pokedex/themes/app_images.dart';
 
@@ -43,14 +43,9 @@ class CarPokemonWidget extends StatelessWidget {
                 children: [
                   // Text("${pokemon.name}"),
                   Hero(
-                    tag: pokemon.order ?? 'dash',
-                    child: CachedNetworkImage(
-                      imageUrl: "${pokemon.sprites!.frontDefault}",
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  )
+                      tag: pokemon.order ?? 'dash',
+                      child: CacheImageWidget(
+                          pathImage: '${pokemon.sprites!.frontDefault}'))
                 ],
               ),
             ),
