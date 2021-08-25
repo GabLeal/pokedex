@@ -11,8 +11,14 @@ part 'pokemon_store.g.dart';
 class PokemonStore = _PokemonStoreBase with _$PokemonStore;
 
 abstract class _PokemonStoreBase with Store {
-  PokemonRepository _pokemonRepository = PokemonRepository(dio: Dio());
-  CacheFavorites _cacheFavorites = CacheFavorites();
+  late PokemonRepository _pokemonRepository;
+  late CacheFavorites _cacheFavorites;
+
+  _PokemonStoreBase(
+      [PokemonRepository? repository, CacheFavorites? cacheFavorites]) {
+    _pokemonRepository = repository ?? PokemonRepository(dio: Dio());
+    _cacheFavorites = cacheFavorites ?? CacheFavorites();
+  }
 
   @observable
   StatusRequest statusRequest = StatusRequest.empty;

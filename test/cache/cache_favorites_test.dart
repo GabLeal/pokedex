@@ -1,151 +1,47 @@
-import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dio/dio.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/cache/cache_favorites.dart';
 import 'package:pokedex/model/model.dart';
-import 'package:pokedex/repository/pokemon_repository.dart';
-import 'package:pokedex/util/base_url.dart';
-
-class DioMock extends Mock implements Dio {}
+import 'package:shared_preferences/shared_preferences.dart';
 
 main() {
-  final dio = DioMock();
+  test('deve recuperar pokemons favoritos', () async {
+    SharedPreferences.setMockInitialValues({
+      'pikachu': jsonOnePokemon,
+      'charmander': jsonOnePokemon,
+    });
 
-  final repository = PokemonRepository(dio: dio);
+    CacheFavorites cacheFavorites = CacheFavorites();
 
-  test('Deve preencher lista de pokemon', () async {
-    when(() => dio.get(any())).thenAnswer((_) async => Response(
-        requestOptions: RequestOptions(path: BaseUrl.url),
-        data: json,
-        statusCode: 200));
+    List<Pokemon> pokemons = await cacheFavorites.getFavoritesPokemons();
 
-    List<Pokemon> pokemons = await repository.getPokemons();
-
-    expect(pokemons, isNotEmpty);
-    expect(pokemons.length, 20);
+    expect(pokemons.length, 2);
   });
 
-  test('Deve retorna lista de pokemon', () async {
-    when(() => dio.get(any())).thenAnswer((_) async => Response(
-        requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 400));
+  test('deve recuperar uma lista de pokemons favoritos vazia', () async {
+    SharedPreferences.setMockInitialValues({});
 
-    List<Pokemon> pokemons = await repository.getPokemons();
+    CacheFavorites cacheFavorites = CacheFavorites();
+
+    List<Pokemon> pokemons = await cacheFavorites.getFavoritesPokemons();
 
     expect(pokemons, isEmpty);
   });
 
-  test('Deve retornar pokemon encontrado', () async {
-    when(() => dio.get(any())).thenAnswer((_) async => Response(
-        requestOptions: RequestOptions(path: BaseUrl.url),
-        data: jsonOnePokemon,
-        statusCode: 200));
+  test('deve remover pokemons dos favoritos', () async {
+    SharedPreferences.setMockInitialValues({
+      'pikachu': jsonOnePokemon,
+      'charmander': jsonOnePokemon,
+    });
+    Pokemon pokemon = Pokemon(name: 'pikachu');
+    CacheFavorites cacheFavorites = CacheFavorites();
 
-    Pokemon? pokemon = await repository.searchPokemonByName('pikachu');
-
-    expect(pokemon, isNotNull);
-  });
-
-  test('Deve retornar null se pokemon não foi encontrado', () async {
-    when(() => dio.get(any())).thenAnswer((_) async => Response(
-        requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 404));
-
-    Pokemon? pokemon = await repository.searchPokemonByName('pikachu');
-
-    expect(pokemon, isNull);
+    await cacheFavorites.removeFavoritePokemon(pokemon);
+    List<Pokemon> pokemons = await cacheFavorites.getFavoritesPokemons();
+    expect(pokemons.length, 1);
   });
 }
 
-var json = jsonDecode('''
-{
-  "count": 1118,
-  "next": "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20",
-  "previous": null,
-  "results": [
-    {
-      "name": "bulbasaur",
-      "url": "https://pokeapi.co/api/v2/pokemon/1/"
-    },
-    {
-      "name": "ivysaur",
-      "url": "https://pokeapi.co/api/v2/pokemon/2/"
-    },
-    {
-      "name": "venusaur",
-      "url": "https://pokeapi.co/api/v2/pokemon/3/"
-    },
-    {
-      "name": "charmander",
-      "url": "https://pokeapi.co/api/v2/pokemon/4/"
-    },
-    {
-      "name": "charmeleon",
-      "url": "https://pokeapi.co/api/v2/pokemon/5/"
-    },
-    {
-      "name": "charizard",
-      "url": "https://pokeapi.co/api/v2/pokemon/6/"
-    },
-    {
-      "name": "squirtle",
-      "url": "https://pokeapi.co/api/v2/pokemon/7/"
-    },
-    {
-      "name": "wartortle",
-      "url": "https://pokeapi.co/api/v2/pokemon/8/"
-    },
-    {
-      "name": "blastoise",
-      "url": "https://pokeapi.co/api/v2/pokemon/9/"
-    },
-    {
-      "name": "caterpie",
-      "url": "https://pokeapi.co/api/v2/pokemon/10/"
-    },
-    {
-      "name": "metapod",
-      "url": "https://pokeapi.co/api/v2/pokemon/11/"
-    },
-    {
-      "name": "butterfree",
-      "url": "https://pokeapi.co/api/v2/pokemon/12/"
-    },
-    {
-      "name": "weedle",
-      "url": "https://pokeapi.co/api/v2/pokemon/13/"
-    },
-    {
-      "name": "kakuna",
-      "url": "https://pokeapi.co/api/v2/pokemon/14/"
-    },
-    {
-      "name": "beedrill",
-      "url": "https://pokeapi.co/api/v2/pokemon/15/"
-    },
-    {
-      "name": "pidgey",
-      "url": "https://pokeapi.co/api/v2/pokemon/16/"
-    },
-    {
-      "name": "pidgeotto",
-      "url": "https://pokeapi.co/api/v2/pokemon/17/"
-    },
-    {
-      "name": "pidgeot",
-      "url": "https://pokeapi.co/api/v2/pokemon/18/"
-    },
-    {
-      "name": "rattata",
-      "url": "https://pokeapi.co/api/v2/pokemon/19/"
-    },
-    {
-      "name": "raticate",
-      "url": "https://pokeapi.co/api/v2/pokemon/20/"
-    }
-  ]
-}
-''');
-
-var jsonOnePokemon = jsonDecode('''
+var jsonOnePokemon = '''
 {
   "abilities": [
     {
@@ -10621,4 +10517,4 @@ var jsonOnePokemon = jsonDecode('''
   ],
   "weight": 69
 }
-''');
+''';
