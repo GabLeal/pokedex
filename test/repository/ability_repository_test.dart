@@ -13,7 +13,7 @@ main() {
 
   final repository = AbilityDetailsRepository(dio: dio);
 
-  test('Deve pega AbilityDetails', () async {
+  test('should return AbilityDetails', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url),
         data: json,

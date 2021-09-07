@@ -13,7 +13,7 @@ main() {
 
   final repository = TypeDamageRepository(dio: dio);
 
-  test('Deve pega Typedamage', () async {
+  test('should return Typedamage', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url),
         data: json,

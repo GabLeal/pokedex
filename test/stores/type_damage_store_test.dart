@@ -11,7 +11,7 @@ main() {
   final repository = TypeDamageRepositoryMock();
 
   final store = TypeDamageStore(repository);
-  test('deve receber um typeDamage', () async {
+  test('should return one typeDamage', () async {
     when(() => repository.getTypeDamage(urlTest)).thenAnswer((_) async {
       store.typeDamage = TypeDamage();
       store.statusRequestTypedamage = StatusRequest.success;
@@ -22,7 +22,7 @@ main() {
     expect(store.statusRequestTypedamage, StatusRequest.success);
   });
 
-  test('typeDamage deve ser null', () {
+  test('typeDamage must be null', () {
     when(() => repository.getTypeDamage(urlTest)).thenAnswer((_) async {
       store.typeDamage = null;
       store.statusRequestTypedamage = StatusRequest.error;

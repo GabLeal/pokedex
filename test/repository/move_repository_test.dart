@@ -13,7 +13,7 @@ main() {
 
   final repository = MoveDetailsRepository(dio: dio);
 
-  test('deve pega MoveDetails', () async {
+  test('should return MoveDetails', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url),
         data: jsonMove,

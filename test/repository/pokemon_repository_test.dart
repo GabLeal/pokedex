@@ -13,7 +13,7 @@ main() {
 
   final repository = PokemonRepository(dio: dio);
 
-  test('Deve preencher lista de pokemon', () async {
+  test('should return a list of 20 pokemons', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url),
         data: json,
@@ -25,7 +25,7 @@ main() {
     expect(pokemons.length, 20);
   });
 
-  test('Deve retorna lista de pokemon', () async {
+  test('should return an empty pokemon list', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 400));
 
@@ -34,7 +34,7 @@ main() {
     expect(pokemons, isEmpty);
   });
 
-  test('Deve retornar pokemon encontrado', () async {
+  test('should return pokemon with the given name', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url),
         data: jsonOnePokemon,
@@ -45,7 +45,7 @@ main() {
     expect(pokemon, isNotNull);
   });
 
-  test('Deve retornar null se pokemon não foi encontrado', () async {
+  test('Should return null if pokemon was not found', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 404));
 

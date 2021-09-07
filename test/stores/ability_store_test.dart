@@ -12,7 +12,7 @@ main() {
   final repository = AbilityDetailsRepositoryMock();
 
   final store = AbilityStore(repository);
-  test('deve receber um MoveDetails', () async {
+  test('should return one Ability', () async {
     when(() => repository.getAbilityDetails(urlTest)).thenAnswer((_) async {
       store.abilityDetails = AbilityDetails();
       store.statusRequestAbility = StatusRequest.success;
@@ -23,7 +23,7 @@ main() {
     expect(store.statusRequestAbility, StatusRequest.success);
   });
 
-  test('MoveDetails deve ser null', () {
+  test('Ability must be null', () {
     when(() => repository.getAbilityDetails(urlTest)).thenAnswer((_) async {
       store.abilityDetails = null;
       store.statusRequestAbility = StatusRequest.error;

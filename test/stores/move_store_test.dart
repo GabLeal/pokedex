@@ -11,7 +11,7 @@ main() {
   final repository = MoveDetailsRepositoryMock();
 
   final store = MoveStore(repository);
-  test('deve receber um MoveDetails', () async {
+  test('should return one Ability', () async {
     when(() => repository.getMoveDetails(urlTest)).thenAnswer((_) async {
       store.moveDetails = MoveDetails();
       store.statusRequestMove = StatusRequest.success;
@@ -22,7 +22,7 @@ main() {
     expect(store.statusRequestMove, StatusRequest.success);
   });
 
-  test('MoveDetails deve ser null', () {
+  test('MoveDetails must be null', () {
     when(() => repository.getMoveDetails(urlTest)).thenAnswer((_) async {
       store.moveDetails = null;
       store.statusRequestMove = StatusRequest.error;

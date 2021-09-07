@@ -4,7 +4,7 @@ import 'package:pokedex/model/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 main() {
-  test('deve recuperar pokemons favoritos', () async {
+  test('should retrieve favorite pokemons', () async {
     SharedPreferences.setMockInitialValues({
       'pikachu': jsonOnePokemon,
       'charmander': jsonOnePokemon,
@@ -17,7 +17,7 @@ main() {
     expect(pokemons.length, 2);
   });
 
-  test('deve recuperar uma lista de pokemons favoritos vazia', () async {
+  test('should retrieve an empty favorite pokemon list', () async {
     SharedPreferences.setMockInitialValues({});
 
     CacheFavorites cacheFavorites = CacheFavorites();
@@ -27,7 +27,7 @@ main() {
     expect(pokemons, isEmpty);
   });
 
-  test('deve remover pokemons dos favoritos', () async {
+  test('should remove pokemons from favorites', () async {
     SharedPreferences.setMockInitialValues({
       'pikachu': jsonOnePokemon,
       'charmander': jsonOnePokemon,

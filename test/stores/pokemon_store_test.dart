@@ -15,7 +15,7 @@ main() {
 
   final store = PokemonStore(repository, cacheFavorites);
 
-  group('Cache pokemons favoritos', () {
+  group('Cache favorites pokemons', () {
     test('deve adicionar um pokemon aos favoritos', () {
       Pokemon pokemon = Pokemon();
       when(() => cacheFavorites.favoritePokemon(pokemon))
@@ -27,14 +27,14 @@ main() {
     });
   });
 
-  group('Pokemons API', () {
-    test('deve retornar lista de pokemons vazia', () async {
+  group('API Pokemons', () {
+    test('should return an empty pokemon list', () async {
       when(() => repository.getPokemons()).thenAnswer((_) async => []);
       await store.getPokemons();
 
       expect(store.pokemons, isEmpty);
     });
-    test('deve preencher lista de pokemon', () async {
+    test('should fill Pokemon list', () async {
       when(() => repository.getPokemons()).thenAnswer((_) async => <Pokemon>[
             Pokemon(),
             Pokemon(),
