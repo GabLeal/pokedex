@@ -4,7 +4,7 @@ import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/shared/components/card_pokemon_widget.dart';
 
 class GridPokemonsWidget extends StatelessWidget {
-  final List<Pokemon> pokemons;
+  final List<PokemonEntity> pokemons;
   const GridPokemonsWidget({
     Key? key,
     required this.pokemons,

@@ -11,7 +11,7 @@ import 'package:pokedex/themes/app_colors.dart';
 import 'package:pokedex/util/enums.dart';
 
 class MovesPage extends StatefulWidget {
-  final Pokemon pokemon;
+  final PokemonEntity pokemon;
   MovesPage({
     Key? key,
     required this.pokemon,

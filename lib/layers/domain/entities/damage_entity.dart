@@ -1,10 +1,10 @@
-class DamageClass {
+class DamageEntity {
   String? name;
   String? url;
 
-  DamageClass({this.name, this.url});
+  DamageEntity({this.name, this.url});
 
-  DamageClass.fromJson(Map<String, dynamic> json) {
+  DamageEntity.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     url = json['url'];
   }

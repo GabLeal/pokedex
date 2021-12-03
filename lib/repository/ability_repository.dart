@@ -7,14 +7,14 @@ class AbilityDetailsRepository {
     required this.dio,
   });
 
-  Future<AbilityDetails?> getAbilityDetails(String url) async {
+  Future<AbilityDetailsEntity?> getAbilityDetails(String url) async {
     try {
       var response = await dio.get(url);
 
       var abilityDetailsResponse = response.data;
 
-      AbilityDetails abilityDetails =
-          AbilityDetails.fromJson(abilityDetailsResponse);
+      AbilityDetailsEntity abilityDetails =
+          AbilityDetailsEntity.fromJson(abilityDetailsResponse);
 
       return abilityDetails;
     } catch (erro) {

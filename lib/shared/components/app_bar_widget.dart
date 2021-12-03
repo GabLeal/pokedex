@@ -76,7 +76,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     });
     final pokemonStore = context.read<PokemonStore>();
 
-    Pokemon? pokemon =
+    PokemonEntity? pokemon =
         await pokemonStore.searchPokemonByName(newQuery.toLowerCase());
 
     if (pokemon != null) {

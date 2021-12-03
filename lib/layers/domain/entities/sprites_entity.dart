@@ -1,9 +1,9 @@
-class Sprites {
+class SpritesEntity {
   String? backDefault;
   String? frontDefault;
-  Sprites({this.backDefault, this.frontDefault});
+  SpritesEntity({this.backDefault, this.frontDefault});
 
-  Sprites.fromJson(Map<String, dynamic> json) {
+  SpritesEntity.fromJson(Map<String, dynamic> json) {
     frontDefault = json['front_default'];
     backDefault = json['back_default'];
   }

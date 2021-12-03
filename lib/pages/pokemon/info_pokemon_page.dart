@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 enum Info { STATS, MOVES, DAMAGE }
 
 class InfoPokemonPage extends StatefulWidget {
-  final Pokemon pokemon;
+  final PokemonEntity pokemon;
 
   const InfoPokemonPage({Key? key, required this.pokemon}) : super(key: key);
 

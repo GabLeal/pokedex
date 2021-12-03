@@ -1,9 +1,9 @@
-class DreamWorld {
+class DreamWorldEntity {
   String? frontDefault;
 
-  DreamWorld({this.frontDefault});
+  DreamWorldEntity({this.frontDefault});
 
-  DreamWorld.fromJson(Map<String, dynamic> json) {
+  DreamWorldEntity.fromJson(Map<String, dynamic> json) {
     frontDefault = json['front_default'];
   }
 

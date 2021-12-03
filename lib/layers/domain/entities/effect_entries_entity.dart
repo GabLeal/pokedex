@@ -1,11 +1,11 @@
-class EffectEntries {
+class EffectEntriesEntity {
   String? effect;
 
   String? shortEffect;
 
-  EffectEntries({this.effect, this.shortEffect});
+  EffectEntriesEntity({this.effect, this.shortEffect});
 
-  EffectEntries.fromJson(Map<String, dynamic> json) {
+  EffectEntriesEntity.fromJson(Map<String, dynamic> json) {
     effect = json['effect'];
 
     shortEffect = json['short_effect'];

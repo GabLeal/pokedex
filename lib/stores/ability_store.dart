@@ -10,7 +10,7 @@ part 'ability_store.g.dart';
 class AbilityStore = _AbilityStoreBase with _$AbilityStore;
 
 abstract class _AbilityStoreBase with Store {
-  AbilityDetails? abilityDetails;
+  AbilityDetailsEntity? abilityDetails;
   AbilityDetailsRepository _abilityDetailsRepository;
 
   _AbilityStoreBase([AbilityDetailsRepository? repository])

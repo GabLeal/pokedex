@@ -1,10 +1,10 @@
-class Ability {
+class AbilityEntity {
   String? name;
   String? url;
 
-  Ability({this.name, this.url});
+  AbilityEntity({this.name, this.url});
 
-  Ability.fromJson(Map<String, dynamic> json) {
+  AbilityEntity.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     url = json['url'];
   }

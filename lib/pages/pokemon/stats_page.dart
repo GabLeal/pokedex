@@ -4,7 +4,7 @@ import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/themes/app_colors.dart';
 
 class StatsPage extends StatefulWidget {
-  final Pokemon pokemon;
+  final PokemonEntity pokemon;
   const StatsPage({Key? key, required this.pokemon}) : super(key: key);
 
   @override

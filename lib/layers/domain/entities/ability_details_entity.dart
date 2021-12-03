@@ -1,12 +1,12 @@
 import 'package:pokedex/layers/domain/entities/language_entity.dart';
 
-class AbilityDetails {
+class AbilityDetailsEntity {
   List<EffectEntries>? effectEntries;
   String? name;
 
-  AbilityDetails({this.effectEntries, this.name});
+  AbilityDetailsEntity({this.effectEntries, this.name});
 
-  AbilityDetails.fromJson(Map<String, dynamic> json) {
+  AbilityDetailsEntity.fromJson(Map<String, dynamic> json) {
     if (json['effect_entries'] != null) {
       effectEntries = [];
       json['effect_entries'].forEach((v) {
@@ -29,7 +29,7 @@ class AbilityDetails {
 
 class EffectEntries {
   String? effect;
-  Language? language;
+  LanguageEntity? language;
   String? shortEffect;
 
   EffectEntries({this.effect, this.language, this.shortEffect});
@@ -37,7 +37,7 @@ class EffectEntries {
   EffectEntries.fromJson(Map<String, dynamic> json) {
     effect = json['effect'];
     language = json['language'] != null
-        ? new Language.fromJson(json['language'])
+        ? new LanguageEntity.fromJson(json['language'])
         : null;
     shortEffect = json['short_effect'];
   }

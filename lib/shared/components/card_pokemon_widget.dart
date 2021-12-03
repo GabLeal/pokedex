@@ -6,7 +6,7 @@ import 'package:pokedex/themes/app_colors.dart';
 import 'package:pokedex/themes/app_images.dart';
 
 class CarPokemonWidget extends StatelessWidget {
-  final Pokemon pokemon;
+  final PokemonEntity pokemon;
   const CarPokemonWidget({
     Key? key,
     required this.pokemon,

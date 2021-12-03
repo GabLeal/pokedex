@@ -24,26 +24,27 @@ abstract class _PokemonStoreBase with Store {
   StatusRequest statusRequest = StatusRequest.empty;
 
   @observable
-  ObservableList<Pokemon> pokemons = ObservableList<Pokemon>().asObservable();
+  ObservableList<PokemonEntity> pokemons =
+      ObservableList<PokemonEntity>().asObservable();
 
   @observable
-  ObservableList<Pokemon> favoritesPokemons =
-      ObservableList<Pokemon>().asObservable();
+  ObservableList<PokemonEntity> favoritesPokemons =
+      ObservableList<PokemonEntity>().asObservable();
 
   getFavoritesPokemons() async {
-    List<Pokemon> poke = await _cacheFavorites.getFavoritesPokemons();
+    List<PokemonEntity> poke = await _cacheFavorites.getFavoritesPokemons();
 
     if (poke.isNotEmpty) {
       favoritesPokemons.addAll(poke);
     }
   }
 
-  favoritePokemon(Pokemon pokemon) async {
+  favoritePokemon(PokemonEntity pokemon) async {
     bool isSave = await _cacheFavorites.favoritePokemon(pokemon);
     if (isSave) favoritesPokemons.add(pokemon);
   }
 
-  removeFavoritePokemon(Pokemon pokemon) async {
+  removeFavoritePokemon(PokemonEntity pokemon) async {
     bool isremove = await _cacheFavorites.removeFavoritePokemon(pokemon);
     if (isremove) {
       favoritesPokemons.removeWhere((p) => p.name == pokemon.name);
@@ -54,7 +55,7 @@ abstract class _PokemonStoreBase with Store {
   getPokemons() async {
     statusRequest = StatusRequest.loading;
 
-    List<Pokemon> listPokemons = await _pokemonRepository.getPokemons();
+    List<PokemonEntity> listPokemons = await _pokemonRepository.getPokemons();
 
     if (listPokemons.isNotEmpty) {
       pokemons.addAll(listPokemons);
@@ -64,10 +65,10 @@ abstract class _PokemonStoreBase with Store {
     }
   }
 
-  Future<Pokemon?> searchPokemonByName(String name) async {
+  Future<PokemonEntity?> searchPokemonByName(String name) async {
     statusRequest = StatusRequest.loading;
 
-    Pokemon? pokemon = await _pokemonRepository.searchPokemonByName(name);
+    PokemonEntity? pokemon = await _pokemonRepository.searchPokemonByName(name);
 
     if (pokemon != null) {
       statusRequest = StatusRequest.success;

@@ -3,14 +3,14 @@ import 'package:pokedex/layers/domain/entities/effect_entries_entity.dart';
 
 class MoveDetails {
   int? accuracy;
-  DamageClass? damageClass;
+  DamageEntity? damageClass;
   int? effectChance;
-  List<EffectEntries>? effectEntries;
+  List<EffectEntriesEntity>? effectEntries;
   String? name;
   int? power;
   int? pp;
   int? priority;
-  DamageClass? type;
+  DamageEntity? type;
 
   MoveDetails(
       {this.accuracy,
@@ -27,21 +27,22 @@ class MoveDetails {
     accuracy = json['accuracy'];
 
     damageClass = json['damage_class'] != null
-        ? new DamageClass.fromJson(json['damage_class'])
+        ? new DamageEntity.fromJson(json['damage_class'])
         : null;
     effectChance = json['effect_chance'];
 
     if (json['effect_entries'] != null) {
       effectEntries = [];
       json['effect_entries'].forEach((v) {
-        effectEntries!.add(EffectEntries.fromJson(v));
+        effectEntries!.add(EffectEntriesEntity.fromJson(v));
       });
     }
     name = json['name'];
     power = json['power'];
     pp = json['pp'];
     priority = json['priority'];
-    type = json['type'] != null ? new DamageClass.fromJson(json['type']) : null;
+    type =
+        json['type'] != null ? new DamageEntity.fromJson(json['type']) : null;
   }
 
   Map<String, dynamic> toJson() {

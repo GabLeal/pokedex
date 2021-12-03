@@ -10,7 +10,7 @@ import 'package:pokedex/stores/type_damage_store.dart';
 import 'package:pokedex/util/enums.dart';
 
 class DamagePage extends StatefulWidget {
-  final Pokemon pokemon;
+  final PokemonEntity pokemon;
   DamagePage({Key? key, required this.pokemon}) : super(key: key);
 
   @override

@@ -10,8 +10,8 @@ class PokemonRepository {
     required this.dio,
   });
 
-  Future<List<Pokemon>> getPokemons() async {
-    List<Pokemon> pokemons = [];
+  Future<List<PokemonEntity>> getPokemons() async {
+    List<PokemonEntity> pokemons = [];
     try {
       var response = await dio
           .get('${BaseUrl.url}/pokemon/?offset=${_offset.toString()}&limit=20');
@@ -19,7 +19,7 @@ class PokemonRepository {
       List listaPokemons = response.data['results'];
 
       for (int i = 0; i < listaPokemons.length; i++) {
-        Pokemon? pokemon = await _loadingPokemon(listaPokemons[i]['url']);
+        PokemonEntity? pokemon = await _loadingPokemon(listaPokemons[i]['url']);
 
         if (pokemon != null) pokemons.add(pokemon);
       }
@@ -32,26 +32,26 @@ class PokemonRepository {
     }
   }
 
-  Future<Pokemon?> searchPokemonByName(String name) async {
+  Future<PokemonEntity?> searchPokemonByName(String name) async {
     try {
       var response = await dio.get('${BaseUrl.url}/pokemon/$name');
 
       var pokemonResponse = response.data;
 
-      Pokemon pokemon = Pokemon.fromJson(pokemonResponse);
+      PokemonEntity pokemon = PokemonEntity.fromJson(pokemonResponse);
       return pokemon;
     } catch (erro) {
       return null;
     }
   }
 
-  Future<Pokemon?> _loadingPokemon(String urlPokemon) async {
+  Future<PokemonEntity?> _loadingPokemon(String urlPokemon) async {
     try {
       var response = await dio.get(urlPokemon);
 
       var pokemonResponse = response.data;
 
-      Pokemon pokemon = Pokemon.fromJson(pokemonResponse);
+      PokemonEntity pokemon = PokemonEntity.fromJson(pokemonResponse);
 
       return pokemon;
     } catch (erro) {

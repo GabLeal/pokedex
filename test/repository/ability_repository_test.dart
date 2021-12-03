@@ -19,7 +19,8 @@ main() {
         data: json,
         statusCode: 200));
 
-    AbilityDetails? abilityDetails = await repository.getAbilityDetails(url);
+    AbilityDetailsEntity? abilityDetails =
+        await repository.getAbilityDetails(url);
 
     expect(abilityDetails, isNotNull);
   });

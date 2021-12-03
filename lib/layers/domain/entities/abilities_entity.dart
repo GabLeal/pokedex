@@ -1,13 +1,14 @@
 import 'package:pokedex/layers/domain/entities/ability_entity.dart';
 
-class Abilities {
-  Ability? ability;
+class AbilitiesEntity {
+  AbilityEntity? ability;
 
-  Abilities({this.ability});
+  AbilitiesEntity({this.ability});
 
-  Abilities.fromJson(Map<String, dynamic> json) {
-    ability =
-        json['ability'] != null ? Ability.fromJson(json['ability']) : null;
+  AbilitiesEntity.fromJson(Map<String, dynamic> json) {
+    ability = json['ability'] != null
+        ? AbilityEntity.fromJson(json['ability'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

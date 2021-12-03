@@ -4,20 +4,20 @@ import 'package:pokedex/layers/domain/entities/sprites_entity.dart';
 import 'package:pokedex/layers/domain/entities/stats_entity.dart';
 import 'package:pokedex/layers/domain/entities/type_entity.dart';
 
-class Pokemon {
-  List<Abilities>? abilities;
+class PokemonEntity {
+  List<AbilitiesEntity>? abilities;
   int? height;
   int? id;
   String? locationAreaEncounters;
   List<Moves>? moves;
   String? name;
   int? order;
-  Sprites? sprites;
+  SpritesEntity? sprites;
   List<Stats>? stats;
   List<Types>? types;
   int? weight;
 
-  Pokemon(
+  PokemonEntity(
       {this.abilities,
       this.height,
       this.id,
@@ -30,11 +30,11 @@ class Pokemon {
       this.types,
       this.weight});
 
-  Pokemon.fromJson(Map<String, dynamic> json) {
+  PokemonEntity.fromJson(Map<String, dynamic> json) {
     if (json['abilities'] != null) {
       abilities = [];
       json['abilities'].forEach((v) {
-        abilities!.add(new Abilities.fromJson(v));
+        abilities!.add(new AbilitiesEntity.fromJson(v));
       });
     }
 
@@ -49,8 +49,9 @@ class Pokemon {
     }
     name = json['name'];
     order = json['order'];
-    sprites =
-        json['sprites'] != null ? new Sprites.fromJson(json['sprites']) : null;
+    sprites = json['sprites'] != null
+        ? new SpritesEntity.fromJson(json['sprites'])
+        : null;
     if (json['stats'] != null) {
       stats = [];
       json['stats'].forEach((v) {

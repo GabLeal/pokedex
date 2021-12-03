@@ -1,13 +1,13 @@
 import 'package:pokedex/layers/domain/entities/ability_entity.dart';
 
 class Moves {
-  Ability? move;
+  AbilityEntity? move;
   String? url;
 
   Moves({this.move, this.url});
 
   Moves.fromJson(Map<String, dynamic> json) {
-    move = json['move'] != null ? Ability.fromJson(json['move']) : null;
+    move = json['move'] != null ? AbilityEntity.fromJson(json['move']) : null;
     url = json['url'];
   }
 

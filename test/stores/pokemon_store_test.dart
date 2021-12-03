@@ -17,7 +17,7 @@ main() {
 
   group('Cache favorites pokemons', () {
     test('deve adicionar um pokemon aos favoritos', () {
-      Pokemon pokemon = Pokemon();
+      PokemonEntity pokemon = PokemonEntity();
       when(() => cacheFavorites.favoritePokemon(pokemon))
           .thenAnswer((_) async => Future.value(true));
 
@@ -35,28 +35,29 @@ main() {
       expect(store.pokemons, isEmpty);
     });
     test('should fill Pokemon list', () async {
-      when(() => repository.getPokemons()).thenAnswer((_) async => <Pokemon>[
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-            Pokemon(),
-          ]);
+      when(() => repository.getPokemons())
+          .thenAnswer((_) async => <PokemonEntity>[
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+                PokemonEntity(),
+              ]);
 
       await store.getPokemons();
       expect(store.pokemons, isNotEmpty);

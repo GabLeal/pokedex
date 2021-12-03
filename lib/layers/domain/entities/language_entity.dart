@@ -1,10 +1,10 @@
-class Language {
+class LanguageEntity {
   String? name;
   String? url;
 
-  Language({this.name, this.url});
+  LanguageEntity({this.name, this.url});
 
-  Language.fromJson(Map<String, dynamic> json) {
+  LanguageEntity.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     url = json['url'];
   }

@@ -12,7 +12,7 @@ main() {
 
     CacheFavorites cacheFavorites = CacheFavorites();
 
-    List<Pokemon> pokemons = await cacheFavorites.getFavoritesPokemons();
+    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
 
     expect(pokemons.length, 2);
   });
@@ -22,7 +22,7 @@ main() {
 
     CacheFavorites cacheFavorites = CacheFavorites();
 
-    List<Pokemon> pokemons = await cacheFavorites.getFavoritesPokemons();
+    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
 
     expect(pokemons, isEmpty);
   });
@@ -32,11 +32,11 @@ main() {
       'pikachu': jsonOnePokemon,
       'charmander': jsonOnePokemon,
     });
-    Pokemon pokemon = Pokemon(name: 'pikachu');
+    PokemonEntity pokemon = PokemonEntity(name: 'pikachu');
     CacheFavorites cacheFavorites = CacheFavorites();
 
     await cacheFavorites.removeFavoritePokemon(pokemon);
-    List<Pokemon> pokemons = await cacheFavorites.getFavoritesPokemons();
+    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
     expect(pokemons.length, 1);
   });
 }

@@ -14,7 +14,7 @@ main() {
   final store = AbilityStore(repository);
   test('should return one Ability', () async {
     when(() => repository.getAbilityDetails(urlTest)).thenAnswer((_) async {
-      store.abilityDetails = AbilityDetails();
+      store.abilityDetails = AbilityDetailsEntity();
       store.statusRequestAbility = StatusRequest.success;
     });
 

@@ -2,13 +2,14 @@ import 'package:pokedex/layers/domain/entities/ability_entity.dart';
 
 class Types {
   int? slot;
-  Ability? type;
+  AbilityEntity? type;
 
   Types({this.slot, this.type});
 
   Types.fromJson(Map<String, dynamic> json) {
     slot = json['slot'];
-    type = json['type'] != null ? new Ability.fromJson(json['type']) : null;
+    type =
+        json['type'] != null ? new AbilityEntity.fromJson(json['type']) : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -19,7 +19,7 @@ main() {
         data: json,
         statusCode: 200));
 
-    List<Pokemon> pokemons = await repository.getPokemons();
+    List<PokemonEntity> pokemons = await repository.getPokemons();
 
     expect(pokemons, isNotEmpty);
     expect(pokemons.length, 20);
@@ -29,7 +29,7 @@ main() {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 400));
 
-    List<Pokemon> pokemons = await repository.getPokemons();
+    List<PokemonEntity> pokemons = await repository.getPokemons();
 
     expect(pokemons, isEmpty);
   });
@@ -40,7 +40,7 @@ main() {
         data: jsonOnePokemon,
         statusCode: 200));
 
-    Pokemon? pokemon = await repository.searchPokemonByName('pikachu');
+    PokemonEntity? pokemon = await repository.searchPokemonByName('pikachu');
 
     expect(pokemon, isNotNull);
   });
@@ -49,7 +49,7 @@ main() {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 404));
 
-    Pokemon? pokemon = await repository.searchPokemonByName('pikachu');
+    PokemonEntity? pokemon = await repository.searchPokemonByName('pikachu');
 
     expect(pokemon, isNull);
   });
