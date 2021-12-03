@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
-import 'package:pokedex/model/model.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 main() {

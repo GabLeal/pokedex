@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
-import 'package:pokedex/model/ability_details.dart';
+import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
+
 import 'package:pokedex/repository/ability_repository.dart';
 import 'package:pokedex/util/enums.dart';
 

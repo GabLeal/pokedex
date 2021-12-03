@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/model/model.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/pages/pokemon/info_pokemon_page.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:provider/provider.dart';
@@ -43,8 +43,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
         IconButton(
           icon: const Icon(Icons.clear),
           onPressed: () {
-            if (_searchQueryController == null ||
-                _searchQueryController.text.isEmpty) {
+            if (_searchQueryController.text.isEmpty) {
               Navigator.pop(context);
               return;
             }

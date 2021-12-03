@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/themes/app_colors.dart';
 
+// ignore: must_be_immutable
 class TypeWidget extends StatelessWidget {
   String? nameType;
   TypeWidget({

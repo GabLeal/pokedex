@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
-import 'package:pokedex/model/move_details.dart';
+import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
 import 'package:pokedex/repository/move_repository.dart';
 import 'package:pokedex/util/enums.dart';
 

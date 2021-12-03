@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
-import 'package:pokedex/model/model.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/repository/pokemon_repository.dart';
 import 'package:pokedex/util/enums.dart';
 import 'package:bot_toast/bot_toast.dart';

@@ -1,3 +1,6 @@
+import 'package:pokedex/layers/domain/entities/damage_entity.dart';
+import 'package:pokedex/layers/domain/entities/effect_entries_entity.dart';
+
 class MoveDetails {
   int? accuracy;
   DamageClass? damageClass;
@@ -62,47 +65,6 @@ class MoveDetails {
     if (this.type != null) {
       data['type'] = this.type!.toJson();
     }
-    return data;
-  }
-}
-
-class DamageClass {
-  String? name;
-  String? url;
-
-  DamageClass({this.name, this.url});
-
-  DamageClass.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    url = json['url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['url'] = this.url;
-    return data;
-  }
-}
-
-class EffectEntries {
-  String? effect;
-
-  String? shortEffect;
-
-  EffectEntries({this.effect, this.shortEffect});
-
-  EffectEntries.fromJson(Map<String, dynamic> json) {
-    effect = json['effect'];
-
-    shortEffect = json['short_effect'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['effect'] = this.effect;
-
-    data['short_effect'] = this.shortEffect;
     return data;
   }
 }

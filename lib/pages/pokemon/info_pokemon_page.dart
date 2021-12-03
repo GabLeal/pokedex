@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pokedex/model/model.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/pages/pokemon/damage_page.dart';
 import 'package:pokedex/pages/pokemon/moves_page.dart';
 import 'package:pokedex/pages/pokemon/stats_page.dart';
@@ -28,7 +27,6 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     PokemonStore _pokemonStore = Provider.of<PokemonStore>(context);
     return Scaffold(
         body: CustomScrollView(

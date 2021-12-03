@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
-import 'package:pokedex/model/type_damage.dart';
+import 'package:pokedex/layers/domain/entities/type_damage_entity.dart';
 import 'package:pokedex/repository/type_damage_repository.dart';
 import 'package:pokedex/util/enums.dart';
 

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pokedex/model/model.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/util/base_url.dart';
 
 class PokemonRepository {

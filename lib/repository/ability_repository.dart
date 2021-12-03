@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pokedex/model/ability_details.dart';
+import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
 
 class AbilityDetailsRepository {
   final Dio dio;

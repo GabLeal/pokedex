@@ -1,7 +1,7 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pokedex/model/model.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/shared/components/button_retry.dart';
 import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
@@ -10,15 +10,22 @@ import 'package:pokedex/stores/move_store.dart';
 import 'package:pokedex/themes/app_colors.dart';
 import 'package:pokedex/util/enums.dart';
 
-class MovesPage extends StatelessWidget {
+class MovesPage extends StatefulWidget {
   final Pokemon pokemon;
   MovesPage({
     Key? key,
     required this.pokemon,
   }) : super(key: key);
 
+  @override
+  State<MovesPage> createState() => _MovesPageState();
+}
+
+class _MovesPageState extends State<MovesPage> {
   MoveStore _moveStore = MoveStore();
+
   AbilityStore _abilityStore = AbilityStore();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -32,7 +39,7 @@ class MovesPage extends StatelessWidget {
             _title('Abilities', size),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: pokemon.abilities!.map((e) {
+              children: widget.pokemon.abilities!.map((e) {
                 return _cardMoveOrAbility(
                     text: e.ability!.name,
                     context: context,
@@ -43,7 +50,7 @@ class MovesPage extends StatelessWidget {
             _title('Moves', size),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: pokemon.moves!.map((e) {
+              children: widget.pokemon.moves!.map((e) {
                 return _cardMoveOrAbility(
                     text: e.move!.name, context: context, url: e.move!.url);
               }).toList(),
@@ -77,9 +84,9 @@ class MovesPage extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
             border: Border.all(
-                color:
-                    ColorstypePokemon.colorType[pokemon.types![0].type!.name] ??
-                        Colors.white,
+                color: ColorstypePokemon
+                        .colorType[widget.pokemon.types![0].type!.name] ??
+                    Colors.white,
                 width: 1),
             borderRadius: BorderRadius.circular(10)),
         child: Row(
@@ -155,8 +162,8 @@ class MovesPage extends StatelessWidget {
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 10),
                             height: 1,
-                            color: ColorstypePokemon
-                                .colorType[pokemon.types!.first.type!.name],
+                            color: ColorstypePokemon.colorType[
+                                widget.pokemon.types!.first.type!.name],
                           ),
                           _infoAblity(
                               'effect',
@@ -202,8 +209,8 @@ class MovesPage extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
                           height: 1,
-                          color: ColorstypePokemon
-                              .colorType[pokemon.types!.first.type!.name],
+                          color: ColorstypePokemon.colorType[
+                              widget.pokemon.types!.first.type!.name],
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 7.0),

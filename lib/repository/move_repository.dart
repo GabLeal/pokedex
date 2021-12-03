@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:pokedex/model/move_details.dart';
+import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
 
 class MoveDetailsRepository {
   final Dio dio;

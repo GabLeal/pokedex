@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/model/type_damage.dart';
+import 'package:pokedex/layers/domain/entities/type_damage_entity.dart';
 import 'package:pokedex/repository/type_damage_repository.dart';
 import 'package:pokedex/stores/type_damage_store.dart';
 import 'package:pokedex/util/enums.dart';

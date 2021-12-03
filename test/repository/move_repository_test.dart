@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/model/move_details.dart';
+import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
 import 'package:pokedex/repository/move_repository.dart';
 import 'package:pokedex/util/base_url.dart';
 
