@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
-import 'package:pokedex/repository/ability_repository.dart';
+import 'package:pokedex/layers/data/dto/ability_details_entity.dart';
+import 'package:pokedex/layers/domain/repositories/ability_repository.dart';
 import 'package:pokedex/stores/ability_store.dart';
 import 'package:pokedex/util/enums.dart';
 
@@ -14,7 +14,7 @@ main() {
   final store = AbilityStore(repository);
   test('should return one Ability', () async {
     when(() => repository.getAbilityDetails(urlTest)).thenAnswer((_) async {
-      store.abilityDetails = AbilityDetailsEntity();
+      store.abilityDetails = AbilityDetailsDto();
       store.statusRequestAbility = StatusRequest.success;
     });
 

@@ -27,13 +27,13 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
   final _$pokemonsAtom = Atom(name: '_PokemonStoreBase.pokemons');
 
   @override
-  ObservableList<PokemonEntity> get pokemons {
+  ObservableList<PokemonDto> get pokemons {
     _$pokemonsAtom.reportRead();
     return super.pokemons;
   }
 
   @override
-  set pokemons(ObservableList<PokemonEntity> value) {
+  set pokemons(ObservableList<PokemonDto> value) {
     _$pokemonsAtom.reportWrite(value, super.pokemons, () {
       super.pokemons = value;
     });
@@ -43,13 +43,13 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
       Atom(name: '_PokemonStoreBase.favoritesPokemons');
 
   @override
-  ObservableList<PokemonEntity> get favoritesPokemons {
+  ObservableList<PokemonDto> get favoritesPokemons {
     _$favoritesPokemonsAtom.reportRead();
     return super.favoritesPokemons;
   }
 
   @override
-  set favoritesPokemons(ObservableList<PokemonEntity> value) {
+  set favoritesPokemons(ObservableList<PokemonDto> value) {
     _$favoritesPokemonsAtom.reportWrite(value, super.favoritesPokemons, () {
       super.favoritesPokemons = value;
     });

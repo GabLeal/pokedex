@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
-import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
+import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 main() {
@@ -12,7 +12,7 @@ main() {
 
     CacheFavorites cacheFavorites = CacheFavorites();
 
-    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
+    List<PokemonDto> pokemons = await cacheFavorites.getFavoritesPokemons();
 
     expect(pokemons.length, 2);
   });
@@ -22,7 +22,7 @@ main() {
 
     CacheFavorites cacheFavorites = CacheFavorites();
 
-    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
+    List<PokemonDto> pokemons = await cacheFavorites.getFavoritesPokemons();
 
     expect(pokemons, isEmpty);
   });
@@ -32,11 +32,11 @@ main() {
       'pikachu': jsonOnePokemon,
       'charmander': jsonOnePokemon,
     });
-    PokemonEntity pokemon = PokemonEntity(name: 'pikachu');
+    PokemonDto pokemon = PokemonDto(name: 'pikachu');
     CacheFavorites cacheFavorites = CacheFavorites();
 
     await cacheFavorites.removeFavoritePokemon(pokemon);
-    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
+    List<PokemonDto> pokemons = await cacheFavorites.getFavoritesPokemons();
     expect(pokemons.length, 1);
   });
 }

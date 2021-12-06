@@ -1,26 +1,26 @@
 import 'package:pokedex/layers/domain/entities/ability_entity.dart';
 
-class Stats {
+class StatsEntity {
   int? baseStat;
   int? effort;
   AbilityEntity? stat;
 
-  Stats({this.baseStat, this.effort, this.stat});
+  StatsEntity({this.baseStat, this.effort, this.stat});
 
-  Stats.fromJson(Map<String, dynamic> json) {
-    baseStat = json['base_stat'];
-    effort = json['effort'];
-    stat =
-        json['stat'] != null ? new AbilityEntity.fromJson(json['stat']) : null;
-  }
+  // StatsEntity.fromJson(Map<String, dynamic> json) {
+  //   baseStat = json['base_stat'];
+  //   effort = json['effort'];
+  //   stat =
+  //       json['stat'] != null ? new AbilityEntity.fromJson(json['stat']) : null;
+  // }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['base_stat'] = this.baseStat;
-    data['effort'] = this.effort;
-    if (this.stat != null) {
-      data['stat'] = this.stat!.toJson();
-    }
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['base_stat'] = this.baseStat;
+  //   data['effort'] = this.effort;
+  //   if (this.stat != null) {
+  //     data['stat'] = this.stat!.toJson();
+  //   }
+  //   return data;
+  // }
 }

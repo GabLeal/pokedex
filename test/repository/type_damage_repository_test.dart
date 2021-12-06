@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/layers/domain/entities/type_damage_entity.dart';
-import 'package:pokedex/repository/type_damage_repository.dart';
+import 'package:pokedex/layers/domain/repositories/type_damage_repository.dart';
 import 'package:pokedex/util/base_url.dart';
 
 class DioMock extends Mock implements Dio {}

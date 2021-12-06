@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
-import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/repository/pokemon_repository.dart';
+import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 
 class PokemonRepositoryMock extends Mock implements PokemonRepository {}
@@ -17,7 +17,7 @@ main() {
 
   group('Cache favorites pokemons', () {
     test('deve adicionar um pokemon aos favoritos', () {
-      PokemonEntity pokemon = PokemonEntity();
+      PokemonDto pokemon = PokemonDto();
       when(() => cacheFavorites.favoritePokemon(pokemon))
           .thenAnswer((_) async => Future.value(true));
 
@@ -35,29 +35,28 @@ main() {
       expect(store.pokemons, isEmpty);
     });
     test('should fill Pokemon list', () async {
-      when(() => repository.getPokemons())
-          .thenAnswer((_) async => <PokemonEntity>[
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-                PokemonEntity(),
-              ]);
+      when(() => repository.getPokemons()).thenAnswer((_) async => <PokemonDto>[
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+          ]);
 
       await store.getPokemons();
       expect(store.pokemons, isNotEmpty);

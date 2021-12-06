@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
+import 'package:pokedex/layers/data/dto/move_details_entity.dart';
 
 class MoveDetailsRepository {
   final Dio dio;
@@ -7,13 +7,13 @@ class MoveDetailsRepository {
     required this.dio,
   });
 
-  Future<MoveDetails?> getMoveDetails(String url) async {
+  Future<MoveDetailsDto?> getMoveDetails(String url) async {
     try {
       var response = await dio.get(url);
 
       var moveDetailsResponse = response.data;
 
-      MoveDetails moveDetails = MoveDetails.fromJson(moveDetailsResponse);
+      MoveDetailsDto moveDetails = MoveDetailsDto.fromJson(moveDetailsResponse);
 
       return moveDetails;
     } catch (erro) {

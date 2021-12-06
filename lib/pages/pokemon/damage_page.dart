@@ -1,7 +1,7 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
+import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/entities/type_damage_entity.dart';
 import 'package:pokedex/shared/components/button_retry.dart';
 import 'package:pokedex/shared/components/loading_widget.dart';
@@ -10,7 +10,7 @@ import 'package:pokedex/stores/type_damage_store.dart';
 import 'package:pokedex/util/enums.dart';
 
 class DamagePage extends StatefulWidget {
-  final PokemonEntity pokemon;
+  final PokemonDto pokemon;
   DamagePage({Key? key, required this.pokemon}) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class _DamagePageState extends State<DamagePage> {
   TypeDamageStore _typeDamageStore = TypeDamageStore();
   @override
   void initState() {
-    _typeDamageStore.getTypeDamage(widget.pokemon.types!.first.type!.url);
+    _typeDamageStore.getTypeDamage(widget.pokemon.typesDto!.first.typeDto!.url);
 
     super.initState();
   }
@@ -48,8 +48,8 @@ class _DamagePageState extends State<DamagePage> {
                     "Não estamos conseguindo conectar com a internet no momento."),
                 ButtonRetry(
                   onTap: () {
-                    _typeDamageStore
-                        .getTypeDamage(widget.pokemon.types!.first.type!.url);
+                    _typeDamageStore.getTypeDamage(
+                        widget.pokemon.typesDto!.first.typeDto!.url);
                   },
                 )
               ],

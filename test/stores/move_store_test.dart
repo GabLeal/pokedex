@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
-import 'package:pokedex/repository/move_repository.dart';
+import 'package:pokedex/layers/data/dto/move_details_entity.dart';
+import 'package:pokedex/layers/domain/repositories/move_repository.dart';
 import 'package:pokedex/stores/move_store.dart';
 import 'package:pokedex/util/enums.dart';
 
@@ -13,7 +13,7 @@ main() {
   final store = MoveStore(repository);
   test('should return one Ability', () async {
     when(() => repository.getMoveDetails(urlTest)).thenAnswer((_) async {
-      store.moveDetails = MoveDetails();
+      store.moveDetails = MoveDetailsDto();
       store.statusRequestMove = StatusRequest.success;
     });
 

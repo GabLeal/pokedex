@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
-import 'package:pokedex/repository/move_repository.dart';
+import 'package:pokedex/layers/data/dto/move_details_entity.dart';
+import 'package:pokedex/layers/domain/repositories/move_repository.dart';
 import 'package:pokedex/util/base_url.dart';
 
 class DioMock extends Mock implements Dio {}
@@ -19,7 +19,7 @@ main() {
         data: jsonMove,
         statusCode: 200));
 
-    MoveDetails? moveDetails = await repository.getMoveDetails(url);
+    MoveDetailsDto? moveDetails = await repository.getMoveDetails(url);
 
     expect(moveDetails, isNotNull);
   });

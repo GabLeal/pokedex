@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
+import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
 import 'package:pokedex/util/base_url.dart';
 
 class PokemonRepository {
@@ -10,8 +10,8 @@ class PokemonRepository {
     required this.dio,
   });
 
-  Future<List<PokemonEntity>> getPokemons() async {
-    List<PokemonEntity> pokemons = [];
+  Future<List<PokemonDto>> getPokemons() async {
+    List<PokemonDto> pokemons = [];
     try {
       var response = await dio
           .get('${BaseUrl.url}/pokemon/?offset=${_offset.toString()}&limit=20');
@@ -19,7 +19,7 @@ class PokemonRepository {
       List listaPokemons = response.data['results'];
 
       for (int i = 0; i < listaPokemons.length; i++) {
-        PokemonEntity? pokemon = await _loadingPokemon(listaPokemons[i]['url']);
+        PokemonDto? pokemon = await _loadingPokemon(listaPokemons[i]['url']);
 
         if (pokemon != null) pokemons.add(pokemon);
       }
@@ -32,26 +32,26 @@ class PokemonRepository {
     }
   }
 
-  Future<PokemonEntity?> searchPokemonByName(String name) async {
+  Future<PokemonDto?> searchPokemonByName(String name) async {
     try {
       var response = await dio.get('${BaseUrl.url}/pokemon/$name');
 
       var pokemonResponse = response.data;
 
-      PokemonEntity pokemon = PokemonEntity.fromJson(pokemonResponse);
+      PokemonDto pokemon = PokemonDto.fromJson(pokemonResponse);
       return pokemon;
     } catch (erro) {
       return null;
     }
   }
 
-  Future<PokemonEntity?> _loadingPokemon(String urlPokemon) async {
+  Future<PokemonDto?> _loadingPokemon(String urlPokemon) async {
     try {
       var response = await dio.get(urlPokemon);
 
       var pokemonResponse = response.data;
 
-      PokemonEntity pokemon = PokemonEntity.fromJson(pokemonResponse);
+      PokemonDto pokemon = PokemonDto.fromJson(pokemonResponse);
 
       return pokemon;
     } catch (erro) {
