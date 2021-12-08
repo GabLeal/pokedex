@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
-import 'package:pokedex/layers/domain/repositories/ability_repository.dart';
+import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
 import 'package:pokedex/util/base_url.dart';
 
 class DioMock extends Mock implements Dio {}
@@ -11,7 +11,7 @@ class DioMock extends Mock implements Dio {}
 main() {
   final dio = DioMock();
 
-  final repository = AbilityDetailsRepository(dio: dio);
+  final repository = AbilityDetailsRepositoryImp(dio: dio);
 
   test('should return AbilityDetails', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(

@@ -2,7 +2,7 @@ import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
-import 'package:pokedex/layers/domain/entities/type_damage_entity.dart';
+import 'package:pokedex/layers/data/dto/type_damage_entity.dart';
 import 'package:pokedex/shared/components/button_retry.dart';
 import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/shared/components/type_widget.dart';

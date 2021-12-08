@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
 import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/data/repositories/pokemon_repository_imp.dart';
 import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
 import 'package:pokedex/util/enums.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -16,7 +17,7 @@ abstract class _PokemonStoreBase with Store {
 
   _PokemonStoreBase(
       [PokemonRepository? repository, CacheFavorites? cacheFavorites]) {
-    _pokemonRepository = repository ?? PokemonRepository(dio: Dio());
+    _pokemonRepository = repository ?? PokemonRepositoryImp(dio: Dio());
     _cacheFavorites = cacheFavorites ?? CacheFavorites();
   }
 

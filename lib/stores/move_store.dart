@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/layers/data/dto/move_details_entity.dart';
+import 'package:pokedex/layers/data/repositories/move_repository_imp.dart';
 import 'package:pokedex/layers/domain/repositories/move_repository.dart';
 import 'package:pokedex/util/enums.dart';
 
@@ -15,7 +16,7 @@ abstract class _MoveStoreBase with Store {
 
   _MoveStoreBase([MoveDetailsRepository? repository])
       : _moveDetailsRepository =
-            repository ?? MoveDetailsRepository(dio: Dio());
+            repository ?? MoveDetailsRepositoryImp(dio: Dio());
 
   @observable
   StatusRequest statusRequestMove = StatusRequest.empty;

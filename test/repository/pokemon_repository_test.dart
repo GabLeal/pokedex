@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
+import 'package:pokedex/layers/data/repositories/pokemon_repository_imp.dart';
 import 'package:pokedex/util/base_url.dart';
 
 class DioMock extends Mock implements Dio {}
@@ -11,7 +11,7 @@ class DioMock extends Mock implements Dio {}
 main() {
   final dio = DioMock();
 
-  final repository = PokemonRepository(dio: dio);
+  final repository = PokemonRepositoryImp(dio: dio);
 
   test('should return a list of 20 pokemons', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(

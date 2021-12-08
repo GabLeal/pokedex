@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
-import 'package:pokedex/layers/domain/entities/type_damage_entity.dart';
+import 'package:pokedex/layers/data/repositories/type_damage_repository_imp.dart';
+import 'package:pokedex/layers/data/dto/type_damage_entity.dart';
 import 'package:pokedex/layers/domain/repositories/type_damage_repository.dart';
 import 'package:pokedex/util/enums.dart';
 
@@ -13,7 +14,8 @@ abstract class _TypeDamageStoreBase with Store {
   TypeDamageRepository _typeDamageRepository;
 
   _TypeDamageStoreBase([TypeDamageRepository? repository])
-      : _typeDamageRepository = repository ?? TypeDamageRepository(dio: Dio());
+      : _typeDamageRepository =
+            repository ?? TypeDamageRepositoryImp(dio: Dio());
 
   @observable
   StatusRequest statusRequestTypedamage = StatusRequest.empty;

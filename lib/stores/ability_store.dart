@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/layers/data/dto/ability_details_entity.dart';
+import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
 import 'package:pokedex/layers/domain/repositories/ability_repository.dart';
 import 'package:pokedex/util/enums.dart';
 
@@ -14,7 +15,7 @@ abstract class _AbilityStoreBase with Store {
 
   _AbilityStoreBase([AbilityDetailsRepository? repository])
       : _abilityDetailsRepository =
-            repository ?? AbilityDetailsRepository(dio: Dio());
+            repository ?? AbilityDetailsRepositoryImp(dio: Dio());
   @observable
   StatusRequest statusRequestAbility = StatusRequest.empty;
 
