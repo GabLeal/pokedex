@@ -1,7 +1,7 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/shared/components/button_retry.dart';
 import 'package:pokedex/shared/components/loading_widget.dart';
 import 'package:pokedex/shared/components/type_widget.dart';
@@ -11,7 +11,7 @@ import 'package:pokedex/themes/app_colors.dart';
 import 'package:pokedex/util/enums.dart';
 
 class MovesPage extends StatefulWidget {
-  final PokemonDto pokemon;
+  final PokemonEntity pokemon;
   MovesPage({
     Key? key,
     required this.pokemon,
@@ -39,22 +39,20 @@ class _MovesPageState extends State<MovesPage> {
             _title('Abilities', size),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: widget.pokemon.abilitiesDto!.map((e) {
+              children: widget.pokemon.abilities!.map((e) {
                 return _cardMoveOrAbility(
-                    text: e.abilityDto!.name,
+                    text: e.ability!.name,
                     context: context,
-                    url: e.abilityDto!.url,
+                    url: e.ability!.url,
                     isAbility: true);
               }).toList(),
             ),
             _title('Moves', size),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: widget.pokemon.movesDto!.map((e) {
+              children: widget.pokemon.moves!.map((e) {
                 return _cardMoveOrAbility(
-                    text: e.abilityDto!.name,
-                    context: context,
-                    url: e.abilityDto!.url);
+                    text: e.move!.name, context: context, url: e.move!.url);
               }).toList(),
             ),
           ],
@@ -87,7 +85,7 @@ class _MovesPageState extends State<MovesPage> {
         decoration: BoxDecoration(
             border: Border.all(
                 color: ColorstypePokemon
-                        .colorType[widget.pokemon.typesDto![0].typeDto!.name] ??
+                        .colorType[widget.pokemon.types![0].type!.name] ??
                     Colors.white,
                 width: 1),
             borderRadius: BorderRadius.circular(10)),
@@ -165,16 +163,16 @@ class _MovesPageState extends State<MovesPage> {
                             margin: EdgeInsets.symmetric(vertical: 10),
                             height: 1,
                             color: ColorstypePokemon.colorType[
-                                widget.pokemon.typesDto!.first.typeDto!.name],
+                                widget.pokemon.types!.first.type!.name],
                           ),
                           _infoAblity(
                               'effect',
-                              _abilityStore.abilityDetails!.effectEntriesDto!
-                                  .last.effect),
+                              _abilityStore
+                                  .abilityDetails!.effectEntries!.last.effect),
                           _infoAblity(
                               'short effect',
-                              _abilityStore.abilityDetails!.effectEntriesDto!
-                                  .last.shortEffect),
+                              _abilityStore.abilityDetails!.effectEntries!.last
+                                  .shortEffect),
                         ],
                       );
                     default:
@@ -212,7 +210,7 @@ class _MovesPageState extends State<MovesPage> {
                           margin: EdgeInsets.symmetric(vertical: 10),
                           height: 1,
                           color: ColorstypePokemon.colorType[
-                              widget.pokemon.typesDto!.first.typeDto!.name],
+                              widget.pokemon.types!.first.type!.name],
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 7.0),
@@ -221,8 +219,7 @@ class _MovesPageState extends State<MovesPage> {
                             children: [
                               Text('type'),
                               TypeWidget(
-                                  nameType:
-                                      _moveStore.moveDetails!.typeDto!.name)
+                                  nameType: _moveStore.moveDetails!.type!.name)
                             ],
                           ),
                         ),
@@ -233,7 +230,8 @@ class _MovesPageState extends State<MovesPage> {
                             children: [
                               Text("Damage"),
                               Text(
-                                _moveStore.moveDetails!.damageDto!.name ?? '-',
+                                _moveStore.moveDetails!.damageClass!.name ??
+                                    '-',
                               ),
                             ],
                           ),

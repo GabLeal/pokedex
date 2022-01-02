@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:pokedex/layers/data/dto/ability_details_entity.dart';
+import 'package:pokedex/layers/data/dto/ability_details_dto.dart';
+import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
 import 'package:pokedex/layers/domain/repositories/ability_repository.dart';
 
 class AbilityDetailsRepositoryImp implements AbilityDetailsRepository {
@@ -10,7 +11,7 @@ class AbilityDetailsRepositoryImp implements AbilityDetailsRepository {
   });
 
   @override
-  Future<AbilityDetailsDto?> getAbilityDetails(String url) async {
+  Future<AbilityDetailsEntity?> getAbilityDetails(String url) async {
     try {
       var response = await dio.get(url);
 

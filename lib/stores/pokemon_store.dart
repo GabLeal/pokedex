@@ -1,8 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
 import 'package:pokedex/layers/data/repositories/pokemon_repository_imp.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
 import 'package:pokedex/util/enums.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -25,27 +25,27 @@ abstract class _PokemonStoreBase with Store {
   StatusRequest statusRequest = StatusRequest.empty;
 
   @observable
-  ObservableList<PokemonDto> pokemons =
-      ObservableList<PokemonDto>().asObservable();
+  ObservableList<PokemonEntity> pokemons =
+      ObservableList<PokemonEntity>().asObservable();
 
   @observable
-  ObservableList<PokemonDto> favoritesPokemons =
-      ObservableList<PokemonDto>().asObservable();
+  ObservableList<PokemonEntity> favoritesPokemons =
+      ObservableList<PokemonEntity>().asObservable();
 
   getFavoritesPokemons() async {
-    List<PokemonDto> poke = await _cacheFavorites.getFavoritesPokemons();
+    List<PokemonEntity> poke = await _cacheFavorites.getFavoritesPokemons();
 
     if (poke.isNotEmpty) {
       favoritesPokemons.addAll(poke);
     }
   }
 
-  favoritePokemon(PokemonDto pokemon) async {
+  favoritePokemon(PokemonEntity pokemon) async {
     bool isSave = await _cacheFavorites.favoritePokemon(pokemon);
     if (isSave) favoritesPokemons.add(pokemon);
   }
 
-  removeFavoritePokemon(PokemonDto pokemon) async {
+  removeFavoritePokemon(PokemonEntity pokemon) async {
     bool isremove = await _cacheFavorites.removeFavoritePokemon(pokemon);
     if (isremove) {
       favoritesPokemons.removeWhere((p) => p.name == pokemon.name);
@@ -56,7 +56,7 @@ abstract class _PokemonStoreBase with Store {
   getPokemons() async {
     statusRequest = StatusRequest.loading;
 
-    List<PokemonDto> listPokemons = await _pokemonRepository.getPokemons();
+    List<PokemonEntity> listPokemons = await _pokemonRepository.getPokemons();
 
     if (listPokemons.isNotEmpty) {
       pokemons.addAll(listPokemons);
@@ -66,10 +66,10 @@ abstract class _PokemonStoreBase with Store {
     }
   }
 
-  Future<PokemonDto?> searchPokemonByName(String name) async {
+  Future<PokemonEntity?> searchPokemonByName(String name) async {
     statusRequest = StatusRequest.loading;
 
-    PokemonDto? pokemon = await _pokemonRepository.searchPokemonByName(name);
+    PokemonEntity? pokemon = await _pokemonRepository.searchPokemonByName(name);
 
     if (pokemon != null) {
       statusRequest = StatusRequest.success;

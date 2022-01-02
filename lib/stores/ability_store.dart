@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
-import 'package:pokedex/layers/data/dto/ability_details_entity.dart';
 import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
+import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
 import 'package:pokedex/layers/domain/repositories/ability_repository.dart';
 import 'package:pokedex/util/enums.dart';
 
@@ -10,7 +10,7 @@ part 'ability_store.g.dart';
 class AbilityStore = _AbilityStoreBase with _$AbilityStore;
 
 abstract class _AbilityStoreBase with Store {
-  AbilityDetailsDto? abilityDetails;
+  AbilityDetailsEntity? abilityDetails;
   AbilityDetailsRepository _abilityDetailsRepository;
 
   _AbilityStoreBase([AbilityDetailsRepository? repository])

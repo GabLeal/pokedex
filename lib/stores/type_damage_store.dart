@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/layers/data/repositories/type_damage_repository_imp.dart';
-import 'package:pokedex/layers/data/dto/type_damage_entity.dart';
+import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
 import 'package:pokedex/layers/domain/repositories/type_damage_repository.dart';
 import 'package:pokedex/util/enums.dart';
 

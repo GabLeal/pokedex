@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/pages/pokemon/damage_page.dart';
 import 'package:pokedex/pages/pokemon/moves_page.dart';
 import 'package:pokedex/pages/pokemon/stats_page.dart';
@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 enum Info { STATS, MOVES, DAMAGE }
 
 class InfoPokemonPage extends StatefulWidget {
-  final PokemonDto pokemon;
+  final PokemonEntity pokemon;
 
   const InfoPokemonPage({Key? key, required this.pokemon}) : super(key: key);
 
@@ -32,8 +32,8 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
         body: CustomScrollView(
       slivers: [
         SliverAppBar(
-          backgroundColor: ColorstypePokemon
-              .colorType[widget.pokemon.typesDto![0].typeDto!.name],
+          backgroundColor:
+              ColorstypePokemon.colorType[widget.pokemon.types![0].type!.name],
           pinned: true,
           floating: true,
           snap: true,
@@ -66,10 +66,9 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
                       child: SlideImageWidget(children: [
                         CacheImageWidget(
                             pathImage:
-                                '${widget.pokemon.spritesDto!.frontDefault}'),
+                                '${widget.pokemon.sprites!.frontDefault}'),
                         CacheImageWidget(
-                            pathImage:
-                                '${widget.pokemon.spritesDto!.backDefault}')
+                            pathImage: '${widget.pokemon.sprites!.backDefault}')
                       ])),
                 ),
                 Align(
@@ -78,9 +77,9 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
                     padding: const EdgeInsets.only(bottom: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: widget.pokemon.typesDto!.map((t) {
+                      children: widget.pokemon.types!.map((t) {
                         return TypeWidget(
-                          nameType: "${t.typeDto!.name}",
+                          nameType: "${t.type!.name}",
                         );
                       }).toList(),
                     ),
@@ -128,7 +127,7 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
 
   Widget _itemMenu(String label, Info info) {
     Color color =
-        ColorstypePokemon.colorType[widget.pokemon.typesDto![0].typeDto!.name]!;
+        ColorstypePokemon.colorType[widget.pokemon.types![0].type!.name]!;
     return GestureDetector(
       onTap: () {
         setState(() {

@@ -1,5 +1,5 @@
-import 'package:pokedex/layers/data/dto/move_details_entity.dart';
+import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
 
 abstract class MoveDetailsRepository {
-  Future<MoveDetailsDto?> getMoveDetails(String url);
+  Future<MoveDetailsEntity?> getMoveDetails(String url);
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/layers/data/dto/type_damage_entity.dart';
+import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
 import 'package:pokedex/layers/data/repositories/type_damage_repository_imp.dart';
 import 'package:pokedex/util/base_url.dart';
 

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:pokedex/layers/data/dto/move_details_entity.dart';
+import 'package:pokedex/layers/data/dto/move_details_dto.dart';
+import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
 import 'package:pokedex/layers/domain/repositories/move_repository.dart';
 
 class MoveDetailsRepositoryImp implements MoveDetailsRepository {
@@ -9,7 +10,7 @@ class MoveDetailsRepositoryImp implements MoveDetailsRepository {
   });
 
   @override
-  Future<MoveDetailsDto?> getMoveDetails(String url) async {
+  Future<MoveDetailsEntity?> getMoveDetails(String url) async {
     try {
       var response = await dio.get(url);
 

@@ -1,11 +1,14 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/themes/app_colors.dart';
 
 class StatsPage extends StatefulWidget {
-  final PokemonDto pokemon;
-  const StatsPage({Key? key, required this.pokemon}) : super(key: key);
+  final PokemonEntity pokemon;
+  const StatsPage({
+    Key? key,
+    required this.pokemon,
+  }) : super(key: key);
 
   @override
   _StatsPageState createState() => _StatsPageState();
@@ -55,8 +58,8 @@ class _StatsPageState extends State<StatsPage> {
                       Container(
                         height: size.height * 0.05,
                         width: 2,
-                        color: ColorstypePokemon.colorType[
-                            widget.pokemon.typesDto![0].typeDto!.name],
+                        color: ColorstypePokemon
+                            .colorType[widget.pokemon.types![0].type!.name],
                       ),
                       Text(
                         "Weight ${widget.pokemon.weight}",
@@ -78,7 +81,7 @@ class _StatsPageState extends State<StatsPage> {
             padding: EdgeInsets.all(10),
             width: size.width,
             child: Column(
-              children: widget.pokemon.statsDto!.map((e) {
+              children: widget.pokemon.stats!.map((e) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Column(
@@ -88,8 +91,8 @@ class _StatsPageState extends State<StatsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${e.stats!.name}".replaceFirst(e.stats!.name![0],
-                                e.stats!.name![0].toUpperCase()),
+                            "${e.stat!.name}".replaceFirst(e.stat!.name![0],
+                                e.stat!.name![0].toUpperCase()),
                             style: TextStyle(fontSize: 10),
                           ),
                           Text("${e.baseStat}", style: TextStyle(fontSize: 10)),
@@ -127,8 +130,8 @@ class _StatsPageState extends State<StatsPage> {
                                         (e.baseStat!.toDouble() / 100)
                                     : 0,
                                 decoration: BoxDecoration(
-                                    color: ColorstypePokemon.colorType[widget
-                                        .pokemon.typesDto![0].typeDto!.name],
+                                    color: ColorstypePokemon.colorType[
+                                        widget.pokemon.types![0].type!.name],
                                     borderRadius: BorderRadius.circular(4)),
                               ),
                             ],

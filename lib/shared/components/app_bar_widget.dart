@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/pages/pokemon/info_pokemon_page.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +76,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     });
     final pokemonStore = context.read<PokemonStore>();
 
-    PokemonDto? pokemon =
+    PokemonEntity? pokemon =
         await pokemonStore.searchPokemonByName(newQuery.toLowerCase());
 
     if (pokemon != null) {

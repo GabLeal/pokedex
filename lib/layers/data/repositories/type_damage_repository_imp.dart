@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pokedex/layers/data/dto/type_damage_entity.dart';
+import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
 import 'package:pokedex/layers/domain/repositories/type_damage_repository.dart';
 
 class TypeDamageRepositoryImp implements TypeDamageRepository {

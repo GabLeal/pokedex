@@ -1,8 +1,8 @@
-import 'package:pokedex/layers/data/dto/abilities_entity.dart';
-import 'package:pokedex/layers/data/dto/moves_entity.dart';
-import 'package:pokedex/layers/data/dto/sprites_entity.dart';
-import 'package:pokedex/layers/data/dto/stats_entity.dart';
-import 'package:pokedex/layers/data/dto/type_entity.dart';
+import 'package:pokedex/layers/data/dto/abilities_dto.dart';
+import 'package:pokedex/layers/data/dto/moves_dto.dart';
+import 'package:pokedex/layers/data/dto/sprites_dto.dart';
+import 'package:pokedex/layers/data/dto/stats_dto.dart';
+import 'package:pokedex/layers/data/dto/type_dto.dart';
 
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 
@@ -46,9 +46,9 @@ class PokemonDto extends PokemonEntity {
 
   PokemonDto.fromJson(Map<String, dynamic> json) {
     if (json['abilities'] != null) {
-      abilitiesDto = [];
+      abilities = [];
       json['abilities'].forEach((v) {
-        abilitiesDto!.add(AbilitiesDto.fromJson(v));
+        abilities!.add(AbilitiesDto.fromJson(v));
       });
     }
 
@@ -56,25 +56,25 @@ class PokemonDto extends PokemonEntity {
     id = json['id'];
     locationAreaEncounters = json['location_area_encounters'];
     if (json['moves'] != null) {
-      movesDto = [];
+      moves = [];
       json['moves'].forEach((v) {
-        movesDto!.add(new MovesDto.fromJson(v));
+        moves!.add(new MovesDto.fromJson(v));
       });
     }
     name = json['name'];
     order = json['order'];
-    spritesDto =
+    sprites =
         json['sprites'] != null ? SpritesDto.fromJson(json['sprites']) : null;
     if (json['stats'] != null) {
-      statsDto = [];
+      stats = [];
       json['stats'].forEach((v) {
-        statsDto!.add(StatsDto.fromJson(v));
+        stats!.add(StatsDto.fromJson(v));
       });
     }
     if (json['types'] != null) {
-      typesDto = [];
+      types = [];
       json['types'].forEach((v) {
-        typesDto!.add(TypesDto.fromJson(v));
+        types!.add(TypesDto.fromJson(v));
       });
     }
     weight = json['weight'];
@@ -82,7 +82,7 @@ class PokemonDto extends PokemonEntity {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.abilitiesDto != null) {
+    if (this.abilities != null) {
       data['abilities'] = this.abilitiesDto!.map((v) => v.toJson()).toList();
     }
 

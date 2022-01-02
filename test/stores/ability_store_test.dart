@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/layers/data/dto/ability_details_entity.dart';
+import 'package:pokedex/layers/data/dto/ability_details_dto.dart';
 import 'package:pokedex/layers/domain/repositories/ability_repository.dart';
 import 'package:pokedex/stores/ability_store.dart';
 import 'package:pokedex/util/enums.dart';

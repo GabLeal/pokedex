@@ -1,5 +1,5 @@
-import 'package:pokedex/layers/data/dto/damage_entity.dart';
-import 'package:pokedex/layers/data/dto/effect_entries_entity.dart';
+import 'package:pokedex/layers/data/dto/damage_dto.dart';
+import 'package:pokedex/layers/data/dto/effect_entries_dto.dart';
 import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
 
 class MoveDetailsDto extends MoveDetailsEntity {
@@ -38,23 +38,22 @@ class MoveDetailsDto extends MoveDetailsEntity {
   MoveDetailsDto.fromJson(Map<String, dynamic> json) {
     accuracy = json['accuracy'];
 
-    damageDto = json['damage_class'] != null
+    damageClass = json['damage_class'] != null
         ? new DamageDto.fromJson(json['damage_class'])
         : null;
     effectChance = json['effect_chance'];
 
     if (json['effect_entries'] != null) {
-      effectEntriesDto = [];
+      effectEntries = [];
       json['effect_entries'].forEach((v) {
-        effectEntriesDto!.add(EffectEntriesDto.fromJson(v));
+        effectEntries!.add(EffectEntriesDto.fromJson(v));
       });
     }
     name = json['name'];
     power = json['power'];
     pp = json['pp'];
     priority = json['priority'];
-    typeDto =
-        json['type'] != null ? new DamageDto.fromJson(json['type']) : null;
+    type = json['type'] != null ? new DamageDto.fromJson(json['type']) : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -1,13 +1,15 @@
-import 'package:pokedex/layers/data/dto/ability_entity.dart';
+import 'package:pokedex/layers/data/dto/ability_dto.dart';
 import 'package:pokedex/layers/domain/entities/abilities_entity.dart';
 
 class AbilitiesDto extends AbilitiesEntity {
   AbilityDto? abilityDto;
 
-  AbilitiesDto({this.abilityDto}) : super(ability: abilityDto);
+  AbilitiesDto({
+    this.abilityDto,
+  }) : super(ability: abilityDto);
 
   AbilitiesDto.fromJson(Map<String, dynamic> json) {
-    abilityDto =
+    ability =
         json['ability'] != null ? AbilityDto.fromJson(json['ability']) : null;
   }
 

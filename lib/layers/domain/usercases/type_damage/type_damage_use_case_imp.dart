@@ -1,4 +1,4 @@
-import 'package:pokedex/layers/data/dto/type_damage_entity.dart';
+import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
 import 'package:pokedex/layers/domain/repositories/type_damage_repository.dart';
 import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/shared/components/card_pokemon_widget.dart';
 
 class GridPokemonsWidget extends StatelessWidget {
-  final List<PokemonDto> pokemons;
+  final List<PokemonEntity> pokemons;
   const GridPokemonsWidget({
     Key? key,
     required this.pokemons,

@@ -1,7 +1,7 @@
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 
 abstract class PokemonRepository {
-  Future<List<PokemonDto>> getPokemons();
+  Future<List<PokemonEntity>> getPokemons();
 
-  Future<PokemonDto?> searchPokemonByName(String name);
+  Future<PokemonEntity?> searchPokemonByName(String name);
 }

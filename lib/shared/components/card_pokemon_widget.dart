@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/pages/pokemon/info_pokemon_page.dart';
 import 'package:pokedex/shared/components/cache_image_widget.dart';
 import 'package:pokedex/themes/app_colors.dart';
 import 'package:pokedex/themes/app_images.dart';
 
 class CarPokemonWidget extends StatelessWidget {
-  final PokemonDto pokemon;
+  final PokemonEntity pokemon;
   const CarPokemonWidget({
     Key? key,
     required this.pokemon,
@@ -25,8 +25,7 @@ class CarPokemonWidget extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color:
-                ColorstypePokemon.colorType[pokemon.typesDto![0].typeDto!.name],
+            color: ColorstypePokemon.colorType[pokemon.types![0].type!.name],
             borderRadius: BorderRadius.circular(10)),
         child: Stack(
           children: [
@@ -46,7 +45,7 @@ class CarPokemonWidget extends StatelessWidget {
                   Hero(
                       tag: pokemon.order ?? 'dash',
                       child: CacheImageWidget(
-                          pathImage: '${pokemon.spritesDto!.frontDefault}'))
+                          pathImage: '${pokemon.sprites!.frontDefault}'))
                 ],
               ),
             ),

@@ -1,5 +1,5 @@
-import 'package:pokedex/layers/data/dto/ability_details_entity.dart';
+import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
 
 abstract class AbilityDetailsUseCase {
-  Future<AbilityDetailsDto?> getPokemonAbilityDetails(String url);
+  Future<AbilityDetailsEntity?> getPokemonAbilityDetails(String url);
 }

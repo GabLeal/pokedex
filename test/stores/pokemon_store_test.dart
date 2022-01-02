@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
-import 'package:pokedex/layers/data/dto/pokemon_entity.dart';
+import 'package:pokedex/layers/data/dto/pokemon_dto.dart';
 import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
 import 'package:pokedex/stores/pokemon_store.dart';
 

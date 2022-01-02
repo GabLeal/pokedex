@@ -1,4 +1,4 @@
-import 'package:pokedex/layers/data/dto/ability_entity.dart';
+import 'package:pokedex/layers/data/dto/ability_dto.dart';
 import 'package:pokedex/layers/domain/entities/moves_entity.dart';
 
 class MovesDto extends MovesEntity {
@@ -12,8 +12,7 @@ class MovesDto extends MovesEntity {
         );
 
   MovesDto.fromJson(Map<String, dynamic> json) {
-    abilityDto =
-        json['move'] != null ? AbilityDto.fromJson(json['move']) : null;
+    move = json['move'] != null ? AbilityDto.fromJson(json['move']) : null;
     url = json['url'];
   }
 
