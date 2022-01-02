@@ -3,7 +3,9 @@ import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
 import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case.dart';
 
 class PokemonUseCaseImp implements PokemonUseCase {
-  late PokemonRepository _pokemonRepository;
+  final PokemonRepository _pokemonRepository;
+
+  PokemonUseCaseImp(this._pokemonRepository);
   @override
   Future<List<PokemonEntity>> getPokemons() async {
     return await _pokemonRepository.getPokemons();

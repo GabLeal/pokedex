@@ -3,7 +3,9 @@ import 'package:pokedex/layers/domain/repositories/type_damage_repository.dart';
 import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case.dart';
 
 class TypeDamageUseCaseImp implements TypeDamageUseCase {
-  late TypeDamageRepository _typeDamageRepository;
+  final TypeDamageRepository _typeDamageRepository;
+
+  TypeDamageUseCaseImp(this._typeDamageRepository);
 
   @override
   Future<TypeDamage?> getTypeDamage(String url) async {

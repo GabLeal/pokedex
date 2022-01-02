@@ -1,9 +1,7 @@
 import 'package:mobx/mobx.dart';
-import 'package:dio/dio.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
-import 'package:pokedex/layers/data/repositories/pokemon_repository_imp.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
+import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case.dart';
 import 'package:pokedex/util/enums.dart';
 import 'package:bot_toast/bot_toast.dart';
 
@@ -12,14 +10,19 @@ part 'pokemon_store.g.dart';
 class PokemonStore = _PokemonStoreBase with _$PokemonStore;
 
 abstract class _PokemonStoreBase with Store {
-  late PokemonRepository _pokemonRepository;
-  late CacheFavorites _cacheFavorites;
+  // late PokemonRepository _pokemonRepository;
+  // late CacheFavorites _cacheFavorites;
 
-  _PokemonStoreBase(
-      [PokemonRepository? repository, CacheFavorites? cacheFavorites]) {
-    _pokemonRepository = repository ?? PokemonRepositoryImp(dio: Dio());
-    _cacheFavorites = cacheFavorites ?? CacheFavorites();
-  }
+  // _PokemonStoreBase(
+  //     [PokemonRepository? repository, CacheFavorites? cacheFavorites]) {
+  //   _pokemonRepository = repository ?? PokemonRepositoryImp(dio: Dio());
+  //   _cacheFavorites = cacheFavorites ?? CacheFavorites();
+  // }
+
+  final PokemonUseCase _pokemonUseCase;
+  final CacheFavorites _cacheFavorites;
+
+  _PokemonStoreBase(this._pokemonUseCase, this._cacheFavorites);
 
   @observable
   StatusRequest statusRequest = StatusRequest.empty;
@@ -56,7 +59,7 @@ abstract class _PokemonStoreBase with Store {
   getPokemons() async {
     statusRequest = StatusRequest.loading;
 
-    List<PokemonEntity> listPokemons = await _pokemonRepository.getPokemons();
+    List<PokemonEntity> listPokemons = await _pokemonUseCase.getPokemons();
 
     if (listPokemons.isNotEmpty) {
       pokemons.addAll(listPokemons);
@@ -69,7 +72,7 @@ abstract class _PokemonStoreBase with Store {
   Future<PokemonEntity?> searchPokemonByName(String name) async {
     statusRequest = StatusRequest.loading;
 
-    PokemonEntity? pokemon = await _pokemonRepository.searchPokemonByName(name);
+    PokemonEntity? pokemon = await _pokemonUseCase.searchPokemonByName(name);
 
     if (pokemon != null) {
       statusRequest = StatusRequest.success;

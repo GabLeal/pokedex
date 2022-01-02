@@ -1,8 +1,11 @@
 import 'package:animated_card/animated_card.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
+import 'package:pokedex/layers/data/repositories/type_damage_repository_imp.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case_imp.dart';
 import 'package:pokedex/layers/presentation/components/button_retry.dart';
 import 'package:pokedex/layers/presentation/components/loading_widget.dart';
 import 'package:pokedex/layers/presentation/components/type_widget.dart';
@@ -18,7 +21,13 @@ class DamagePage extends StatefulWidget {
 }
 
 class _DamagePageState extends State<DamagePage> {
-  TypeDamageStore _typeDamageStore = TypeDamageStore();
+  TypeDamageStore _typeDamageStore = TypeDamageStore(
+    TypeDamageUseCaseImp(
+      TypeDamageRepositoryImp(
+        dio: Dio(),
+      ),
+    ),
+  );
   @override
   void initState() {
     _typeDamageStore.getTypeDamage(widget.pokemon.types!.first.type!.url);

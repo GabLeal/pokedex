@@ -1,8 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:dio/dio.dart';
-import 'package:pokedex/layers/data/repositories/move_repository_imp.dart';
 import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
-import 'package:pokedex/layers/domain/repositories/move_repository.dart';
+import 'package:pokedex/layers/domain/usercases/moves/moves_use_case.dart';
 import 'package:pokedex/util/enums.dart';
 
 part 'move_store.g.dart';
@@ -12,11 +10,9 @@ class MoveStore = _MoveStoreBase with _$MoveStore;
 abstract class _MoveStoreBase with Store {
   MoveDetailsEntity? moveDetails;
 
-  MoveDetailsRepository _moveDetailsRepository;
+  final MovesUseCase _movesUseCase;
 
-  _MoveStoreBase([MoveDetailsRepository? repository])
-      : _moveDetailsRepository =
-            repository ?? MoveDetailsRepositoryImp(dio: Dio());
+  _MoveStoreBase(this._movesUseCase);
 
   @observable
   StatusRequest statusRequestMove = StatusRequest.empty;
@@ -24,7 +20,7 @@ abstract class _MoveStoreBase with Store {
   void getMovie(String url) async {
     statusRequestMove = StatusRequest.loading;
 
-    moveDetails = await _moveDetailsRepository.getMoveDetails(url);
+    moveDetails = await _movesUseCase.getMoveDetails(url);
 
     if (moveDetails != null) {
       statusRequestMove = StatusRequest.success;
