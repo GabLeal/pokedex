@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/layers/data/dto/move_details_dto.dart';
 import 'package:pokedex/layers/domain/repositories/move_repository.dart';
-import 'package:pokedex/stores/move_store.dart';
+import 'package:pokedex/layers/presentation/stores/move_store.dart';
 import 'package:pokedex/util/enums.dart';
 
 class MoveDetailsRepositoryMock extends Mock implements MoveDetailsRepository {}

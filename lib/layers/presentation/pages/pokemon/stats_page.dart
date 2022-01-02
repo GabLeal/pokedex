@@ -1,7 +1,7 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/themes/app_colors.dart';
+import 'package:pokedex/layers/presentation/themes/app_colors.dart';
 
 class StatsPage extends StatefulWidget {
   final PokemonEntity pokemon;

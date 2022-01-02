@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/pages/pokemon/info_pokemon_page.dart';
-import 'package:pokedex/stores/pokemon_store.dart';
+import 'package:pokedex/layers/presentation/pages/pokemon/info_pokemon_page.dart';
+import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
 import 'package:provider/provider.dart';
 
 class AppBarWidget extends StatefulWidget implements PreferredSizeWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/pages/pokemon/info_pokemon_page.dart';
-import 'package:pokedex/shared/components/cache_image_widget.dart';
-import 'package:pokedex/themes/app_colors.dart';
-import 'package:pokedex/themes/app_images.dart';
+import 'package:pokedex/layers/presentation/components/cache_image_widget.dart';
+import 'package:pokedex/layers/presentation/pages/pokemon/info_pokemon_page.dart';
+import 'package:pokedex/layers/presentation/themes/app_colors.dart';
+import 'package:pokedex/layers/presentation/themes/app_images.dart';
 
 class CarPokemonWidget extends StatelessWidget {
   final PokemonEntity pokemon;

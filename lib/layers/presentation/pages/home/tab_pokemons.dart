@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pokedex/shared/components/button_retry.dart';
-import 'package:pokedex/shared/components/grid_pokemons_widget.dart';
-import 'package:pokedex/shared/components/loading_widget.dart';
-import 'package:pokedex/stores/pokemon_store.dart';
+import 'package:pokedex/layers/presentation/components/button_retry.dart';
+import 'package:pokedex/layers/presentation/components/grid_pokemons_widget.dart';
+import 'package:pokedex/layers/presentation/components/loading_widget.dart';
+import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
 import 'package:pokedex/util/enums.dart';
 import 'package:provider/provider.dart';
 
@@ -42,16 +42,20 @@ class TabPokemons extends StatelessWidget {
 
         default:
           return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: NotificationListener<ScrollEndNotification>(
-                  onNotification: (scrollEnd) {
-                    var metrics = scrollEnd.metrics;
-                    if (metrics.atEdge) {
-                      if (metrics.pixels != 0) pokemonStore.getPokemons();
-                    }
-                    return true;
-                  },
-                  child: GridPokemonsWidget(pokemons: pokemonStore.pokemons)));
+            padding: const EdgeInsets.all(8.0),
+            child: NotificationListener<ScrollEndNotification>(
+              onNotification: (scrollEnd) {
+                var metrics = scrollEnd.metrics;
+                if (metrics.atEdge) {
+                  if (metrics.pixels != 0) pokemonStore.getPokemons();
+                }
+                return true;
+              },
+              child: GridPokemonsWidget(
+                pokemons: pokemonStore.pokemons,
+              ),
+            ),
+          );
       }
     });
   }

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/shared/components/button_retry.dart';
-import 'package:pokedex/shared/components/loading_widget.dart';
-import 'package:pokedex/shared/components/type_widget.dart';
-import 'package:pokedex/stores/type_damage_store.dart';
+import 'package:pokedex/layers/presentation/components/button_retry.dart';
+import 'package:pokedex/layers/presentation/components/loading_widget.dart';
+import 'package:pokedex/layers/presentation/components/type_widget.dart';
+import 'package:pokedex/layers/presentation/stores/type_damage_store.dart';
 import 'package:pokedex/util/enums.dart';
 
 class DamagePage extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pokedex/shared/components/grid_pokemons_widget.dart';
-import 'package:pokedex/stores/pokemon_store.dart';
+import 'package:pokedex/layers/presentation/components/grid_pokemons_widget.dart';
+import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
 import 'package:provider/provider.dart';
 
 class TabFavorites extends StatelessWidget {

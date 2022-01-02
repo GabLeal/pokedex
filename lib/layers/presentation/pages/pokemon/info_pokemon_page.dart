@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/pages/pokemon/damage_page.dart';
-import 'package:pokedex/pages/pokemon/moves_page.dart';
-import 'package:pokedex/pages/pokemon/stats_page.dart';
-import 'package:pokedex/shared/components/cache_image_widget.dart';
-import 'package:pokedex/shared/components/slide_image_widget.dart';
-import 'package:pokedex/shared/components/type_widget.dart';
-import 'package:pokedex/stores/pokemon_store.dart';
-import 'package:pokedex/themes/app_colors.dart';
+import 'package:pokedex/layers/presentation/components/cache_image_widget.dart';
+import 'package:pokedex/layers/presentation/components/slide_image_widget.dart';
+import 'package:pokedex/layers/presentation/components/type_widget.dart';
+import 'package:pokedex/layers/presentation/pages/pokemon/damage_page.dart';
+import 'package:pokedex/layers/presentation/pages/pokemon/moves_page.dart';
+import 'package:pokedex/layers/presentation/pages/pokemon/stats_page.dart';
+import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
+import 'package:pokedex/layers/presentation/themes/app_colors.dart';
 import 'package:provider/provider.dart';
 
 enum Info { STATS, MOVES, DAMAGE }

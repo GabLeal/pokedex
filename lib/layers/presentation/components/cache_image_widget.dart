@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pokedex/themes/app_images.dart';
+import 'package:pokedex/layers/presentation/themes/app_images.dart';
 
 class CacheImageWidget extends StatelessWidget {
   final String pathImage;
