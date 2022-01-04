@@ -17,11 +17,13 @@ class CarPokemonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => InfoPokemonPage(
-                      pokemon: pokemon,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => InfoPokemonPage(
+              pokemon: pokemon,
+            ),
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -30,12 +32,14 @@ class CarPokemonWidget extends StatelessWidget {
         child: Stack(
           children: [
             Center(
-                child: Opacity(
-                    opacity: 0.6,
-                    child: Image.asset(
-                      AppImages.whitePokeball,
-                      width: 90,
-                    ))),
+              child: Opacity(
+                opacity: 0.6,
+                child: Image.asset(
+                  AppImages.whitePokeball,
+                  width: 90,
+                ),
+              ),
+            ),
             Positioned(
               right: 0,
               bottom: 0,
@@ -50,22 +54,24 @@ class CarPokemonWidget extends StatelessWidget {
               ),
             ),
             Positioned(
-                left: 10,
-                top: 10,
-                child: Text(
-                  "${pokemon.name}".replaceFirst(
-                      pokemon.name![0], pokemon.name![0].toUpperCase()),
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                )),
+              left: 10,
+              top: 10,
+              child: Text(
+                "${pokemon.name}".replaceFirst(
+                    pokemon.name![0], pokemon.name![0].toUpperCase()),
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ),
             Positioned(
-                left: 10,
-                bottom: 10,
-                child: Text(
-                  "Nº${pokemon.order.toString().padLeft(3, '0')}",
-                  style: TextStyle(color: Colors.black, fontSize: 10),
-                )),
+              left: 10,
+              bottom: 10,
+              child: Text(
+                "Nº${pokemon.order.toString().padLeft(3, '0')}",
+                style: TextStyle(color: Colors.black, fontSize: 10),
+              ),
+            ),
           ],
         ),
       ),

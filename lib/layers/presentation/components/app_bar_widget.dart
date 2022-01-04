@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/presentation/pages/pokemon/info_pokemon_page.dart';
 import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
@@ -74,18 +75,20 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     setState(() {
       searchQuery = newQuery;
     });
-    final pokemonStore = context.read<PokemonStore>();
+    PokemonStore pokemonStore = GetIt.I.get<PokemonStore>();
 
     PokemonEntity? pokemon =
         await pokemonStore.searchPokemonByName(newQuery.toLowerCase());
 
     if (pokemon != null) {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => InfoPokemonPage(
-                    pokemon: pokemon,
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (context) => InfoPokemonPage(
+            pokemon: pokemon,
+          ),
+        ),
+      );
     }
   }
 
@@ -106,18 +109,19 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        leading: _isSearching ? const BackButton() : Container(),
-        title: _isSearching ? _buildSearchField() : Text('Pokedex'),
-        actions: _buildActions(),
-        backgroundColor: Color(0xFFFF0000),
-        centerTitle: true,
-        bottom: TabBar(
-          indicatorColor: Colors.white,
-          labelPadding: EdgeInsets.only(bottom: 10, top: 10),
-          tabs: <Widget>[
-            Text("Pokemons"),
-            Text("Favorites"),
-          ],
-        ));
+      leading: _isSearching ? const BackButton() : Container(),
+      title: _isSearching ? _buildSearchField() : Text('Pokedex'),
+      actions: _buildActions(),
+      backgroundColor: Color(0xFFFF0000),
+      centerTitle: true,
+      bottom: TabBar(
+        indicatorColor: Colors.white,
+        labelPadding: EdgeInsets.only(bottom: 10, top: 10),
+        tabs: <Widget>[
+          Text("Pokemons"),
+          Text("Favorites"),
+        ],
+      ),
+    );
   }
 }

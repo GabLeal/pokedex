@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
+import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
 import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case.dart';
-import 'package:pokedex/util/enums.dart';
 
 part 'type_damage_store.g.dart';
 

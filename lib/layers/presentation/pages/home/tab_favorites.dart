@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pokedex/layers/presentation/components/grid_pokemons_widget.dart';
 import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
-import 'package:provider/provider.dart';
 
-class TabFavorites extends StatelessWidget {
+class TabFavorites extends StatefulWidget {
+  @override
+  State<TabFavorites> createState() => _TabFavoritesState();
+}
+
+class _TabFavoritesState extends State<TabFavorites> {
+  PokemonStore _pokemonStore = GetIt.I.get<PokemonStore>();
+
   @override
   Widget build(BuildContext context) {
-    PokemonStore _pokemonStore = Provider.of<PokemonStore>(context);
     return Observer(builder: (_) {
       if (_pokemonStore.favoritesPokemons.isEmpty) {
         return Center(
-            child: Text(
-          'Você ainda não possuim pokemons favoritos. Adicone eles a sua lista.',
-          textAlign: TextAlign.center,
-        ));
+          child: Text(
+            'Você ainda não possuim pokemons favoritos. Adicone eles a sua lista.',
+            textAlign: TextAlign.center,
+          ),
+        );
       } else {
         return Padding(
           padding: const EdgeInsets.all(8.0),

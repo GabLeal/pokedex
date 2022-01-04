@@ -2,6 +2,7 @@ import 'package:animated_card/animated_card.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
 import 'package:pokedex/layers/data/repositories/move_repository_imp.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
@@ -13,7 +14,6 @@ import 'package:pokedex/layers/presentation/components/type_widget.dart';
 import 'package:pokedex/layers/presentation/stores/ability_store.dart';
 import 'package:pokedex/layers/presentation/stores/move_store.dart';
 import 'package:pokedex/layers/presentation/themes/app_colors.dart';
-import 'package:pokedex/util/enums.dart';
 
 class MovesPage extends StatefulWidget {
   final PokemonEntity pokemon;

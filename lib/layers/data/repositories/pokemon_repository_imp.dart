@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:pokedex/core/util/base_url.dart';
 import 'package:pokedex/layers/data/dto/pokemon_dto.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
-import 'package:pokedex/util/base_url.dart';
 
 class PokemonRepositoryImp implements PokemonRepository {
   final Dio dio;

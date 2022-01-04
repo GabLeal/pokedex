@@ -1,8 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
+import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case.dart';
-import 'package:pokedex/util/enums.dart';
 import 'package:bot_toast/bot_toast.dart';
 
 part 'pokemon_store.g.dart';

@@ -13,28 +13,29 @@ class GridPokemonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimationLimiter(
-        child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 3 / 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10),
-            itemCount: pokemons.length,
-            itemBuilder: (context, index) {
-              var pokemon = pokemons[index];
-              return AnimationConfiguration.staggeredGrid(
-                position: index,
-                duration: const Duration(milliseconds: 375),
-                columnCount: 2,
-                child: ScaleAnimation(
-                  child: SlideAnimation(
-                    child: CarPokemonWidget(
-                      pokemon: pokemon,
-                    ),
+      child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 3 / 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10),
+          itemCount: pokemons.length,
+          itemBuilder: (context, index) {
+            var pokemon = pokemons[index];
+            return AnimationConfiguration.staggeredGrid(
+              position: index,
+              duration: const Duration(milliseconds: 375),
+              columnCount: 2,
+              child: ScaleAnimation(
+                child: SlideAnimation(
+                  child: CarPokemonWidget(
+                    pokemon: pokemon,
                   ),
                 ),
-              );
-            }));
+              ),
+            );
+          }),
+    );
 
     // GridView.builder(
   }

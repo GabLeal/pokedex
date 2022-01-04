@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/presentation/components/button_retry.dart';
 import 'package:pokedex/layers/presentation/components/grid_pokemons_widget.dart';
 import 'package:pokedex/layers/presentation/components/loading_widget.dart';
 import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
-import 'package:pokedex/util/enums.dart';
-import 'package:provider/provider.dart';
 
-class TabPokemons extends StatelessWidget {
+class TabPokemons extends StatefulWidget {
+  @override
+  State<TabPokemons> createState() => _TabPokemonsState();
+}
+
+class _TabPokemonsState extends State<TabPokemons> {
+  PokemonStore _pokemonStore = GetIt.I.get<PokemonStore>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    PokemonStore _pokemonStore = Provider.of<PokemonStore>(context);
+
     return Stack(
       alignment: Alignment.center,
       children: [
