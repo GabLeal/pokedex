@@ -81,8 +81,9 @@ abstract class _PokemonStoreBase with Store {
       statusRequest = StatusRequest.success;
 
       BotToast.showText(
-          duration: Duration(seconds: 3),
-          text: "Pokemon not found. Try again."); //popup a text toast;
+        duration: Duration(seconds: 3),
+        text: "Pokemon not found. Try again.",
+      ); //popup a text toast;
 
       return null;
     }

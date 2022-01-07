@@ -26,6 +26,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
 
   Widget _buildSearchField() {
     return TextField(
+      key: Key('inputSeachPokemonKey'),
       controller: _searchQueryController,
       autofocus: true,
       decoration: InputDecoration(
@@ -56,7 +57,12 @@ class _AppBarWidgetState extends State<AppBarWidget> {
 
     return <Widget>[
       IconButton(
-        icon: const Icon(Icons.search),
+        icon: const Icon(
+          Icons.search,
+          key: Key(
+            'searchKey',
+          ),
+        ),
         onPressed: _startSearch,
       ),
     ];

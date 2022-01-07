@@ -50,9 +50,15 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
               },
               icon: Observer(builder: (_) {
                 if (_pokemonStore.favoritesPokemons.contains(widget.pokemon)) {
-                  return Icon(Icons.star);
+                  return Icon(
+                    Icons.star,
+                    key: Key('isNotFavorite'),
+                  );
                 } else {
-                  return Icon(Icons.star_border);
+                  return Icon(
+                    Icons.star_border,
+                    key: Key('isFavorite'),
+                  );
                 }
               }),
             )

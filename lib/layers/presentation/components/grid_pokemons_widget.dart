@@ -14,6 +14,7 @@ class GridPokemonsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimationLimiter(
       child: GridView.builder(
+          key: const Key('gridPokemons'),
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
               childAspectRatio: 3 / 2,
@@ -29,6 +30,7 @@ class GridPokemonsWidget extends StatelessWidget {
               child: ScaleAnimation(
                 child: SlideAnimation(
                   child: CarPokemonWidget(
+                    key: Key('cardPokemon' + index.toString()),
                     pokemon: pokemon,
                   ),
                 ),
