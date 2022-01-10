@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/presentation/components/cache_image_widget.dart';
+import 'package:pokedex/layers/presentation/components/item_menu_pokemon_widget.dart';
 import 'package:pokedex/layers/presentation/components/slide_image_widget.dart';
 import 'package:pokedex/layers/presentation/components/type_widget.dart';
 import 'package:pokedex/layers/presentation/pages/pokemon/damage_page.dart';
@@ -25,8 +26,11 @@ class InfoPokemonPage extends StatefulWidget {
 class _InfoPokemonPageState extends State<InfoPokemonPage> {
   Info _info = Info.STATS;
   PokemonStore _pokemonStore = GetIt.I.get<PokemonStore>();
+
   @override
   Widget build(BuildContext context) {
+    var colorPokemon =
+        ColorstypePokemon.colorType[widget.pokemon.types![0].type!.name]!;
     return Scaffold(
         body: CustomScrollView(
       slivers: [
@@ -104,9 +108,45 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _itemMenu("Stats", Info.STATS),
-                _itemMenu("Moves", Info.MOVES),
-                _itemMenu("Damage", Info.DAMAGE)
+                ItemMenuPokemonWidget(
+                  key: Key('menuStatsKey'),
+                  label: 'Stats',
+                  info: Info.STATS,
+                  color: _info == Info.STATS ? colorPokemon : Colors.white,
+                  borderColor: colorPokemon,
+                  textColor: _info == Info.STATS ? Colors.white : colorPokemon,
+                  onTap: () {
+                    setState(() {
+                      _info = Info.STATS;
+                    });
+                  },
+                ),
+                ItemMenuPokemonWidget(
+                  key: Key('menuMovesKey'),
+                  label: 'Moves',
+                  info: Info.MOVES,
+                  color: _info == Info.MOVES ? colorPokemon : Colors.white,
+                  borderColor: colorPokemon,
+                  textColor: _info == Info.MOVES ? Colors.white : colorPokemon,
+                  onTap: () {
+                    setState(() {
+                      _info = Info.MOVES;
+                    });
+                  },
+                ),
+                ItemMenuPokemonWidget(
+                  key: Key('menuDamageKey'),
+                  label: 'Damage',
+                  info: Info.DAMAGE,
+                  color: _info == Info.DAMAGE ? colorPokemon : Colors.white,
+                  borderColor: colorPokemon,
+                  textColor: _info == Info.DAMAGE ? Colors.white : colorPokemon,
+                  onTap: () {
+                    setState(() {
+                      _info = Info.DAMAGE;
+                    });
+                  },
+                ),
               ],
             ),
           ),
@@ -131,34 +171,5 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
         ]))
       ],
     ));
-  }
-
-  Widget _itemMenu(String label, Info info) {
-    Color color =
-        ColorstypePokemon.colorType[widget.pokemon.types![0].type!.name]!;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _info = info;
-        });
-      },
-      child: AnimatedContainer(
-        duration: Duration(seconds: 1),
-        curve: Curves.easeIn,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: _info == info ? color : Colors.white,
-          border: Border.all(color: color, width: 1.5),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-              fontSize: 13,
-              color: _info == info ? Colors.white : color,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
   }
 }

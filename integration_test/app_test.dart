@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -23,7 +22,7 @@ void main() {
     expect(allCards, findsWidgets);
   });
 
-  testWidgets('should init favorities pokemons is empty',
+  testWidgets('should start favorite pokemons as empty',
       (WidgetTester tester) async {
     app.main();
     await tester.pumpAndSettle();
@@ -44,7 +43,7 @@ void main() {
     await Future.delayed(const Duration(seconds: 2));
   });
 
-  testWidgets('should favorities one pokemons', (WidgetTester tester) async {
+  testWidgets('should favorite a pokemon', (WidgetTester tester) async {
     app.main();
     await tester.pumpAndSettle();
     final card1 = find.byKey(Key('cardPokemon1'));
@@ -61,7 +60,6 @@ void main() {
     await tester.tap(tabFavoritis);
     await tester.pumpAndSettle();
 
-    //desmarcar favorito
     final card0 = find.byKey(Key('cardPokemon0'));
 
     expect(card0, findsOneWidget);
@@ -132,66 +130,55 @@ void main() {
     expect(find.text('Pokemon not found. Try again.'), findsOneWidget);
   });
 
-  //group('end-to-end test', () {
-  // testWidgets('tap on the floating action button, verify counter',
-  //     (WidgetTester tester) async {
-  //   app.main();
-  //   await tester.pumpAndSettle();
+  testWidgets('should open the detail of a pokemon ability',
+      (WidgetTester tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+    final cardPokemon = find.text('Charizard');
+    await tester.tap(cardPokemon);
+    await tester.pumpAndSettle();
 
-  //   expect(find.text('Pokedex'), findsOneWidget);
+    final menuMoves = find.byKey(Key('menuMovesKey'));
+    await tester.tap(menuMoves);
+    await tester.pumpAndSettle();
 
-  //   final listFinder = find.byKey(ValueKey('gridPokemons'));
+    final ability = find.byKey(Key('abilityKey0'));
+    await tester.tap(ability);
+    await tester.pumpAndSettle();
 
-  //   expect(listFinder, findsOneWidget);
+    await Future.delayed(const Duration(seconds: 2));
+  });
 
-  //   final itemFinder = find.byKey(Key('cardPokemon5'));
-  //   expect(itemFinder, findsOneWidget);
+  testWidgets('should open the detail of a pokemon move',
+      (WidgetTester tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+    final cardPokemon = find.text('Charizard');
+    await tester.tap(cardPokemon);
+    await tester.pumpAndSettle();
 
-  //   await tester.drag(itemFinder, Offset(0, -1000));
-  //   await tester.pumpAndSettle();
+    final menuMoves = find.byKey(Key('menuMovesKey'));
+    await tester.tap(menuMoves);
+    await tester.pumpAndSettle();
 
-  //   await Future.delayed(const Duration(seconds: 1));
+    final ability = find.byKey(Key('moveKey0'));
+    await tester.tap(ability);
+    await tester.pumpAndSettle();
 
-  //   final tabFavoritis = find.text('Favorites');
-  //   await tester.tap(tabFavoritis);
-  //   await tester.pumpAndSettle();
+    await Future.delayed(const Duration(seconds: 2));
+  });
 
-  //   final isEmptyFavoritiesText =
-  //       'Você ainda não possuim pokemons favoritos. Adicone eles a sua lista.';
+  testWidgets('should open the detail of a pokemon damage',
+      (WidgetTester tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+    final cardPokemon = find.text('Charizard');
+    await tester.tap(cardPokemon);
+    await tester.pumpAndSettle();
 
-  //   expect(find.text(isEmptyFavoritiesText), findsOneWidget);
-
-  //   await Future.delayed(const Duration(seconds: 2));
-
-  //   final tabPokemons = find.text('Pokemons');
-  //   await tester.tap(tabPokemons);
-  //   await tester.pumpAndSettle();
-
-  //   final card1 = find.byKey(Key('cardPokemon1'));
-  //   await tester.tap(card1);
-  //   await tester.pumpAndSettle();
-
-  //   final starFavorite = find.byKey(Key('isFavorite'));
-  //   await tester.tap(starFavorite);
-  //   await tester.pumpAndSettle();
-  //   await tester.pageBack();
-  //   await tester.pumpAndSettle();
-
-  //   await tester.tap(tabFavoritis);
-  //   await tester.pumpAndSettle();
-
-  //   //desmarcar favorito
-  //   final card0 = find.byKey(Key('cardPokemon0'));
-  //   await tester.tap(card0);
-  //   await tester.pumpAndSettle();
-
-  //   final starIsNotFavorite = find.byKey(Key('isNotFavorite'));
-  //   await tester.tap(starIsNotFavorite);
-  //   await tester.pumpAndSettle();
-  //   await tester.pageBack();
-  //   await tester.pumpAndSettle();
-
-  //   await Future.delayed(const Duration(seconds: 2));
-  // });
-  //});
+    final menuMoves = find.byKey(Key('menuDamageKey'));
+    await tester.tap(menuMoves);
+    await tester.pumpAndSettle();
+    await Future.delayed(const Duration(seconds: 2));
+  });
 }

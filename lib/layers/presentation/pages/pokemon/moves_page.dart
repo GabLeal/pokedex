@@ -55,19 +55,27 @@ class _MovesPageState extends State<MovesPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: widget.pokemon.abilities!.map((e) {
+                var index = widget.pokemon.abilities!.indexOf(e);
                 return _cardMoveOrAbility(
-                    text: e.ability!.name,
-                    context: context,
-                    url: e.ability!.url,
-                    isAbility: true);
+                  key: Key('abilityKey' + index.toString()),
+                  text: e.ability!.name,
+                  context: context,
+                  url: e.ability!.url,
+                  isAbility: true,
+                );
               }).toList(),
             ),
             _title('Moves', size),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: widget.pokemon.moves!.map((e) {
+                var index = widget.pokemon.moves!.indexOf(e);
                 return _cardMoveOrAbility(
-                    text: e.move!.name, context: context, url: e.move!.url);
+                  key: Key('moveKey' + index.toString()),
+                  text: e.move!.name,
+                  context: context,
+                  url: e.move!.url,
+                );
               }).toList(),
             ),
           ],
@@ -87,8 +95,10 @@ class _MovesPageState extends State<MovesPage> {
       {String? text,
       BuildContext? context,
       String? url,
-      bool isAbility = false}) {
+      bool isAbility = false,
+      required Key key}) {
     return GestureDetector(
+      key: key,
       onTap: () {
         isAbility
             ? _showInfoAbility(context, url)
