@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/model/model.dart';
-import 'package:pokedex/repository/pokemon_repository.dart';
-import 'package:pokedex/util/base_url.dart';
+import 'package:pokedex/core/util/base_url.dart';
+import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
+import 'package:pokedex/layers/data/repositories/pokemon_repository_imp.dart';
 
 class DioMock extends Mock implements Dio {}
 
 main() {
   final dio = DioMock();
 
-  final repository = PokemonRepository(dio: dio);
+  final repository = PokemonRepositoryImp(dio: dio);
 
   test('should return a list of 20 pokemons', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
@@ -19,7 +19,7 @@ main() {
         data: json,
         statusCode: 200));
 
-    List<Pokemon> pokemons = await repository.getPokemons();
+    List<PokemonEntity> pokemons = await repository.getPokemons();
 
     expect(pokemons, isNotEmpty);
     expect(pokemons.length, 20);
@@ -29,7 +29,7 @@ main() {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 400));
 
-    List<Pokemon> pokemons = await repository.getPokemons();
+    List<PokemonEntity> pokemons = await repository.getPokemons();
 
     expect(pokemons, isEmpty);
   });
@@ -40,7 +40,7 @@ main() {
         data: jsonOnePokemon,
         statusCode: 200));
 
-    Pokemon? pokemon = await repository.searchPokemonByName('pikachu');
+    PokemonEntity? pokemon = await repository.searchPokemonByName('pikachu');
 
     expect(pokemon, isNotNull);
   });
@@ -49,7 +49,7 @@ main() {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 404));
 
-    Pokemon? pokemon = await repository.searchPokemonByName('pikachu');
+    PokemonEntity? pokemon = await repository.searchPokemonByName('pikachu');
 
     expect(pokemon, isNull);
   });

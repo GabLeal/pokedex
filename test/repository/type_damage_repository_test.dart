@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/model/type_damage.dart';
-import 'package:pokedex/repository/type_damage_repository.dart';
-import 'package:pokedex/util/base_url.dart';
+import 'package:pokedex/core/util/base_url.dart';
+import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
+import 'package:pokedex/layers/data/repositories/type_damage_repository_imp.dart';
 
 class DioMock extends Mock implements Dio {}
 
 main() {
   final dio = DioMock();
 
-  final repository = TypeDamageRepository(dio: dio);
+  final repository = TypeDamageRepositoryImp(dio: dio);
 
   test('should return Typedamage', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(

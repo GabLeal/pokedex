@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/model/ability_details.dart';
-import 'package:pokedex/repository/ability_repository.dart';
-import 'package:pokedex/util/base_url.dart';
+import 'package:pokedex/core/util/base_url.dart';
+import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
+import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
 
 class DioMock extends Mock implements Dio {}
 
 main() {
   final dio = DioMock();
 
-  final repository = AbilityDetailsRepository(dio: dio);
+  final repository = AbilityDetailsRepositoryImp(dio: dio);
 
   test('should return AbilityDetails', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
@@ -19,7 +19,8 @@ main() {
         data: json,
         statusCode: 200));
 
-    AbilityDetails? abilityDetails = await repository.getAbilityDetails(url);
+    AbilityDetailsEntity? abilityDetails =
+        await repository.getAbilityDetails(url);
 
     expect(abilityDetails, isNotNull);
   });

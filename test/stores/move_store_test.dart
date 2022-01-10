@@ -1,19 +1,39 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/model/move_details.dart';
-import 'package:pokedex/repository/move_repository.dart';
-import 'package:pokedex/stores/move_store.dart';
-import 'package:pokedex/util/enums.dart';
+import 'package:pokedex/core/util/enums.dart';
+import 'package:pokedex/layers/data/dto/move_details_dto.dart';
+import 'package:pokedex/layers/domain/repositories/move_repository.dart';
+import 'package:pokedex/layers/domain/usercases/moves/moves_use_case.dart';
+import 'package:pokedex/layers/domain/usercases/moves/moves_use_case_imp.dart';
+import 'package:pokedex/layers/presentation/stores/move_store.dart';
 
 class MoveDetailsRepositoryMock extends Mock implements MoveDetailsRepository {}
 
 main() {
-  final repository = MoveDetailsRepositoryMock();
+  GetIt getIt = GetIt.instance;
 
-  final store = MoveStore(repository);
+  getIt.registerLazySingleton<MoveDetailsRepository>(
+    () => MoveDetailsRepositoryMock(),
+  );
+
+  getIt.registerLazySingleton<MovesUseCase>(
+    () => MovesUseCaseImp(
+      getIt.get<MoveDetailsRepository>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<MoveStore>(
+    () => MoveStore(
+      getIt.get<MovesUseCase>(),
+    ),
+  );
+
+  final store = getIt.get<MoveStore>();
   test('should return one Ability', () async {
-    when(() => repository.getMoveDetails(urlTest)).thenAnswer((_) async {
-      store.moveDetails = MoveDetails();
+    when(() => getIt.get<MoveDetailsRepository>().getMoveDetails(urlTest))
+        .thenAnswer((_) async {
+      store.moveDetails = MoveDetailsDto();
       store.statusRequestMove = StatusRequest.success;
     });
 
@@ -23,7 +43,8 @@ main() {
   });
 
   test('MoveDetails must be null', () {
-    when(() => repository.getMoveDetails(urlTest)).thenAnswer((_) async {
+    when(() => getIt.get<MoveDetailsRepository>().getMoveDetails(urlTest))
+        .thenAnswer((_) async {
       store.moveDetails = null;
       store.statusRequestMove = StatusRequest.error;
     });
