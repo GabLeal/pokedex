@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/presentation/components/cache_image_widget.dart';
 import 'package:pokedex/layers/presentation/components/item_menu_pokemon_widget.dart';
+import 'package:pokedex/layers/presentation/components/pokeball.dart';
 import 'package:pokedex/layers/presentation/components/slide_image_widget.dart';
 import 'package:pokedex/layers/presentation/components/type_widget.dart';
 import 'package:pokedex/layers/presentation/pages/pokemon/damage_page.dart';
@@ -26,7 +27,7 @@ class InfoPokemonPage extends StatefulWidget {
 class _InfoPokemonPageState extends State<InfoPokemonPage> {
   Info _info = Info.STATS;
   PokemonStore _pokemonStore = GetIt.I.get<PokemonStore>();
-
+  String _cartTag = '';
   @override
   Widget build(BuildContext context) {
     var colorPokemon =
@@ -69,37 +70,56 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
           ],
           expandedHeight: 220.0,
           flexibleSpace: FlexibleSpaceBar(
-              background: Center(
-            child: Stack(
-              children: [
-                Center(
-                  child: Hero(
-                    tag: widget.pokemon.order ?? 'dash',
-                    child: SlideImageWidget(children: [
-                      CacheImageWidget(
-                          pathImage: '${widget.pokemon.sprites!.frontDefault}'),
-                      CacheImageWidget(
-                          pathImage: '${widget.pokemon.sprites!.backDefault}')
-                    ]),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 30.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: widget.pokemon.types!.map((t) {
-                        return TypeWidget(
-                          nameType: "${t.type!.name}",
-                        );
-                      }).toList(),
+            background: Center(
+              child: Stack(
+                children: [
+                  Center(
+                    child: Hero(
+                      tag: widget.pokemon.order.toString() + _cartTag,
+                      child: SlideImageWidget(children: [
+                        CacheImageWidget(
+                            pathImage:
+                                '${widget.pokemon.sprites!.frontDefault}'),
+                        CacheImageWidget(
+                            pathImage: '${widget.pokemon.sprites!.backDefault}')
+                      ]),
                     ),
                   ),
-                ),
-              ],
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 30.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: widget.pokemon.types!.map(
+                          (t) {
+                            return TypeWidget(
+                              nameType: "${t.type!.name}",
+                            );
+                          },
+                        ).toList(),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Pokeball(
+                        pokemon: widget.pokemon,
+                        onTap: () {
+                          setState(() {
+                            _cartTag = '_cartTag';
+                          });
+                          //Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          )),
+          ),
         ),
         SliverList(
             delegate: SliverChildListDelegate([
@@ -116,9 +136,11 @@ class _InfoPokemonPageState extends State<InfoPokemonPage> {
                   borderColor: colorPokemon,
                   textColor: _info == Info.STATS ? Colors.white : colorPokemon,
                   onTap: () {
-                    setState(() {
-                      _info = Info.STATS;
-                    });
+                    setState(
+                      () {
+                        _info = Info.STATS;
+                      },
+                    );
                   },
                 ),
                 ItemMenuPokemonWidget(

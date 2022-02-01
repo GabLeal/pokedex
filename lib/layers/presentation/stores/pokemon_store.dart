@@ -35,6 +35,10 @@ abstract class _PokemonStoreBase with Store {
   ObservableList<PokemonEntity> favoritesPokemons =
       ObservableList<PokemonEntity>().asObservable();
 
+  @observable
+  ObservableList<PokemonEntity> myTeamPokemon =
+      ObservableList<PokemonEntity>().asObservable();
+
   getFavoritesPokemons() async {
     List<PokemonEntity> poke = await _cacheFavorites.getFavoritesPokemons();
 
@@ -53,6 +57,26 @@ abstract class _PokemonStoreBase with Store {
     if (isremove) {
       favoritesPokemons.removeWhere((p) => p.name == pokemon.name);
     }
+  }
+
+  addMyTeamPokemon(PokemonEntity pokemon) async {
+    // bool isSave = await _cacheFavorites.favoritePokemon(pokemon);
+    // if (isSave)
+    myTeamPokemon.add(pokemon);
+  }
+
+  removeMyTeamPokemon(PokemonEntity pokemon) async {
+    // bool isremove = await _cacheFavorites.removeFavoritePokemon(pokemon);
+    // if (isremove) {
+    // }
+    myTeamPokemon.removeWhere((p) => p.name == pokemon.name);
+  }
+
+  bool pokemonIsMyTeam(idPokemon) {
+    for (var pokemon in myTeamPokemon) {
+      if (pokemon.id == idPokemon) return true;
+    }
+    return false;
   }
 
   @action

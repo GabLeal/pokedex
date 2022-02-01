@@ -33,6 +33,7 @@ dependencies:
   shared_preferences: ^2.0.6
   bot_toast: ^4.0.1
   get_it:
+  state_builder: ^0.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -69,6 +70,7 @@ flutter:
   assets:
     - assets/pokeball_dark.png
     - assets/pokeball.png
+    - assets/pokeball1.png
     - assets/pokeball_loading.gif
     - assets/poke.png
     - assets/pokedex.png

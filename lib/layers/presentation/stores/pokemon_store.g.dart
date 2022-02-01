@@ -55,6 +55,21 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
     });
   }
 
+  final _$myTeamPokemonAtom = Atom(name: '_PokemonStoreBase.myTeamPokemon');
+
+  @override
+  ObservableList<PokemonEntity> get myTeamPokemon {
+    _$myTeamPokemonAtom.reportRead();
+    return super.myTeamPokemon;
+  }
+
+  @override
+  set myTeamPokemon(ObservableList<PokemonEntity> value) {
+    _$myTeamPokemonAtom.reportWrite(value, super.myTeamPokemon, () {
+      super.myTeamPokemon = value;
+    });
+  }
+
   final _$getPokemonsAsyncAction = AsyncAction('_PokemonStoreBase.getPokemons');
 
   @override
@@ -67,7 +82,8 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
     return '''
 statusRequest: ${statusRequest},
 pokemons: ${pokemons},
-favoritesPokemons: ${favoritesPokemons}
+favoritesPokemons: ${favoritesPokemons},
+myTeamPokemon: ${myTeamPokemon}
     ''';
   }
 }

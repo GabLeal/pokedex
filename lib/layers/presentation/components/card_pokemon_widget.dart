@@ -47,7 +47,7 @@ class CarPokemonWidget extends StatelessWidget {
                 children: [
                   // Text("${pokemon.name}"),
                   Hero(
-                      tag: pokemon.order ?? 'dash',
+                      tag: pokemon.order.toString(),
                       child: CacheImageWidget(
                           pathImage: '${pokemon.sprites!.frontDefault}'))
                 ],
