@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex/core/util/constants.dart';
+import 'package:pokedex/layers/presentation/pages/home/pokeball_home_transition.dart';
 import 'package:pokedex/layers/presentation/pages/my_team/my_team_details_view.dart';
 import 'package:pokedex/layers/presentation/pages/my_team/my_team_short_widget.dart';
 import 'package:pokedex/layers/presentation/components/app_bar_widget.dart';
@@ -100,7 +101,8 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 color: Colors.black.withOpacity(0.5),
               ),
-            )
+            ),
+            PokeballHomeTransition()
           ],
         );
       },
