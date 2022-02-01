@@ -5,4 +5,5 @@ class AppImages {
   static const poke = 'assets/poke.png';
   static const pokedex = 'assets/pokedex.png';
   static const pokebolaPixel = 'assets/pokebola-pixel.png';
+  static const pokeball = 'assets/pokeball1.png';
 }

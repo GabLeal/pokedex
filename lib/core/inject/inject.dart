@@ -17,6 +17,7 @@ import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case.dart';
 import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case_imp.dart';
 import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case.dart';
 import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case_imp.dart';
+import 'package:pokedex/layers/presentation/stores/controller_animation.dart';
 import 'package:pokedex/layers/presentation/stores/ability_store.dart';
 import 'package:pokedex/layers/presentation/stores/move_store.dart';
 import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
