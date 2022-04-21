@@ -77,6 +77,14 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
     return _$getPokemonsAsyncAction.run(() => super.getPokemons());
   }
 
+  final _$getMyTeamPokemonAsyncAction =
+      AsyncAction('_PokemonStoreBase.getMyTeamPokemon');
+
+  @override
+  Future<void> getMyTeamPokemon() {
+    return _$getMyTeamPokemonAsyncAction.run(() => super.getMyTeamPokemon());
+  }
+
   @override
   String toString() {
     return '''
