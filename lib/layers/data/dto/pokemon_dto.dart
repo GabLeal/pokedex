@@ -6,6 +6,7 @@ import 'package:pokedex/layers/data/dto/type_dto.dart';
 
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 
+// ignore: must_be_immutable
 class PokemonDto extends PokemonEntity {
   List<AbilitiesDto>? abilitiesDto;
   int? height;
