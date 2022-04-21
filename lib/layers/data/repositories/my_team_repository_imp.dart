@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:pokedex/layers/data/datasources/local/my_team_datasorce.dart';
+import 'package:pokedex/layers/data/datasources/local/my_team/my_team_datasorce.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/repositories/my_team_repository.dart';
 
