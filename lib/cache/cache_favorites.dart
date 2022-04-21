@@ -15,6 +15,7 @@ class CacheFavorites {
 
     final instance = await SharedPreferences.getInstance();
     instance.getKeys().forEach((keyNamePokemon) {
+      if (keyNamePokemon == 'myTeam') return;
       final json = jsonDecode(instance.getString(keyNamePokemon)!);
       PokemonEntity pokemon = PokemonDto.fromJson(json);
       favoritesPokemons.add(pokemon);
