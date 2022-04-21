@@ -1,3 +1,5 @@
+import 'package:either_dart/either.dart';
+import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
 import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case.dart';
@@ -12,7 +14,8 @@ class PokemonUseCaseImp implements PokemonUseCase {
   }
 
   @override
-  Future<PokemonEntity?> searchPokemonByName(String name) async {
-    return _pokemonRepository.searchPokemonByName(name);
+  Future<Either<Failure, PokemonEntity>> searchPokemonByName(
+      String name) async {
+    return await _pokemonRepository.searchPokemonByName(name);
   }
 }
