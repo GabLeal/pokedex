@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex/cache/cache_favorites.dart';
-import 'package:pokedex/layers/data/datasources/local/my_team_datasorce.dart';
-import 'package:pokedex/layers/data/datasources/local/my_team_datasource_imp.dart';
+import 'package:pokedex/layers/data/datasources/local/my_team/my_team_datasorce.dart';
+import 'package:pokedex/layers/data/datasources/local/my_team/my_team_datasource_imp.dart';
 import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
 import 'package:pokedex/layers/data/repositories/move_repository_imp.dart';
 import 'package:pokedex/layers/data/repositories/my_team_repository_imp.dart';
