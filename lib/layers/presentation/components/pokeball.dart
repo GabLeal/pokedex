@@ -35,7 +35,7 @@ class _PokeballState extends State<Pokeball> with TickerProviderStateMixin {
         Tween<double>(begin: 0, end: 2 * pi).animate(animationController);
   }
 
-  addMyTeamPokemon() {
+  void addMyTeamPokemon() {
     if (_pokemonStore.pokemonIsMyTeam(widget.pokemon.id)) {
       _pokemonStore.removeMyTeamPokemon(widget.pokemon);
       animationController.forward(from: -pi / 2);
