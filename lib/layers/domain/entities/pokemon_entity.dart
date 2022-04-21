@@ -3,8 +3,9 @@ import 'package:pokedex/layers/domain/entities/moves_entity.dart';
 import 'package:pokedex/layers/domain/entities/sprites_entity.dart';
 import 'package:pokedex/layers/domain/entities/stats_entity.dart';
 import 'package:pokedex/layers/domain/entities/type_entity.dart';
+import 'package:equatable/equatable.dart';
 
-class PokemonEntity {
+class PokemonEntity extends Equatable {
   List<AbilitiesEntity>? abilities;
   int? height;
   int? id;
@@ -29,6 +30,9 @@ class PokemonEntity {
       this.stats,
       this.types,
       this.weight});
+
+  @override
+  List<Object?> get props => [id, name];
 
   // PokemonEntity.fromJson(Map<String, dynamic> json) {
   //   if (json['abilities'] != null) {
