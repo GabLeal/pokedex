@@ -14,10 +14,12 @@ main() {
   final repository = AbilityDetailsRepositoryImp(dio: dio);
 
   test('should return AbilityDetails', () async {
-    when(() => dio.get(any())).thenAnswer((_) async => Response(
-        requestOptions: RequestOptions(path: BaseUrl.url),
-        data: json,
-        statusCode: 200));
+    when(() => dio.get(any())).thenAnswer(
+      (_) async => Response(
+          requestOptions: RequestOptions(path: url),
+          data: json,
+          statusCode: 200),
+    );
 
     AbilityDetailsEntity? abilityDetails =
         await repository.getAbilityDetails(url);

@@ -14,10 +14,12 @@ main() {
   final repository = MoveDetailsRepositoryImp(dio: dio);
 
   test('should return MoveDetails', () async {
-    when(() => dio.get(any())).thenAnswer((_) async => Response(
-        requestOptions: RequestOptions(path: BaseUrl.url),
-        data: jsonMove,
-        statusCode: 200));
+    when(() => dio.get(any())).thenAnswer(
+      (_) async => Response(
+          requestOptions: RequestOptions(path: BaseUrl.url),
+          data: jsonMove,
+          statusCode: 200),
+    );
 
     MoveDetailsEntity? moveDetails = await repository.getMoveDetails(url);
 
