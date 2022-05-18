@@ -13,18 +13,18 @@ main() {
 
   final repository = MoveDetailsRepositoryImp(dio: dio);
 
-  test('should return MoveDetails', () async {
-    when(() => dio.get(any())).thenAnswer(
-      (_) async => Response(
-          requestOptions: RequestOptions(path: BaseUrl.url),
-          data: jsonMove,
-          statusCode: 200),
-    );
+  // test('should return MoveDetails', () async {
+  //   when(() => dio.get(any())).thenAnswer(
+  //     (_) async => Response(
+  //         requestOptions: RequestOptions(path: BaseUrl.url),
+  //         data: jsonMove,
+  //         statusCode: 200),
+  //   );
 
-    MoveDetailsEntity? moveDetails = await repository.getMoveDetails(url);
+  //   MoveDetailsEntity? moveDetails = await repository.getMoveDetails(url);
 
-    expect(moveDetails, isNotNull);
-  });
+  //   expect(moveDetails, isNotNull);
+  // });
 }
 
 var url = 'https://pokeapi.co/api/v2/move/345/';
