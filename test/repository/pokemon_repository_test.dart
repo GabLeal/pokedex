@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/core/failure/pokemon_not_found_failure.dart';
 import 'package:pokedex/core/util/base_url.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/data/repositories/pokemon_repository_imp.dart';
@@ -40,18 +41,18 @@ main() {
         data: jsonOnePokemon,
         statusCode: 200));
 
-    PokemonEntity? pokemon = await repository.searchPokemonByName('pikachu');
+    var pokemon = await repository.searchPokemonByName('pikachu');
 
-    expect(pokemon, isNotNull);
+    expect(pokemon.right, isA<PokemonEntity>());
   });
 
   test('Should return null if pokemon was not found', () async {
     when(() => dio.get(any())).thenAnswer((_) async => Response(
         requestOptions: RequestOptions(path: BaseUrl.url), statusCode: 404));
 
-    PokemonEntity? pokemon = await repository.searchPokemonByName('pikachu');
+    var pokemon = await repository.searchPokemonByName('pikachu');
 
-    expect(pokemon, isNull);
+    expect(pokemon.left, isA<PokemonNotFoundFailure>());
   });
 }
 
