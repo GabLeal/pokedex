@@ -68,8 +68,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   }
 
   void _startSearch() {
-    ModalRoute.of(context)!
-        .addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
+    ModalRoute.of(context)!.addLocalHistoryEntry(
+      LocalHistoryEntry(onRemove: _stopSearching),
+    );
 
     setState(() {
       _isSearching = true;
