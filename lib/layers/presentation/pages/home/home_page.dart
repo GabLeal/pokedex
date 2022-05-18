@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     pokemonStore.getPokemons();
     pokemonStore.getFavoritesPokemons();
+    pokemonStore.getMyTeamPokemon();
     super.initState();
   }
 

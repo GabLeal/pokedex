@@ -1,18 +1,27 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pokedex/cache/cache_favorites.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/layers/data/datasources/local/my_favorities/my_favorites_datasorce.dart';
+import 'package:pokedex/layers/data/datasources/local/my_favorities/my_favorites_datasorce_imp.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class MyFavoritesDatasourceMock extends Mock implements MyFavoritesDatasource {}
+
 main() {
+  late MyFavoritesDatasourceImp myFavoritesDatasourceMock;
+
+  setUpAll(() {
+    myFavoritesDatasourceMock = MyFavoritesDatasourceImp();
+  });
+
   test('should retrieve favorite pokemons', () async {
     SharedPreferences.setMockInitialValues({
       'pikachu': jsonOnePokemon,
       'charmander': jsonOnePokemon,
     });
 
-    CacheFavorites cacheFavorites = CacheFavorites();
-
-    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
+    List<PokemonEntity> pokemons =
+        await myFavoritesDatasourceMock.fetchFavoritesPokemons();
 
     expect(pokemons.length, 2);
   });
@@ -20,9 +29,8 @@ main() {
   test('should retrieve an empty favorite pokemon list', () async {
     SharedPreferences.setMockInitialValues({});
 
-    CacheFavorites cacheFavorites = CacheFavorites();
-
-    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
+    List<PokemonEntity> pokemons =
+        await myFavoritesDatasourceMock.fetchFavoritesPokemons();
 
     expect(pokemons, isEmpty);
   });
@@ -33,10 +41,10 @@ main() {
       'charmander': jsonOnePokemon,
     });
     PokemonEntity pokemon = PokemonEntity(name: 'pikachu');
-    CacheFavorites cacheFavorites = CacheFavorites();
 
-    await cacheFavorites.removeFavoritePokemon(pokemon);
-    List<PokemonEntity> pokemons = await cacheFavorites.getFavoritesPokemons();
+    await myFavoritesDatasourceMock.removeFavorite(pokemon);
+    List<PokemonEntity> pokemons =
+        await myFavoritesDatasourceMock.fetchFavoritesPokemons();
     expect(pokemons.length, 1);
   });
 }

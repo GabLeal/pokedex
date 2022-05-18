@@ -15,7 +15,7 @@ abstract class _AbilityStoreBase with Store {
   @observable
   StatusRequest statusRequestAbility = StatusRequest.empty;
 
-  void getAbilityDetails(String url) async {
+  Future<void> getAbilityDetails(String url) async {
     statusRequestAbility = StatusRequest.loading;
 
     abilityDetails = await _abilityDetailsUseCase.getPokemonAbilityDetails(url);

@@ -1,4 +1,9 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:either_dart/either.dart';
+import 'package:pokedex/core/failure/failure.dart';
+import 'package:pokedex/core/failure/pokemon_not_found_failure.dart';
 import 'package:pokedex/core/util/base_url.dart';
 import 'package:pokedex/layers/data/dto/pokemon_dto.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
@@ -36,16 +41,16 @@ class PokemonRepositoryImp implements PokemonRepository {
   }
 
   @override
-  Future<PokemonEntity?> searchPokemonByName(String name) async {
+  Future<Either<Failure, PokemonEntity>> searchPokemonByName(
+      String name) async {
     try {
       var response = await dio.get('${BaseUrl.url}/pokemon/$name');
-
       var pokemonResponse = response.data;
 
       PokemonEntity pokemon = PokemonDto.fromJson(pokemonResponse);
-      return pokemon;
-    } catch (erro) {
-      return null;
+      return Right(pokemon);
+    } catch (_) {
+      return Left(PokemonNotFoundFailure());
     }
   }
 

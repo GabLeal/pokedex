@@ -1,7 +1,9 @@
 import 'package:mobx/mobx.dart';
-import 'package:pokedex/cache/cache_favorites.dart';
+import 'package:pokedex/core/failure/max_team_failure.dart';
 import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/usercases/my_favorites/my_favorites_use_case.dart';
+import 'package:pokedex/layers/domain/usercases/my_team/my_team_use_case.dart';
 import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case.dart';
 import 'package:bot_toast/bot_toast.dart';
 
@@ -10,19 +12,15 @@ part 'pokemon_store.g.dart';
 class PokemonStore = _PokemonStoreBase with _$PokemonStore;
 
 abstract class _PokemonStoreBase with Store {
-  // late PokemonRepository _pokemonRepository;
-  // late CacheFavorites _cacheFavorites;
-
-  // _PokemonStoreBase(
-  //     [PokemonRepository? repository, CacheFavorites? cacheFavorites]) {
-  //   _pokemonRepository = repository ?? PokemonRepositoryImp(dio: Dio());
-  //   _cacheFavorites = cacheFavorites ?? CacheFavorites();
-  // }
-
   final PokemonUseCase _pokemonUseCase;
-  final CacheFavorites _cacheFavorites;
+  final MyTeamUseCase _myTeamUseCase;
+  final MyFavoritesUseCase _myFavoritesUseCase;
 
-  _PokemonStoreBase(this._pokemonUseCase, this._cacheFavorites);
+  _PokemonStoreBase(
+    this._pokemonUseCase,
+    this._myTeamUseCase,
+    this._myFavoritesUseCase,
+  );
 
   @observable
   StatusRequest statusRequest = StatusRequest.empty;
@@ -39,39 +37,49 @@ abstract class _PokemonStoreBase with Store {
   ObservableList<PokemonEntity> myTeamPokemon =
       ObservableList<PokemonEntity>().asObservable();
 
-  getFavoritesPokemons() async {
-    List<PokemonEntity> poke = await _cacheFavorites.getFavoritesPokemons();
+  Future<void> getFavoritesPokemons() async {
+    List<PokemonEntity> poke =
+        await _myFavoritesUseCase.fetchFavoritesPokemons();
 
     if (poke.isNotEmpty) {
       favoritesPokemons.addAll(poke);
     }
   }
 
-  favoritePokemon(PokemonEntity pokemon) async {
-    bool isSave = await _cacheFavorites.favoritePokemon(pokemon);
+  Future<void> favoritePokemon(PokemonEntity pokemon) async {
+    bool isSave = await _myFavoritesUseCase.favorite(pokemon);
     if (isSave) favoritesPokemons.add(pokemon);
   }
 
-  removeFavoritePokemon(PokemonEntity pokemon) async {
-    bool isremove = await _cacheFavorites.removeFavoritePokemon(pokemon);
+  Future<void> removeFavoritePokemon(PokemonEntity pokemon) async {
+    bool isremove = await _myFavoritesUseCase.removeFavorite(pokemon);
     if (isremove) {
       favoritesPokemons.removeWhere((p) => p.name == pokemon.name);
     }
   }
 
-  addMyTeamPokemon(PokemonEntity pokemon) async {
-    // bool isSave = await _cacheFavorites.favoritePokemon(pokemon);
-    // if (isSave)
-    myTeamPokemon.add(pokemon);
+  Future<void> addMyTeamPokemon(PokemonEntity pokemon) async {
+    if (myTeamPokemon.length == 6) {
+      BotToast.showText(
+        duration: Duration(seconds: 3),
+        text: MaxTeamFailure().message,
+      );
+      return;
+    }
+    bool isSave = await _myTeamUseCase.add(
+      pokemon,
+    );
+    if (isSave) myTeamPokemon.add(pokemon);
   }
 
-  removeMyTeamPokemon(PokemonEntity pokemon) async {
-    // bool isremove = await _cacheFavorites.removeFavoritePokemon(pokemon);
-    // if (isremove) {
-    // }
-    myTeamPokemon.removeWhere((p) => p.name == pokemon.name);
+  Future<void> removeMyTeamPokemon(PokemonEntity pokemon) async {
+    bool isremove = await _myTeamUseCase.remove(pokemon.id!);
+    if (isremove) {
+      myTeamPokemon.removeWhere((p) => p.name == pokemon.name);
+    }
   }
 
+  //TODO: revisar
   bool pokemonIsMyTeam(idPokemon) {
     for (var pokemon in myTeamPokemon) {
       if (pokemon.id == idPokemon) return true;
@@ -93,23 +101,29 @@ abstract class _PokemonStoreBase with Store {
     }
   }
 
+  @action
+  Future<void> getMyTeamPokemon() async {
+    List<PokemonEntity> myTeam = await _myTeamUseCase.fetch();
+    if (myTeam.isNotEmpty) myTeamPokemon.addAll(myTeam);
+  }
+
   Future<PokemonEntity?> searchPokemonByName(String name) async {
     statusRequest = StatusRequest.loading;
 
-    PokemonEntity? pokemon = await _pokemonUseCase.searchPokemonByName(name);
+    var result = await _pokemonUseCase.searchPokemonByName(name);
 
-    if (pokemon != null) {
-      statusRequest = StatusRequest.success;
-      return pokemon;
-    } else {
+    return result.fold((error) {
       statusRequest = StatusRequest.success;
 
       BotToast.showText(
         duration: Duration(seconds: 3),
-        text: "Pokemon not found. Try again.",
+        text: error.message,
       ); //popup a text toast;
 
       return null;
-    }
+    }, (success) {
+      statusRequest = StatusRequest.success;
+      return success;
+    });
   }
 }
