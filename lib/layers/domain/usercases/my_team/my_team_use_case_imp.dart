@@ -7,7 +7,9 @@ class MyTeamUseCaseImp implements MyTeamUseCase {
 
   MyTeamUseCaseImp(this._myTeamRepository);
   @override
-  Future<bool> add(PokemonEntity pokemon) async {
+  Future<bool> add(
+    PokemonEntity pokemon,
+  ) async {
     return await _myTeamRepository.add(pokemon);
   }
 
