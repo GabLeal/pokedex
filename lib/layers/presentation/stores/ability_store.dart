@@ -18,12 +18,13 @@ abstract class _AbilityStoreBase with Store {
   Future<void> getAbilityDetails(String url) async {
     statusRequestAbility = StatusRequest.loading;
 
-    abilityDetails = await _abilityDetailsUseCase.getPokemonAbilityDetails(url);
+    var result = await _abilityDetailsUseCase.getPokemonAbilityDetails(url);
 
-    if (abilityDetails != null) {
-      statusRequestAbility = StatusRequest.success;
-    } else {
+    result.fold((error) {
       statusRequestAbility = StatusRequest.error;
-    }
+    }, (success) {
+      abilityDetails = success;
+      statusRequestAbility = StatusRequest.success;
+    });
   }
 }
