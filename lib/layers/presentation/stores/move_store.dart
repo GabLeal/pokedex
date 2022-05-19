@@ -20,12 +20,13 @@ abstract class _MoveStoreBase with Store {
   void getMovie(String url) async {
     statusRequestMove = StatusRequest.loading;
 
-    moveDetails = await _movesUseCase.getMoveDetails(url);
+    var result = await _movesUseCase.getMoveDetails(url);
 
-    if (moveDetails != null) {
-      statusRequestMove = StatusRequest.success;
-    } else {
+    result.fold((error) {
       statusRequestMove = StatusRequest.error;
-    }
+    }, (success) {
+      moveDetails = success;
+      statusRequestMove = StatusRequest.success;
+    });
   }
 }
