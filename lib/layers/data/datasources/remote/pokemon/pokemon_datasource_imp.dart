@@ -8,17 +8,18 @@ import 'package:pokedex/layers/data/datasources/remote/pokemon/pokemon_datasourc
 import 'package:pokedex/layers/data/dto/pokemon_dto.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 
-class PokemonDatasourceImp implements PokemonDatasource{
+class PokemonDatasourceImp implements PokemonDatasource {
   int _offset = 0;
   final Dio _dio;
   PokemonDatasourceImp(this._dio);
 
   @override
-  Future<Either<Failure,List<PokemonEntity>>> getPokemons() async{
-     List<PokemonEntity> pokemons = [];
+  Future<Either<Failure, List<PokemonEntity>>> getPokemons() async {
+    List<PokemonEntity> pokemons = [];
     try {
-      var response = await _dio
-          .get('${BaseUrl.url}/pokemon/?offset=${_offset.toString()}&limit=20',);
+      var response = await _dio.get(
+        '${BaseUrl.url}/pokemon/?offset=${_offset.toString()}&limit=20',
+      );
 
       List listaPokemons = response.data['results'];
 
@@ -27,7 +28,7 @@ class PokemonDatasourceImp implements PokemonDatasource{
 
         if (pokemon != null) pokemons.add(pokemon);
       }
-      
+
       //TODO verificar se deveria ficar aqui esse offset ou no business
       _offset += 20;
 
@@ -64,5 +65,4 @@ class PokemonDatasourceImp implements PokemonDatasource{
       return null;
     }
   }
-
 }
