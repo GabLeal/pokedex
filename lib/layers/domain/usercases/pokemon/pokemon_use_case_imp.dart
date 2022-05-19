@@ -9,7 +9,7 @@ class PokemonUseCaseImp implements PokemonUseCase {
 
   PokemonUseCaseImp(this._pokemonRepository);
   @override
-  Future<List<PokemonEntity>> getPokemons() async {
+  Future<Either<Failure, List<PokemonEntity>>> getPokemons() async {
     return await _pokemonRepository.getPokemons();
   }
 
