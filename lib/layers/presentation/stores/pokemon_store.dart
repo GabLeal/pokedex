@@ -91,14 +91,16 @@ abstract class _PokemonStoreBase with Store {
   getPokemons() async {
     statusRequest = StatusRequest.loading;
 
-    List<PokemonEntity> listPokemons = await _pokemonUseCase.getPokemons();
-
-    if (listPokemons.isNotEmpty) {
-      pokemons.addAll(listPokemons);
-      statusRequest = StatusRequest.success;
-    } else {
-      statusRequest = StatusRequest.error;
-    }
+    var result = await _pokemonUseCase.getPokemons();
+    result.fold(
+      (error) {
+        statusRequest = StatusRequest.error;
+      },
+      (success) {
+        pokemons.addAll(success);
+        statusRequest = StatusRequest.success;
+      },
+    );
   }
 
   @action
