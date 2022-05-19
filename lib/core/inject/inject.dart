@@ -4,6 +4,8 @@ import 'package:pokedex/layers/data/datasources/local/my_favorities/my_favorites
 import 'package:pokedex/layers/data/datasources/local/my_favorities/my_favorites_datasorce_imp.dart';
 import 'package:pokedex/layers/data/datasources/local/my_team/my_team_datasorce.dart';
 import 'package:pokedex/layers/data/datasources/local/my_team/my_team_datasource_imp.dart';
+import 'package:pokedex/layers/data/datasources/remote/pokemon/pokemon_datasource.dart';
+import 'package:pokedex/layers/data/datasources/remote/pokemon/pokemon_datasource_imp.dart';
 import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
 import 'package:pokedex/layers/data/repositories/move_repository_imp.dart';
 import 'package:pokedex/layers/data/repositories/my_favorites_repository_imp.dart';
@@ -44,8 +46,12 @@ class Inject {
     getIt.registerLazySingleton<MyFavoritesDatasource>(
       () => MyFavoritesDatasourceImp(),
     );
-    //REPOSITORIES
 
+    getIt.registerLazySingleton<PokemonDatasource>(
+      () => PokemonDatasourceImp(Dio()),
+    );
+
+    //REPOSITORIES
     getIt.registerLazySingleton<AbilityDetailsRepository>(
       () => AbilityDetailsRepositoryImp(
         dio: Dio(),
@@ -66,7 +72,7 @@ class Inject {
 
     getIt.registerLazySingleton<PokemonRepository>(
       () => PokemonRepositoryImp(
-        dio: Dio(),
+        getIt<PokemonDatasource>(),
       ),
     );
 
