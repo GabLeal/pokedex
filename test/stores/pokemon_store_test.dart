@@ -1,3 +1,4 @@
+import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/layers/data/dto/pokemon_dto.dart';
@@ -25,35 +26,40 @@ main() {
 
   group('API Pokemons', () {
     test('should return an empty pokemon list', () async {
-      when(() => pokemonUseCase.getPokemons()).thenAnswer((_) async => []);
+      when(() => pokemonUseCase.getPokemons()).thenAnswer(
+        (_) async => Right([]),
+      );
       await store.getPokemons();
 
       expect(store.pokemons, isEmpty);
     });
     test('should fill Pokemon list', () async {
-      when(() => pokemonUseCase.getPokemons())
-          .thenAnswer((_) async => <PokemonDto>[
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-                PokemonDto(),
-              ]);
+      when(() => pokemonUseCase.getPokemons()).thenAnswer(
+        (_) async => Right(
+          <PokemonDto>[
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+            PokemonDto(),
+          ],
+        ),
+      );
 
       await store.getPokemons();
       expect(store.pokemons, isNotEmpty);
