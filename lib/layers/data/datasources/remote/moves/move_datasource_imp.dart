@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -14,11 +15,11 @@ class MoveDetailsDatasourceImp implements MoveDatasource {
   MoveDetailsDatasourceImp(this._dio);
 
   @override
-  Future<Either<Failure,MoveDetailsEntity>> getMoveDetails(String url) async {
+  Future<Either<Failure, MoveDetailsEntity>> getMoveDetails(String url) async {
     try {
       var response = await _dio.get(url);
 
-      if(response.statusCode != HttpStatus.ok) throw NotFoundFailure();
+      if (response.statusCode != HttpStatus.ok) throw NotFoundFailure();
 
       var moveDetailsResponse = response.data;
 
