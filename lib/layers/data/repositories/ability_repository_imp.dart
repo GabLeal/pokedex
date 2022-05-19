@@ -1,28 +1,24 @@
-import 'package:dio/dio.dart';
-import 'package:pokedex/layers/data/dto/ability_details_dto.dart';
+import 'package:either_dart/either.dart';
+import 'package:pokedex/core/failure/datasource_failure.dart';
+import 'package:pokedex/core/failure/failure.dart';
+import 'package:pokedex/layers/data/datasources/remote/ability/ability_datasource.dart';
 import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
 import 'package:pokedex/layers/domain/repositories/ability_repository.dart';
 
 class AbilityDetailsRepositoryImp implements AbilityDetailsRepository {
-  final Dio dio;
+  final AbilityDetailsDatasource _abilityDetailsDatasource;
 
-  AbilityDetailsRepositoryImp({
-    required this.dio,
-  });
+  AbilityDetailsRepositoryImp(this._abilityDetailsDatasource);
 
   @override
-  Future<AbilityDetailsEntity?> getAbilityDetails(String url) async {
+  Future<Either<Failure, AbilityDetailsEntity>> getAbilityDetails(
+      String url) async {
     try {
-      var response = await dio.get(url);
+      var result = await _abilityDetailsDatasource.getAbilityDetails(url);
 
-      var abilityDetailsResponse = response.data;
-
-      AbilityDetailsDto abilityDetails =
-          AbilityDetailsDto.fromJson(abilityDetailsResponse);
-
-      return abilityDetails;
+      return result;
     } catch (erro) {
-      return null;
+      return Left(DatasourceFailure());
     }
   }
 }
