@@ -17,13 +17,14 @@ abstract class _MoveStoreBase with Store {
   @observable
   StatusRequest statusRequestMove = StatusRequest.empty;
 
-  void getMovie(String url) async {
+  Future<void> getMovie(String url) async {
     statusRequestMove = StatusRequest.loading;
 
     var result = await _movesUseCase.getMoveDetails(url);
 
     result.fold((error) {
       statusRequestMove = StatusRequest.error;
+      moveDetails = null;
     }, (success) {
       moveDetails = success;
       statusRequestMove = StatusRequest.success;
