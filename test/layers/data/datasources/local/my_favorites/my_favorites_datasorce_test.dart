@@ -4,10 +4,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/layers/data/datasources/local/my_favorities/my_favorites_datasorce.dart';
 import 'package:pokedex/layers/data/datasources/local/my_favorities/my_favorites_datasorce_imp.dart';
+import 'package:pokedex/layers/domain/entities/abilities_entity.dart';
+import 'package:pokedex/layers/domain/entities/ability_entity.dart';
+import 'package:pokedex/layers/domain/entities/moves_entity.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
+import 'package:pokedex/layers/domain/entities/sprites_entity.dart';
+import 'package:pokedex/layers/domain/entities/stats_entity.dart';
+import 'package:pokedex/layers/domain/entities/type_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../remote/pokemon/pokemon_datasource_test.dart';
+import '../pokemon_entity_mock.dart';
 
 class MyFavoritesDatasourceMock extends Mock implements MyFavoritesDatasource {}
 
@@ -16,6 +23,14 @@ main() {
 
   setUpAll(() {
     myFavoritesDatasourceMock = MyFavoritesDatasourceImp();
+  });
+
+  test('should retrieve false when trying to add a pokemon. ', () async {
+    SharedPreferences.setMockInitialValues({});
+
+    var result = await myFavoritesDatasourceMock.favorite(pokemonEntityMock);
+
+    expect(result, true);
   });
 
   test('should retrieve an empty favorite pokemon list', () async {

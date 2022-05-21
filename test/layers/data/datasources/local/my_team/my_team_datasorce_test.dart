@@ -3,6 +3,8 @@ import 'package:pokedex/layers/data/datasources/local/my_team/my_team_datasource
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../pokemon_entity_mock.dart';
+
 main() {
   late MyTeamDatasourceImp myTeamDatasourceMock;
 
@@ -10,6 +12,13 @@ main() {
     myTeamDatasourceMock = MyTeamDatasourceImp();
   });
 
+  test('should retrieve true when trying to add a pokemon. ', () async {
+    SharedPreferences.setMockInitialValues({});
+
+    var result = await myTeamDatasourceMock.add(pokemonEntityMock);
+
+    expect(result, true);
+  });
   test('should retrieve favorite pokemons', () async {
     SharedPreferences.setMockInitialValues({
       'myTeam': jsonMyTeamPokemon,
