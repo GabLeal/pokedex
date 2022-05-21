@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/core/failure/datasource_failure.dart';
+import 'package:pokedex/core/failure/pokemon_not_found_failure.dart';
 import 'package:pokedex/core/network/http_response.dart';
 import 'package:pokedex/core/util/base_url.dart';
 import 'package:pokedex/layers/data/datasources/remote/type_damage/type_damage_datasource_imp.dart';
@@ -13,8 +15,41 @@ main() {
 
   final datasource = TypeDamageDatasourceImp(httpClientMock);
 
+  test('should return a NotFoundFailure when statusCode different from 200',
+      () async {
+    when(
+      () => httpClientMock.get(
+        any(),
+      ),
+    ).thenAnswer(
+      (_) async => HttpResponse(url: 'any', body: json, statusCode: 404),
+    );
+
+    var result = await datasource.getTypeDamage('any');
+
+    expect(result.isLeft, true);
+    expect(result.left, isA<NotFoundFailure>());
+  });
+  test('should return a DatasourceFailure when given an exeption', () async {
+    when(
+      () => httpClientMock.get(
+        any(),
+      ),
+    ).thenThrow(
+      Exception(),
+    );
+
+    var result = await datasource.getTypeDamage('any');
+
+    expect(result.isLeft, true);
+    expect(result.left, isA<DatasourceFailure>());
+  });
   test('should return Typedamage', () async {
-    when(() => httpClientMock.get(any())).thenAnswer((_) async =>
+    when(
+      () => httpClientMock.get(
+        any(),
+      ),
+    ).thenAnswer((_) async =>
         HttpResponse(url: BaseUrl.url, body: json, statusCode: 200));
 
     var result = await datasource.getTypeDamage(url);

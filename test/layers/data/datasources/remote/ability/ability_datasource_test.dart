@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/core/failure/datasource_failure.dart';
+import 'package:pokedex/core/failure/pokemon_not_found_failure.dart';
 import 'package:pokedex/core/network/http_response.dart';
 import 'package:pokedex/layers/data/datasources/remote/ability/ability_datasource_imp.dart';
 import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
@@ -20,6 +22,36 @@ void main() {
 
     expect(result.isRight, true);
     expect(result.right, isA<AbilityDetailsEntity>());
+  });
+
+  test('should return a NotFoundFailure when statusCode different from 200',
+      () async {
+    when(
+      () => httpClient.get(
+        any(),
+      ),
+    ).thenAnswer(
+      (_) async => HttpResponse(url: url, body: json, statusCode: 404),
+    );
+
+    var result = await abilityDetailsDatasource.getAbilityDetails(url);
+
+    expect(result.isLeft, true);
+    expect(result.left, isA<NotFoundFailure>());
+  });
+  test('should return a DatasourceFailure when given an exeption', () async {
+    when(
+      () => httpClient.get(
+        any(),
+      ),
+    ).thenThrow(
+      Exception(),
+    );
+
+    var result = await abilityDetailsDatasource.getAbilityDetails(url);
+
+    expect(result.isLeft, true);
+    expect(result.left, isA<DatasourceFailure>());
   });
 }
 

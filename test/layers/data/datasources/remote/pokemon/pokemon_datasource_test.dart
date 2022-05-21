@@ -31,7 +31,7 @@ main() {
     expect(result.right.length, 20);
   });
 
-  test('should return an empty pokemon list', () async {
+  test('should return a DatasourceFailure.', () async {
     when(() => httpClient.get(any())).thenAnswer(
       (_) async => HttpResponse(
         url: BaseUrl.url,
@@ -59,7 +59,8 @@ main() {
     expect(pokemon.right, isA<PokemonEntity>());
   });
 
-  test('Should return null if pokemon was not found', () async {
+  test('Should return PokemonNotFoundFailure if pokemon was not found',
+      () async {
     when(() => httpClient.get(any())).thenAnswer(
       (_) async => HttpResponse(
         url: BaseUrl.url,
@@ -71,6 +72,14 @@ main() {
     var pokemon = await datasource.searchPokemonByName('pikachu');
 
     expect(pokemon.left, isA<PokemonNotFoundFailure>());
+  });
+
+  test('Should return DatasourceFailure when an exeption occurs.', () async {
+    when(() => httpClient.get(any())).thenThrow(Exception());
+
+    var pokemon = await datasource.searchPokemonByName('pikachu');
+
+    expect(pokemon.left, isA<DatasourceFailure>());
   });
 }
 
