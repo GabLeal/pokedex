@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:mobx/mobx.dart';
 import 'package:pokedex/core/failure/max_team_failure.dart';
 import 'package:pokedex/core/util/enums.dart';
