@@ -1,5 +1,4 @@
 import 'package:either_dart/either.dart';
-import 'package:pokedex/core/failure/datasource_failure.dart';
 import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/layers/data/datasources/remote/ability/ability_datasource.dart';
 import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
@@ -13,12 +12,8 @@ class AbilityDetailsRepositoryImp implements AbilityDetailsRepository {
   @override
   Future<Either<Failure, AbilityDetailsEntity>> getAbilityDetails(
       String url) async {
-    try {
-      var result = await _abilityDetailsDatasource.getAbilityDetails(url);
+    var result = await _abilityDetailsDatasource.getAbilityDetails(url);
 
-      return result;
-    } catch (erro) {
-      return Left(DatasourceFailure());
-    }
+    return result;
   }
 }
