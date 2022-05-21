@@ -35,49 +35,43 @@ class _MyTeamShortWidgetState extends State<MyTeamShortWidget> {
               Row(
                 children: [
                   const SizedBox(width: defaultPadding),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Stack(
-                      children: [
-                        Row(
-                          children: List.generate(
-                            6,
-                            (index) => Padding(
-                              padding: const EdgeInsets.only(
-                                  right: defaultPadding / 2),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.black,
-                                child: Image.asset(AppImages.whitePokeball),
-                              ),
+                  Stack(
+                    children: [
+                      Row(
+                        children: List.generate(
+                          6,
+                          (index) => Padding(
+                            padding: const EdgeInsets.only(
+                                right: defaultPadding / 2),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black,
+                              child: Image.asset(AppImages.whitePokeball),
                             ),
                           ),
                         ),
-                        Row(
-                          children: List.generate(
-                            _pokemonStore.myTeamPokemon.length,
-                            (index) => Padding(
-                              padding: const EdgeInsets.only(
-                                  right: defaultPadding / 2),
-                              child: Hero(
-                                tag: _pokemonStore.myTeamPokemon[index].order!
-                                        .toString() +
-                                    '_cartTag',
-                                child: CircleAvatar(
-                                  backgroundColor:
-                                      Colors.black.withOpacity(0.5),
-                                  child: CacheImageWidget(
-                                    pathImage: _pokemonStore
-                                        .myTeamPokemon[index]
-                                        .sprites!
-                                        .frontDefault!,
-                                  ),
+                      ),
+                      Row(
+                        children: List.generate(
+                          _pokemonStore.myTeamPokemon.length,
+                          (index) => Padding(
+                            padding: const EdgeInsets.only(
+                                right: defaultPadding / 2),
+                            child: Hero(
+                              tag: _pokemonStore.myTeamPokemon[index].order!
+                                      .toString() +
+                                  '_cartTag',
+                              child: CircleAvatar(
+                                backgroundColor: Colors.black.withOpacity(0.5),
+                                child: CacheImageWidget(
+                                  pathImage: _pokemonStore.myTeamPokemon[index]
+                                      .sprites!.frontDefault!,
                                 ),
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: defaultPadding / 2),
