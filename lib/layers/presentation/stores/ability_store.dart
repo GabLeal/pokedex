@@ -22,6 +22,7 @@ abstract class _AbilityStoreBase with Store {
 
     result.fold((error) {
       statusRequestAbility = StatusRequest.error;
+      abilityDetails = null;
     }, (success) {
       abilityDetails = success;
       statusRequestAbility = StatusRequest.success;
