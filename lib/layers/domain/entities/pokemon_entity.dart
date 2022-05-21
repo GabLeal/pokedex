@@ -3,9 +3,8 @@ import 'package:pokedex/layers/domain/entities/moves_entity.dart';
 import 'package:pokedex/layers/domain/entities/sprites_entity.dart';
 import 'package:pokedex/layers/domain/entities/stats_entity.dart';
 import 'package:pokedex/layers/domain/entities/type_entity.dart';
-import 'package:equatable/equatable.dart';
 
-class PokemonEntity extends Equatable {
+class PokemonEntity {
   List<AbilitiesEntity>? abilities;
   int? height;
   int? id;
@@ -18,21 +17,29 @@ class PokemonEntity extends Equatable {
   List<TypesEntity>? types;
   int? weight;
 
-  PokemonEntity(
-      {this.abilities,
-      this.height,
-      this.id,
-      this.locationAreaEncounters,
-      this.moves,
-      this.name,
-      this.order,
-      this.sprites,
-      this.stats,
-      this.types,
-      this.weight});
+  PokemonEntity({
+    this.abilities,
+    this.height,
+    this.id,
+    this.locationAreaEncounters,
+    this.moves,
+    this.name,
+    this.order,
+    this.sprites,
+    this.stats,
+    this.types,
+    this.weight,
+  });
 
   @override
-  List<Object?> get props => [id, name];
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is PokemonEntity && other.id == id && other.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 
   // PokemonEntity.fromJson(Map<String, dynamic> json) {
   //   if (json['abilities'] != null) {
