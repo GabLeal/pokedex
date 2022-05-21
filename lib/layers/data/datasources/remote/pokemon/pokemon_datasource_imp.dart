@@ -43,12 +43,13 @@ class PokemonDatasourceImp implements PokemonDatasource {
       String name) async {
     try {
       var response = await _httpClient.get('${BaseUrl.url}/pokemon/$name');
+      if (response.statusCode != 200) return Left(PokemonNotFoundFailure());
       var pokemonResponse = response.body;
 
       PokemonEntity pokemon = PokemonDto.fromJson(pokemonResponse);
       return Right(pokemon);
     } catch (e) {
-      return Left(PokemonNotFoundFailure());
+      return Left(DatasourceFailure());
     }
   }
 

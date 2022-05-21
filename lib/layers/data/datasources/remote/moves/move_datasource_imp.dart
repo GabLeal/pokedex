@@ -18,7 +18,7 @@ class MoveDetailsDatasourceImp implements MoveDatasource {
     try {
       var response = await _httpClient.get(url);
 
-      if (response.statusCode != HttpStatus.ok) throw NotFoundFailure();
+      if (response.statusCode != HttpStatus.ok) return Left(NotFoundFailure());
 
       var moveDetailsResponse = response.body;
 

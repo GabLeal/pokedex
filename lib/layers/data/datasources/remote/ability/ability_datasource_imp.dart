@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:either_dart/either.dart';
 import 'package:pokedex/core/failure/datasource_failure.dart';
@@ -20,7 +19,7 @@ class AbilityDetailsDatasourceImp implements AbilityDetailsDatasource {
     try {
       var response = await _httpClient.get(url);
 
-      if (response.statusCode != HttpStatus.ok) throw NotFoundFailure();
+      if (response.statusCode != HttpStatus.ok) return Left(NotFoundFailure());
       var abilityDetailsResponse = response.body;
 
       AbilityDetailsDto abilityDetails =
