@@ -5,3 +5,9 @@ class DatasourceFailure extends Failure {
     String message = '',
   }) : super(message);
 }
+
+class InternalServerFailure extends Failure {
+  InternalServerFailure({
+    String message = '',
+  }) : super(message);
+}
