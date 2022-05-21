@@ -1,5 +1,7 @@
+import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
 import 'package:pokedex/layers/domain/usercases/ability/ability_details_use_case.dart';
@@ -13,7 +15,7 @@ main() {
 
   test('should return one Ability', () async {
     when(() => useCase.getPokemonAbilityDetails(any())).thenAnswer((_) async {
-      return AbilityDetailsEntity();
+      return Right(AbilityDetailsEntity());
     });
 
     await store.getAbilityDetails(urlTest);
@@ -23,7 +25,7 @@ main() {
 
   test('Ability must be null', () async {
     when(() => useCase.getPokemonAbilityDetails(any())).thenAnswer((_) async {
-      return null;
+      return Left(Failure('any'));
     });
 
     await store.getAbilityDetails(urlTest);

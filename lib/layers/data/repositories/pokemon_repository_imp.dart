@@ -15,7 +15,6 @@ class PokemonRepositoryImp implements PokemonRepository {
   Future<Either<Failure, List<PokemonEntity>>> getPokemons() async {
     try {
       var result = _pokemonDatasource.getPokemons();
-
       return result;
     } catch (erro) {
       return Left(DatasourceFailure());

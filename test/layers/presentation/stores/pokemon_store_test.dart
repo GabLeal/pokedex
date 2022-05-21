@@ -40,30 +40,13 @@ main() {
             PokemonDto(),
             PokemonDto(),
             PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
-            PokemonDto(),
           ],
         ),
       );
 
       await store.getPokemons();
       expect(store.pokemons, isNotEmpty);
-      expect(store.pokemons.length, 20);
+      expect(store.pokemons.length, 3);
     });
   });
 }

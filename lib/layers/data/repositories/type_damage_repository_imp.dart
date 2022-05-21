@@ -1,25 +1,23 @@
-import 'package:dio/dio.dart';
+import 'package:either_dart/either.dart';
+import 'package:pokedex/core/failure/datasource_failure.dart';
+import 'package:pokedex/core/failure/failure.dart';
+import 'package:pokedex/layers/data/datasources/remote/type_damage/type_damage_datasource.dart';
 import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
+
 import 'package:pokedex/layers/domain/repositories/type_damage_repository.dart';
 
 class TypeDamageRepositoryImp implements TypeDamageRepository {
-  final Dio dio;
-  TypeDamageRepositoryImp({
-    required this.dio,
-  });
+  final TypeDamageDatasource _typeDamageDatasource;
+  TypeDamageRepositoryImp(this._typeDamageDatasource);
 
   @override
-  Future<TypeDamage?> getTypeDamage(String url) async {
+  Future<Either<Failure, TypeDamage>> getTypeDamage(String url) async {
     try {
-      var response = await dio.get(url);
+      var result = await _typeDamageDatasource.getTypeDamage(url);
 
-      var typeDamageResponse = response.data;
-
-      TypeDamage typeDamage = TypeDamage.fromJson(typeDamageResponse);
-
-      return typeDamage;
+      return result;
     } catch (erro) {
-      return null;
+      return Left(DatasourceFailure());
     }
   }
 }
