@@ -1,6 +1,6 @@
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/repositories/my_team_repository.dart';
-import 'package:pokedex/layers/domain/usercases/my_team/my_team_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/my_team/my_team_use_case.dart';
 
 class MyTeamUseCaseImp implements MyTeamUseCase {
   final MyTeamRepository _myTeamRepository;

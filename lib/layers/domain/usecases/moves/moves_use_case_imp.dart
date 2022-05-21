@@ -2,7 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
 import 'package:pokedex/layers/domain/repositories/move_repository.dart';
-import 'package:pokedex/layers/domain/usercases/moves/moves_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/moves/moves_use_case.dart';
 
 class MovesUseCaseImp implements MovesUseCase {
   final MoveDetailsRepository _moveDetailsRepository;

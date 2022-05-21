@@ -1,6 +1,6 @@
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/repositories/my_favorites_repository.dart';
-import 'package:pokedex/layers/domain/usercases/my_favorites/my_favorites_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/my_favorites/my_favorites_use_case.dart';
 
 class MyFavoritesUseCaseImp implements MyFavoritesUseCase {
   final MyFavoritesRepository _myFavoritesRepository;

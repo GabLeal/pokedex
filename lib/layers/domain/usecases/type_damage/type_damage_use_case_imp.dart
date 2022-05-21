@@ -3,7 +3,7 @@ import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
 
 import 'package:pokedex/layers/domain/repositories/type_damage_repository.dart';
-import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/type_damage/type_damage_use_case.dart';
 
 class TypeDamageUseCaseImp implements TypeDamageUseCase {
   final TypeDamageRepository _typeDamageRepository;
