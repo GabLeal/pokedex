@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
-import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/type_damage/type_damage_use_case.dart';
 import 'package:pokedex/layers/presentation/stores/type_damage_store.dart';
 
 class TypeDamageUseCaseMock extends Mock implements TypeDamageUseCase {}

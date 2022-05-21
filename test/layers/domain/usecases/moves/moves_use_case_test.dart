@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
 import 'package:pokedex/layers/domain/repositories/move_repository.dart';
-import 'package:pokedex/layers/domain/usercases/moves/moves_use_case_imp.dart';
+import 'package:pokedex/layers/domain/usecases/moves/moves_use_case_imp.dart';
 
 class MoveDetailsRepositoryMock extends Mock implements MoveDetailsRepository {}
 

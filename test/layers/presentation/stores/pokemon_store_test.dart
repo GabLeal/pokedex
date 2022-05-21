@@ -2,9 +2,9 @@ import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/layers/data/dto/pokemon_dto.dart';
-import 'package:pokedex/layers/domain/usercases/my_favorites/my_favorites_use_case.dart';
-import 'package:pokedex/layers/domain/usercases/my_team/my_team_use_case.dart';
-import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/my_favorites/my_favorites_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/my_team/my_team_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/pokemon/pokemon_use_case.dart';
 import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
 
 class PokemonUseCaseMock extends Mock implements PokemonUseCase {}

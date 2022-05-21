@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
 import 'package:pokedex/layers/domain/repositories/ability_repository.dart';
-import 'package:pokedex/layers/domain/usercases/ability/ability_details_use_case_imp.dart';
+import 'package:pokedex/layers/domain/usecases/ability/ability_details_use_case_imp.dart';
 
 class AbilityDetailsRepositoryMock extends Mock
     implements AbilityDetailsRepository {}

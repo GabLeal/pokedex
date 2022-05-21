@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
-import 'package:pokedex/layers/domain/usercases/moves/moves_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/moves/moves_use_case.dart';
 import 'package:pokedex/layers/presentation/stores/move_store.dart';
 
 class MovesUseCaseMock extends Mock implements MovesUseCase {}
