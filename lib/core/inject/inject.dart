@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pokedex/core/network/http_client.dart';
+import 'package:pokedex/core/network/http_client_interface.dart';
 import 'package:pokedex/layers/data/datasources/local/my_favorities/my_favorites_datasorce.dart';
 import 'package:pokedex/layers/data/datasources/local/my_favorities/my_favorites_datasorce_imp.dart';
 import 'package:pokedex/layers/data/datasources/local/my_team/my_team_datasorce.dart';
@@ -10,6 +12,8 @@ import 'package:pokedex/layers/data/datasources/remote/moves/move_datasource.dar
 import 'package:pokedex/layers/data/datasources/remote/moves/move_datasource_imp.dart';
 import 'package:pokedex/layers/data/datasources/remote/pokemon/pokemon_datasource.dart';
 import 'package:pokedex/layers/data/datasources/remote/pokemon/pokemon_datasource_imp.dart';
+import 'package:pokedex/layers/data/datasources/remote/type_damage/type_damage_datasource.dart';
+import 'package:pokedex/layers/data/datasources/remote/type_damage/type_damage_datasource_imp.dart';
 import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
 import 'package:pokedex/layers/data/repositories/move_repository_imp.dart';
 import 'package:pokedex/layers/data/repositories/my_favorites_repository_imp.dart';
@@ -40,10 +44,20 @@ import 'package:pokedex/layers/presentation/stores/pokemon_store.dart';
 import 'package:pokedex/layers/presentation/stores/type_damage_store.dart';
 
 class Inject {
-  static void init() {
-    GetIt getIt = GetIt.instance;
+  GetIt getIt = GetIt.instance;
+  void init() {
+    getIt.registerFactory<IHttpClient>(
+      () => HttpClient(
+        Dio(),
+      ),
+    );
+    _configureDataSource();
+    _configureRepository();
+    _configureUsecase();
+    _configurePresentation();
+  }
 
-    //TODO datasourcer
+  void _configureDataSource() {
     getIt.registerLazySingleton<MyTeamDatasource>(
       () => MyTeamDatasourceImp(),
     );
@@ -52,16 +66,29 @@ class Inject {
     );
 
     getIt.registerLazySingleton<PokemonDatasource>(
-      () => PokemonDatasourceImp(Dio()),
+      () => PokemonDatasourceImp(
+        getIt<IHttpClient>(),
+      ),
     );
     getIt.registerLazySingleton<MoveDatasource>(
-      () => MoveDetailsDatasourceImp(Dio()),
+      () => MoveDetailsDatasourceImp(
+        getIt<IHttpClient>(),
+      ),
     );
     getIt.registerLazySingleton<AbilityDetailsDatasource>(
-      () => AbilityDetailsDatasourceImp(Dio()),
+      () => AbilityDetailsDatasourceImp(
+        getIt<IHttpClient>(),
+      ),
     );
 
-    //REPOSITORIES
+    getIt.registerLazySingleton<TypeDamageDatasource>(
+      () => TypeDamageDatasourceImp(
+        getIt<IHttpClient>(),
+      ),
+    );
+  }
+
+  void _configureRepository() {
     getIt.registerLazySingleton<AbilityDetailsRepository>(
       () => AbilityDetailsRepositoryImp(
         getIt<AbilityDetailsDatasource>(),
@@ -76,7 +103,7 @@ class Inject {
 
     getIt.registerLazySingleton<TypeDamageRepository>(
       () => TypeDamageRepositoryImp(
-        dio: Dio(),
+        getIt<TypeDamageDatasource>(),
       ),
     );
 
@@ -97,8 +124,9 @@ class Inject {
         getIt<MyFavoritesDatasource>(),
       ),
     );
+  }
 
-    //USECASES
+  void _configureUsecase() {
     getIt.registerLazySingleton<AbilityDetailsUseCase>(
       () => AbilityDetailsUseCaseImp(
         getIt.get<AbilityDetailsRepository>(),
@@ -134,8 +162,9 @@ class Inject {
         getIt<MyFavoritesRepository>(),
       ),
     );
+  }
 
-    //CONTROLLERSß
+  void _configurePresentation() {
     getIt.registerLazySingleton<AbilityStore>(
       () => AbilityStore(
         getIt.get<AbilityDetailsUseCase>(),
