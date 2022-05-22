@@ -4,7 +4,8 @@ import 'package:pokedex/core/inject/inject.dart';
 import 'package:pokedex/layers/presentation/pages/home/home_page.dart';
 
 void main() async {
-  Inject.init();
+  Inject inject = Inject();
+  inject.init();
   runApp(App());
 }
 

@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/repositories/my_favorites_repository.dart';
-import 'package:pokedex/layers/domain/usercases/my_favorites/my_favorites_use_case_imp.dart';
+import 'package:pokedex/layers/domain/usecases/my_favorites/my_favorites_use_case_imp.dart';
 
 class MyFavoritesRepositoryMock extends Mock implements MyFavoritesRepository {}
 

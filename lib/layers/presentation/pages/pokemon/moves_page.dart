@@ -1,13 +1,9 @@
 import 'package:animated_card/animated_card.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pokedex/core/util/enums.dart';
-import 'package:pokedex/layers/data/repositories/ability_repository_imp.dart';
-import 'package:pokedex/layers/data/repositories/move_repository_imp.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/layers/domain/usercases/ability/ability_details_use_case_imp.dart';
-import 'package:pokedex/layers/domain/usercases/moves/moves_use_case_imp.dart';
 import 'package:pokedex/layers/presentation/components/button_retry.dart';
 import 'package:pokedex/layers/presentation/components/loading_widget.dart';
 import 'package:pokedex/layers/presentation/components/type_widget.dart';
@@ -27,19 +23,8 @@ class MovesPage extends StatefulWidget {
 }
 
 class _MovesPageState extends State<MovesPage> {
-  MoveStore _moveStore = MoveStore(
-    MovesUseCaseImp(
-      MoveDetailsRepositoryImp(
-        dio: Dio(),
-      ),
-    ),
-  );
-
-  AbilityStore _abilityStore = AbilityStore(
-    AbilityDetailsUseCaseImp(AbilityDetailsRepositoryImp(
-      dio: Dio(),
-    )),
-  );
+  final _moveStore = GetIt.I.get<MoveStore>();
+  final _abilityStore = GetIt.I.get<AbilityStore>();
 
   @override
   Widget build(BuildContext context) {

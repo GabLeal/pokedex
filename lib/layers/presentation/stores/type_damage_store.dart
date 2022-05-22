@@ -1,7 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/data/dto/type_damage_dto.dart';
-import 'package:pokedex/layers/domain/usercases/type_damage/type_damage_use_case.dart';
+
+import 'package:pokedex/layers/domain/usecases/type_damage/type_damage_use_case.dart';
 
 part 'type_damage_store.g.dart';
 
@@ -17,19 +18,17 @@ abstract class _TypeDamageStoreBase with Store {
   @observable
   StatusRequest statusRequestTypedamage = StatusRequest.empty;
 
-  void getTypeDamage(String? url) async {
+  Future<void> getTypeDamage(String? url) async {
     statusRequestTypedamage = StatusRequest.loading;
-    try {
-      typeDamage = await _typeDamageUseCase.getTypeDamage(url!);
 
-      if (typeDamage != null) {
-        statusRequestTypedamage = StatusRequest.success;
-      } else {
-        statusRequestTypedamage = StatusRequest.error;
-      }
-    } catch (erro) {
+    var result = await _typeDamageUseCase.getTypeDamage(url!);
+
+    result.fold((error) {
       statusRequestTypedamage = StatusRequest.error;
-      print(erro);
-    }
+      typeDamage = null;
+    }, (success) {
+      typeDamage = success;
+      statusRequestTypedamage = StatusRequest.success;
+    });
   }
 }

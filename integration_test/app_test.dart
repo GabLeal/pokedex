@@ -26,13 +26,12 @@ void main() {
       (WidgetTester tester) async {
     app.main();
     await tester.pumpAndSettle();
-
     final tabFavoritis = find.text('Favorites');
     await tester.tap(tabFavoritis);
     await tester.pumpAndSettle();
 
     final isEmptyFavoritiesText =
-        'Você ainda não possuim pokemons favoritos. Adicone eles a sua lista.';
+        'You dont have any favorite pokemons yet. Add them to your list.';
 
     expect(find.text(isEmptyFavoritiesText), findsOneWidget);
 
@@ -180,5 +179,57 @@ void main() {
     await tester.tap(menuMoves);
     await tester.pumpAndSettle();
     await Future.delayed(const Duration(seconds: 2));
+  });
+
+  group('My team pokemon', () {
+    testWidgets('should open the detail and add pokemon in my team.',
+        (WidgetTester tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+      final cardPokemon = find.text('Charizard');
+      await tester.tap(cardPokemon);
+      await tester.pumpAndSettle();
+
+      final pokebola = find.byKey(Key('pokebola'));
+      await tester.tap(pokebola);
+      await tester.pumpAndSettle();
+
+      await tester.pageBack();
+      await tester.pumpAndSettle();
+
+      final pokemon = find.byKey(Key('pokemonMyTeam0'));
+      await Future.delayed(const Duration(seconds: 2));
+
+      expect(pokemon, findsOneWidget);
+    });
+
+    testWidgets('should open the detail and remove pokemon in my team.',
+        (WidgetTester tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+      final cardPokemon = find.text('Charizard');
+      await tester.tap(cardPokemon);
+      await tester.pumpAndSettle();
+
+      final pokebola = find.byKey(Key('pokebola'));
+      await tester.tap(pokebola);
+      await tester.pumpAndSettle();
+
+      await tester.pageBack();
+      await tester.pumpAndSettle();
+
+      await tester.tap(cardPokemon);
+      await tester.pumpAndSettle();
+      await tester.tap(pokebola);
+      await tester.pumpAndSettle();
+
+      await tester.pageBack();
+      await tester.pumpAndSettle();
+      final pokemon = find.byKey(Key('pokemonMyTeam0'));
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      expect(pokemon, findsNothing);
+    });
   });
 }

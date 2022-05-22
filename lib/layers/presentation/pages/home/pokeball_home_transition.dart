@@ -51,8 +51,8 @@ class _PokeballHomeTransitionState extends State<PokeballHomeTransition> {
           ),
         ),
         AnimatedPositioned(
-          duration: duration,
-          top: isAnimateHomePokeball ? -fullHeight : 1,
+          duration: Duration(milliseconds: 1100),
+          top: isAnimateHomePokeball ? -fullHeight - 50 : 1,
           left: 0,
           bottom: isAnimateHomePokeball ? 0 : 1,
           right: 0,

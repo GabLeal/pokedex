@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:pokedex/layers/data/datasources/local/my_team/my_team_datasorce.dart';
 import 'package:pokedex/layers/data/dto/ability_dto.dart';
 import 'package:pokedex/layers/data/dto/pokemon_dto.dart';
@@ -53,7 +52,6 @@ class MyTeamDatasourceImp implements MyTeamDatasource {
     var myTeamCache = instance.getString('myTeam');
     if (myTeamCache == null) return myTeam;
     var myTeamJson = jsonDecode(myTeamCache);
-    log(myTeamCache.toString());
     myTeam = List.of(myTeamJson).map((pokemon) {
       return PokemonDto.fromJson(pokemon);
     }).toList();

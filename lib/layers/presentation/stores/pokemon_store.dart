@@ -1,11 +1,9 @@
 import 'package:mobx/mobx.dart';
-import 'package:pokedex/core/failure/max_team_failure.dart';
 import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
-import 'package:pokedex/layers/domain/usercases/my_favorites/my_favorites_use_case.dart';
-import 'package:pokedex/layers/domain/usercases/my_team/my_team_use_case.dart';
-import 'package:pokedex/layers/domain/usercases/pokemon/pokemon_use_case.dart';
-import 'package:bot_toast/bot_toast.dart';
+import 'package:pokedex/layers/domain/usecases/my_favorites/my_favorites_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/my_team/my_team_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/pokemon/pokemon_use_case.dart';
 
 part 'pokemon_store.g.dart';
 
@@ -15,6 +13,7 @@ abstract class _PokemonStoreBase with Store {
   final PokemonUseCase _pokemonUseCase;
   final MyTeamUseCase _myTeamUseCase;
   final MyFavoritesUseCase _myFavoritesUseCase;
+  String erroMessageSeacrhPokemon = '';
 
   _PokemonStoreBase(
     this._pokemonUseCase,
@@ -58,14 +57,11 @@ abstract class _PokemonStoreBase with Store {
     }
   }
 
+  bool get pokemonTeamIsComplete {
+    return myTeamPokemon.length == 6;
+  }
+
   Future<void> addMyTeamPokemon(PokemonEntity pokemon) async {
-    if (myTeamPokemon.length == 6) {
-      BotToast.showText(
-        duration: Duration(seconds: 3),
-        text: MaxTeamFailure().message,
-      );
-      return;
-    }
     bool isSave = await _myTeamUseCase.add(
       pokemon,
     );
@@ -79,8 +75,7 @@ abstract class _PokemonStoreBase with Store {
     }
   }
 
-  //TODO: revisar
-  bool pokemonIsMyTeam(idPokemon) {
+  bool pokemonIsInMyTeam(idPokemon) {
     for (var pokemon in myTeamPokemon) {
       if (pokemon.id == idPokemon) return true;
     }
@@ -91,14 +86,16 @@ abstract class _PokemonStoreBase with Store {
   getPokemons() async {
     statusRequest = StatusRequest.loading;
 
-    List<PokemonEntity> listPokemons = await _pokemonUseCase.getPokemons();
-
-    if (listPokemons.isNotEmpty) {
-      pokemons.addAll(listPokemons);
-      statusRequest = StatusRequest.success;
-    } else {
-      statusRequest = StatusRequest.error;
-    }
+    var result = await _pokemonUseCase.getPokemons();
+    result.fold(
+      (error) {
+        statusRequest = StatusRequest.error;
+      },
+      (success) {
+        pokemons.addAll(success);
+        statusRequest = StatusRequest.success;
+      },
+    );
   }
 
   @action
@@ -113,13 +110,8 @@ abstract class _PokemonStoreBase with Store {
     var result = await _pokemonUseCase.searchPokemonByName(name);
 
     return result.fold((error) {
-      statusRequest = StatusRequest.success;
-
-      BotToast.showText(
-        duration: Duration(seconds: 3),
-        text: error.message,
-      ); //popup a text toast;
-
+      statusRequest = StatusRequest.empty;
+      erroMessageSeacrhPokemon = error.message;
       return null;
     }, (success) {
       statusRequest = StatusRequest.success;

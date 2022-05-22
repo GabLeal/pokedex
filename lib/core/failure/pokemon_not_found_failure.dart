@@ -5,3 +5,9 @@ class PokemonNotFoundFailure extends Failure {
     String message = 'Pokemon not found. Try again.',
   }) : super(message);
 }
+
+class NotFoundFailure extends Failure {
+  NotFoundFailure({
+    String message = '',
+  }) : super(message);
+}

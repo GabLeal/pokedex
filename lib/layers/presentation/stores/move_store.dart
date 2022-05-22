@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/domain/entities/move_details_entity.dart';
-import 'package:pokedex/layers/domain/usercases/moves/moves_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/moves/moves_use_case.dart';
 
 part 'move_store.g.dart';
 
@@ -17,15 +17,17 @@ abstract class _MoveStoreBase with Store {
   @observable
   StatusRequest statusRequestMove = StatusRequest.empty;
 
-  void getMovie(String url) async {
+  Future<void> getMovie(String url) async {
     statusRequestMove = StatusRequest.loading;
 
-    moveDetails = await _movesUseCase.getMoveDetails(url);
+    var result = await _movesUseCase.getMoveDetails(url);
 
-    if (moveDetails != null) {
-      statusRequestMove = StatusRequest.success;
-    } else {
+    result.fold((error) {
       statusRequestMove = StatusRequest.error;
-    }
+      moveDetails = null;
+    }, (success) {
+      moveDetails = success;
+      statusRequestMove = StatusRequest.success;
+    });
   }
 }

@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:pokedex/core/util/enums.dart';
 import 'package:pokedex/layers/domain/entities/ability_details_entity.dart';
-import 'package:pokedex/layers/domain/usercases/ability/ability_details_use_case.dart';
+import 'package:pokedex/layers/domain/usecases/ability/ability_details_use_case.dart';
 
 part 'ability_store.g.dart';
 
@@ -18,12 +18,14 @@ abstract class _AbilityStoreBase with Store {
   Future<void> getAbilityDetails(String url) async {
     statusRequestAbility = StatusRequest.loading;
 
-    abilityDetails = await _abilityDetailsUseCase.getPokemonAbilityDetails(url);
+    var result = await _abilityDetailsUseCase.getPokemonAbilityDetails(url);
 
-    if (abilityDetails != null) {
-      statusRequestAbility = StatusRequest.success;
-    } else {
+    result.fold((error) {
       statusRequestAbility = StatusRequest.error;
-    }
+      abilityDetails = null;
+    }, (success) {
+      abilityDetails = success;
+      statusRequestAbility = StatusRequest.success;
+    });
   }
 }
