@@ -56,14 +56,14 @@ Nesta sessão é possível ver quais as funcionalidades da pokedex e alguns [dia
 
 ## Testes
 
-Para obter uma maior segurança em relação ao que foi desenvolvido essa aplicação conta com dois tipos de testes: testes de unidade e testes de integração. Abaixo temos uma imagem que mostrar a cobertura atual de testes do aplicativo.
+Para obter uma maior segurança em relação ao que foi desenvolvido essa aplicação conta com dois tipos de testes: testes de unidade e testes de integração. Abaixo temos uma imagem que mostra a cobertura atual de testes do aplicativo.
 
 <div align='center'>
   <img src="screenshot-readme/coverage.png" width="100%">
 </div>
 
 
-Para rodar os testes basta ter o projeto clonado em seu computador e excutar os seguintes comandos no terminal dentro da estrutura de pastas do projeto:
+Para rodar os testes basta ter o projeto clonado em seu computador e executar os seguintes comandos no terminal dentro da estrutura de pastas do projeto:
 
 Testes de unidade:
 ```
