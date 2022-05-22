@@ -29,7 +29,6 @@ class HttpClient implements IHttpClient {
         statusCode: response.statusCode!,
       );
     } catch (exception) {
-      log(exception.toString());
       throw InternalServerFailure();
     }
   }
