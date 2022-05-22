@@ -29,7 +29,6 @@ class PokemonDatasourceImp implements PokemonDatasource {
         if (pokemon != null) pokemons.add(pokemon);
       }
 
-      //TODO verificar se deveria ficar aqui esse offset ou no business
       _offset += 20;
 
       return Right(pokemons);
@@ -40,7 +39,8 @@ class PokemonDatasourceImp implements PokemonDatasource {
 
   @override
   Future<Either<Failure, PokemonEntity>> searchPokemonByName(
-      String name) async {
+    String name,
+  ) async {
     try {
       var response = await _httpClient.get('${BaseUrl.url}/pokemon/$name');
       if (response.statusCode != 200) return Left(PokemonNotFoundFailure());
