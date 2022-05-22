@@ -18,7 +18,7 @@ Pokedex é um aplicativo onde o usuário pode consultar os pokemons e saber info
 
 ### Design da aplicação
 
-<img src="screenshot-readme/splash.png" height="500"> <img src="screenshot-readme/pokemons.png" height="500">
+<img src="screenshot-readme/splash.png" height="500"> <img src="screenshot-readme/pokemons.jpg" height="500">
 <img src="screenshot-readme/favorites.png" height="500">
 <img src="screenshot-readme/stats.png" height="500">
 <img src="screenshot-readme/moves.png" height="500">
