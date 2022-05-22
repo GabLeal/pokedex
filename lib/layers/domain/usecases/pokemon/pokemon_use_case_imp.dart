@@ -15,7 +15,9 @@ class PokemonUseCaseImp implements PokemonUseCase {
 
   @override
   Future<Either<Failure, PokemonEntity>> searchPokemonByName(
-      String name) async {
+    String name,
+  ) async {
+    if (name.isEmpty) return Left(Failure('Pokemon name is not empty.'));
     return await _pokemonRepository.searchPokemonByName(name);
   }
 }
