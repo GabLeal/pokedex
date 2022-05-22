@@ -94,5 +94,5 @@ Uma solução para melhorar o armazenamento de dados poderia ser integrar os dad
 Uma outra questão interessante seria implementar um sistema para monitoramento de logs do sistema que poderia ser usada para entender melhor possíveis erros que a aplicação pode ter ou ate mesmo usados para auditoria.
 
 ### Testes
-Apesar da grande maioria dos cenários terem sido testados acredito que daria pra chegar a uma cobertura de 100% nos testes de unidade e cobrir mais alguns casos nos testes de integração que não foram realizados.
+Apesar da grande maioria dos cenários terem sido testados, acredito que atingiria a uma cobertura de 100% nos testes de unidade, e cobriria mais alguns casos nos testes de integração que não foram realizados.
 
