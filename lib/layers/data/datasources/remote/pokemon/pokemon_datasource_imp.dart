@@ -49,7 +49,7 @@ class PokemonDatasourceImp implements PokemonDatasource {
       PokemonEntity pokemon = PokemonDto.fromJson(pokemonResponse);
       return Right(pokemon);
     } catch (e) {
-      return Left(DatasourceFailure());
+      return Left(DatasourceFailure(message: 'Pokemon not found. Try again.'));
     }
   }
 
