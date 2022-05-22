@@ -9,7 +9,8 @@
 
 ## Sobre o projeto
 
-Pokedex é um aplicativo onde o usuário pode consultar os pokemons e saber informações relevantes sobre o mesmo. Além disso, é possível favoritar seus pokemons para ter acesso a eles de forma mais rápida, inclusive quando você estiver offline. Nele você também pode montar seu time dos sonhos com os seus 6 melhores pokemons.
+Pokedex é um aplicativo no qual o usuário pode consultar os pokemons e adquirir informações relevantes sobre eles. Além disso, é possível favoritar os pokemons afim de acessá-los de forma mais rápida, inclusive quando você estiver offline! 
+Nele você também poderá montar seu time dos sonhos com os seus 6 melhores pokemons!
 
 <div align='center'>
   <img src="screenshot-readme/demostracao.gif" height="600">
@@ -28,14 +29,14 @@ Pokedex é um aplicativo onde o usuário pode consultar os pokemons e saber info
 <img src="screenshot-readme/myteam.png" height="600">
 
 ## Arquitetura
-O código foi feito se baseando nos principios de clean architecture propostos pelo livre [clean architecture](https://www.amazon.com.br/Arquitetura-Limpa-Artes%C3%A3o-Estrutura-Software/dp/8550804606/ref=sr_1_3?keywords=arquitetura+limpa&qid=1653192120&s=books&sprefix=arquitetura+lim%2Cstripbooks%2C188&sr=1-3&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9) e nos videos de arquitetura limpa do canal do [Deivid Willyan | Flutter](https://www.youtube.com/watch?v=LwOACmXcNQ8&list=PLRpTFz5_57cvCYRhHUui2Bis-5Ybh78TS). Os conceitos aplicados tem como objetivo tentar garantir um codigo com baixo acoplamento e alta coesão para facilitar a manutenabilidade e testabilidade do software.
+O código foi criado com base nos principios de Clean Architecture propostos pelo livro [Clean Architecture](https://www.amazon.com.br/Arquitetura-Limpa-Artes%C3%A3o-Estrutura-Software/dp/8550804606/ref=sr_1_3?keywords=arquitetura+limpa&qid=1653192120&s=books&sprefix=arquitetura+lim%2Cstripbooks%2C188&sr=1-3&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9) de Robert C. Martin e nos videos de arquitetura limpa do canal de [Deivid Willyan | Flutter](https://www.youtube.com/watch?v=LwOACmXcNQ8&list=PLRpTFz5_57cvCYRhHUui2Bis-5Ybh78TS). Os conceitos aplicados buscam como objetivo garantir um código com baixo acoplamento e alta coesão para facilitar a manutenabilidade e testabilidade do software.
 
 ## Features e diagramas
 Nesta sessão é possivel ver quais as funcionalidades da pokedex e alguns [diagramas BPNM](https://www.totvs.com/blog/gestao-industrial/bpmn/#:~:text=O%20BPMN%20%C3%A9%20uma%20representa%C3%A7%C3%A3o,etapa%20do%20processo%20de%20produ%C3%A7%C3%A3o.) que exemplificam como elas funcionam.
 
 1 - Listar pokemons: por padrao a pokedex exibe 20 pokemons e conforme o scroll é realizada ela vai carregando mais pokemons.
 
-2 - Ver detalhes de um pokemon e obter: informaçoes basicas, abilidades e movimentos, bem como saber suas vantagens e fraquezas em relação a outros tipos de pokemon.
+2 - Ver detalhes de um pokemon e obter: Informações básicas, habilidade e movimentos, bem como saber suas vantagens e fraquezas em relação a outros tipos de pokemon.
 
 3 - Marcar/Desmarcar um pokemon como favorito.
 
@@ -79,13 +80,13 @@ Por conta do tempo, algumas funcionalidades ainda não contemplam com profundida
 Entender melhor o mapeamento dos dados para saber se realmente todos os dados da api podem vir nulos em algum momento
 
 ### Tratamento de falhas
-Tratar melhor os erros da aplicacao e reproduzi-los de uma forma mais coerente na interface do usuario.
+Tratar melhor os erros da aplicação e reproduzi-los de uma forma mais coerente na interface do usuário.
 
-### Tratamento de conexao com a internet
-Criar um objeto responsavel por identifiar se o aparelho do usuario consegue se comunicar com algum host externo e tratar possiveis problemas de conexao com a internet.
+### Tratamento de conexão com a internet
+Criar um objeto responsável por identifiar se o aparelho do usuário consegue se comunicar com algum host externo e tratar possíveis problemas de conexão com a internet.
 
 ### Armazenamento de dados
-Uma soluçao para melhorar o armazenamento de dados poderia ser integrar os dados com o firebase. Dessa forma o usuario poderia ter seus dados mesmo offiline e/ou acessando outros dispositivos.
+Uma solução para melhorar o armazenamento de dados poderia ser integrar os dados com o firebase. Dessa forma o usuário poderia ter seus dados mesmo offiline e/ou acessando outros dispositivos.
 
 ### Testes
 Apesar da grande maioria dos cenarios terem sido testados acredito que daria pra chegar a uma cobertura de 100% nos testes de unidade e cobrir mais alguns casos nos testes de integração que não foram realizados.
