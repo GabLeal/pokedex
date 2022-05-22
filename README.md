@@ -18,14 +18,14 @@ Pokedex é um aplicativo onde o usuário pode consultar os pokemons e saber info
 
 ### Design da aplicação
 
-<img src="screenshot-readme/splash.png" height="500"> <img src="screenshot-readme/pokemons.jpg" height="500">
-<img src="screenshot-readme/favorites.png" height="500">
-<img src="screenshot-readme/stats.png" height="500">
-<img src="screenshot-readme/moves.png" height="500">
-<img src="screenshot-readme/ability.png" height="500">
-<img src="screenshot-readme/infomove.png" height="500">
-<img src="screenshot-readme/damage.png" height="500">
-<img src="screenshot-readme/myteam.png" height="500">
+<img src="screenshot-readme/splash.png" height="600"> <img src="screenshot-readme/pokemons.png" height="600">
+<img src="screenshot-readme/favorites.png" height="600">
+<img src="screenshot-readme/stats.png" height="600">
+<img src="screenshot-readme/moves.png" height="600">
+<img src="screenshot-readme/ability.png" height="600">
+<img src="screenshot-readme/infomove.png" height="600">
+<img src="screenshot-readme/damage.png" height="600">
+<img src="screenshot-readme/myteam.png" height="600">
 
 ### Arquitetura
 O código foi feito se baseando nos principios de clean architecture propostos pelo livre [clean architecture](https://www.amazon.com.br/Arquitetura-Limpa-Artes%C3%A3o-Estrutura-Software/dp/8550804606/ref=sr_1_3?keywords=arquitetura+limpa&qid=1653192120&s=books&sprefix=arquitetura+lim%2Cstripbooks%2C188&sr=1-3&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9) e nos videos de arquitetura limpa do canal do [Deivid Willyan | Flutter](https://www.youtube.com/watch?v=LwOACmXcNQ8&list=PLRpTFz5_57cvCYRhHUui2Bis-5Ybh78TS). Os conceitos aplicados tem como objetivo tentar garantir um codigo com baixo acoplamento e alta coesão para facilitar a manutenabilidade e testabilidade do software.
