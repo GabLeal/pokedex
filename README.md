@@ -48,7 +48,7 @@ Nesta sessão é possivel ver quais as funcionalidades da pokedex e alguns [diag
 7 - Pesquisar um pokemon pelo seu nome.
 
 <div align='center'>
-  <img src="screenshot-readme/giagramas.png" height="600">
+  <img src="screenshot-readme/diagramas.png" width="100%">
 </div>
 
 ### Testes
