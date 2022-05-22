@@ -75,6 +75,7 @@ class _MyTeamShortWidgetState extends State<MyTeamShortWidget> {
                                           backgroundColor:
                                               Colors.black.withOpacity(0.5),
                                           child: CacheImageWidget(
+                                            key: Key('pokemonMyTeam$index'),
                                             pathImage: _pokemonStore
                                                 .myTeamPokemon[index]
                                                 .sprites!

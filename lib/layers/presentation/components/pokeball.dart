@@ -62,6 +62,7 @@ class _PokeballState extends State<Pokeball> with TickerProviderStateMixin {
           width: width,
           height: height * 2,
           child: GestureDetector(
+            key: Key('pokebola'),
             onTap: addMyTeamPokemon,
             child: Transform.rotate(
               angle: animation.value,
