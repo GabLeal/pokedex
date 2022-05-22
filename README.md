@@ -34,9 +34,9 @@ Este aplicativo foi feito utilizando como base os dados da API do [pokeapi](http
 O código foi criado com base nos principios de Clean Architecture propostos pelo livro [Clean Architecture](https://www.amazon.com.br/Arquitetura-Limpa-Artes%C3%A3o-Estrutura-Software/dp/8550804606/ref=sr_1_3?keywords=arquitetura+limpa&qid=1653192120&s=books&sprefix=arquitetura+lim%2Cstripbooks%2C188&sr=1-3&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9) de Robert C. Martin e nos videos de arquitetura limpa do canal de [Deivid Willyan | Flutter](https://www.youtube.com/watch?v=LwOACmXcNQ8&list=PLRpTFz5_57cvCYRhHUui2Bis-5Ybh78TS). Os conceitos aplicados buscam como objetivo garantir um código com baixo acoplamento e alta coesão para facilitar a manutenabilidade e testabilidade do software.
 
 ## Features e diagramas
-Nesta sessão é possivel ver quais as funcionalidades da pokedex e alguns [diagramas BPNM](https://www.totvs.com/blog/gestao-industrial/bpmn/#:~:text=O%20BPMN%20%C3%A9%20uma%20representa%C3%A7%C3%A3o,etapa%20do%20processo%20de%20produ%C3%A7%C3%A3o.) que exemplificam como elas funcionam.
+Nesta sessão é possível ver quais as funcionalidades da pokedex e alguns [diagramas BPNM](https://www.totvs.com/blog/gestao-industrial/bpmn/#:~:text=O%20BPMN%20%C3%A9%20uma%20representa%C3%A7%C3%A3o,etapa%20do%20processo%20de%20produ%C3%A7%C3%A3o.) que exemplificam como elas funcionam.
 
-1 - Listar pokemons: por padrão a pokedex exibe 20 pokemons e conforme o scroll é realizada ela vai carregando mais pokemons.
+1 - Listar pokemons: por padrão a pokedex exibe 20 pokemons e conforme o scroll é realizado ele vai carregando mais pokemons.
 
 2 - Ver detalhes de um pokemon e obter: Informações básicas, habilidades e movimentos, bem como saber suas vantagens e fraquezas em relação a outros tipos de pokemon.
 
