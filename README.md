@@ -1,16 +1,18 @@
- # Sumario
+ # Sumário
  * [Sobre o projeto](#sobre-o-projeto)
  * [Design da aplicação](#design-da-aplicação)
  * [Arquitetura](#arquitetura)
  * [Features e diagramas](#features-e-diagramas)
  * [Testes](#testes)
- * [Proximos passos e melhorias que podem ser feitas](#proximos-passos-e-melhorias-que-podem-ser-feitas)
+ * [Próximos passos e melhorias que podem ser feitas](#próximos-passos-e-melhorias-que-podem-ser-feitas)
 
 
 ## Sobre o projeto
 
 Pokedex é um aplicativo no qual o usuário pode consultar os pokemons e adquirir informações relevantes sobre eles. Além disso, é possível favoritar os pokemons afim de acessá-los de forma mais rápida, inclusive quando você estiver offline! 
 Nele você também poderá montar seu time dos sonhos com os seus 6 melhores pokemons!
+
+Este aplicativo foi feito utilizando como base os dados da API do [pokeapi](https://pokeapi.co/) que possui um catálogo com todas as informações do universo dos pokemons.
 
 <div align='center'>
   <img src="screenshot-readme/demostracao.gif" height="600">
@@ -72,18 +74,18 @@ Testes de integração:
 ```
 flutter test integration_test/app_test.dart
 ```
-## Proximos passos e melhorias que podem ser feitas
+## Próximos passos e melhorias que podem ser feitas
 
 Por conta do tempo, algumas funcionalidades ainda não contemplam com profundidade todos os cenários que eu gostaria. Alguns pontos para serem melhorados:
 
-##### Modelagem do dados
-Entender melhor o mapeamento dos dados para saber se realmente todos os dados da api podem vir nulos em algum momento.
+### Modelagem das entidades
+Entender melhor o mapeamento dos dados para saber se realmente todos os dados da API podem vir nulos em algum momento.
 
 ### Tratamento de falhas
 Tratar melhor os erros da aplicação e reproduzi-los de uma forma mais coerente na interface do usuário.
 
 ### Tratamento de conexão com a internet
-Criar um objeto responsável por identifiar se o aparelho do usuário consegue se comunicar com algum host externo e tratar possíveis problemas de conexão com a internet.
+Criar um objeto responsável por identificar se o aparelho do usuário consegue se comunicar com algum host externo e tratar possíveis problemas de conexão com a internet.
 
 ### Armazenamento de dados
 Uma solução para melhorar o armazenamento de dados poderia ser integrar os dados com o firebase. Dessa forma o usuário poderia ter seus dados mesmo offiline e/ou acessando outros dispositivos.
