@@ -73,8 +73,8 @@ flutter test integration_test/app_test.dart
 ```
 ## Proximos passos e melhorias que podem ser feitas
 
-Por conta do tempo, algumas funcionalidades ainda não contemplam com profundidades todos os cenarios que eu gostaria. Alguns pontos são
-###
+Por conta do tempo, algumas funcionalidades ainda não contemplam com profundidades todos os cenarios que eu gostaria. Alguns pontos para serem melhorados:
+
 ##### Modelagem do dados
 Entender melhor o mapeamento dos dados para saber se realmente todos os dados da api podem vir nulos em algum momento
 
