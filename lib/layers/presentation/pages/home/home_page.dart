@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex/core/util/constants.dart';
-import 'package:pokedex/layers/presentation/pages/home/pokeball_home_transition.dart';
 import 'package:pokedex/layers/presentation/pages/my_team/my_team_details_view.dart';
 import 'package:pokedex/layers/presentation/pages/my_team/my_team_short_widget.dart';
 import 'package:pokedex/layers/presentation/components/app_bar_widget.dart';
@@ -38,75 +37,78 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     fullHeight = MediaQuery.of(context).size.height;
-    return AnimatedBuilder(
-      animation: _controllerAnimation,
-      builder: (context, _) {
-        return Stack(
-          children: [
-            DefaultTabController(
-              length: 2,
-              child: Scaffold(
-                appBar: AppBarWidget(),
-                body: LayoutBuilder(
-                  builder: (context, BoxConstraints constraints) {
-                    layoutHeight = constraints.maxHeight;
-                    return Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        AnimatedPositioned(
-                          duration: defaultTimeTransition,
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          height: constraints.maxHeight - cartBarHeight,
-                          child: TabBarView(
-                            children: <Widget>[
-                              TabPokemons(),
-                              TabFavorites(),
-                            ],
-                          ),
-                        ),
-                        AnimatedPositioned(
-                          duration: defaultTimeTransition,
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          height:
-                              _controllerAnimation.homeState == HomeState.normal
-                                  ? cartBarHeight
-                                  : (constraints.maxHeight - cartBarHeight),
-                          child: GestureDetector(
-                            onVerticalDragUpdate:
-                                _controllerAnimation.onVerticalGesture,
-                            child: AnimatedSwitcher(
-                              duration: defaultTimeTransition,
-                              child: _controllerAnimation.homeState ==
-                                      HomeState.normal
-                                  ? MyTeamShortWidget()
-                                  : MyTeamDetailsView(),
+    return Scaffold(
+      body: AnimatedBuilder(
+        animation: _controllerAnimation,
+        builder: (context, _) {
+          return Stack(
+            children: [
+              DefaultTabController(
+                length: 2,
+                child: Scaffold(
+                  appBar: AppBarWidget(),
+                  body: LayoutBuilder(
+                    builder: (context, BoxConstraints constraints) {
+                      layoutHeight = constraints.maxHeight;
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          AnimatedPositioned(
+                            duration: defaultTimeTransition,
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            height: constraints.maxHeight - cartBarHeight,
+                            child: TabBarView(
+                              children: <Widget>[
+                                TabPokemons(),
+                                TabFavorites(),
+                              ],
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  },
+                          AnimatedPositioned(
+                            duration: defaultTimeTransition,
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: _controllerAnimation.homeState ==
+                                    HomeState.normal
+                                ? cartBarHeight
+                                : (constraints.maxHeight - cartBarHeight),
+                            child: GestureDetector(
+                              key: Key('myTeam'),
+                              onVerticalDragUpdate:
+                                  _controllerAnimation.onVerticalGesture,
+                              child: AnimatedSwitcher(
+                                duration: defaultTimeTransition,
+                                child: _controllerAnimation.homeState ==
+                                        HomeState.normal
+                                    ? MyTeamShortWidget()
+                                    : MyTeamDetailsView(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-            AnimatedPositioned(
-              duration: defaultTimeTransition,
-              top: 0,
-              left: 0,
-              right: 0,
-              height: _heightAnimation,
-              child: Container(
-                color: Colors.black.withOpacity(0.5),
+              AnimatedPositioned(
+                duration: defaultTimeTransition,
+                top: 0,
+                left: 0,
+                right: 0,
+                height: _heightAnimation,
+                child: Container(
+                  color: Colors.black.withOpacity(0.5),
+                ),
               ),
-            ),
-            PokeballHomeTransition()
-          ],
-        );
-      },
+              // PokeballHomeTransition()
+            ],
+          );
+        },
+      ),
     );
   }
 }
