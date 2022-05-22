@@ -2,6 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/core/failure/datasource_failure.dart';
+import 'package:pokedex/core/failure/failure.dart';
 import 'package:pokedex/core/failure/pokemon_not_found_failure.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
 import 'package:pokedex/layers/domain/repositories/pokemon_repository.dart';
@@ -14,7 +15,7 @@ main() {
 
   final usecase = PokemonUseCaseImp(repositoryMock);
 
-  test('should return a list of 20 pokemons', () async {
+  test('should return a list of 3 pokemons', () async {
     when(repositoryMock.getPokemons).thenAnswer(
       (_) async => Right([
         PokemonEntity(),
@@ -52,6 +53,26 @@ main() {
     var pokemon = await usecase.searchPokemonByName('pikachu');
 
     expect(pokemon.right, isA<PokemonEntity>());
+  });
+
+  test(
+      'should return Failure with message Pokemon name cannot be empty, if name pokemon is empty.',
+      () async {
+    var pokemon = await usecase.searchPokemonByName('');
+
+    expect(pokemon.isLeft, true);
+    expect(pokemon.left, isA<Failure>());
+    expect(pokemon.left.message, 'Pokemon name cannot be empty.');
+  });
+
+  test(
+      'should return Failed message The pokemon name cannot be empty, if the pokemon name is a blank.',
+      () async {
+    var pokemon = await usecase.searchPokemonByName(' ');
+
+    expect(pokemon.isLeft, true);
+    expect(pokemon.left, isA<Failure>());
+    expect(pokemon.left.message, 'Pokemon name cannot be empty.');
   });
 
   test('should return a NotFound Failure error.', () async {

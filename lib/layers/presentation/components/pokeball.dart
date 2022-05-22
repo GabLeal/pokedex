@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex/core/util/constants.dart';
@@ -36,14 +37,21 @@ class _PokeballState extends State<Pokeball> with TickerProviderStateMixin {
   }
 
   void addMyTeamPokemon() {
-    if (_pokemonStore.pokemonIsMyTeam(widget.pokemon.id)) {
+    if (_pokemonStore.pokemonIsInMyTeam(widget.pokemon.id)) {
       _pokemonStore.removeMyTeamPokemon(widget.pokemon);
       animationController.forward(from: -pi / 2);
     } else {
-      _pokemonStore.addMyTeamPokemon(widget.pokemon);
-      animationController.forward(from: -pi / 2).whenComplete(() {
-        widget.onTap();
-      });
+      if (_pokemonStore.pokemonTeamIsComplete) {
+        BotToast.showText(
+          duration: Duration(seconds: 3),
+          text: 'Your team has the maximum number of pokemons',
+        );
+      } else {
+        _pokemonStore.addMyTeamPokemon(widget.pokemon);
+        animationController.forward(from: -pi / 2).whenComplete(() {
+          widget.onTap();
+        });
+      }
     }
   }
 
@@ -80,7 +88,7 @@ class _PokeballState extends State<Pokeball> with TickerProviderStateMixin {
                             top: Radius.circular(50.0),
                           ),
                           color:
-                              _pokemonStore.pokemonIsMyTeam(widget.pokemon.id)
+                              _pokemonStore.pokemonIsInMyTeam(widget.pokemon.id)
                                   ? Colors.red
                                   : Colors.white,
                         ),

@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex/layers/domain/entities/pokemon_entity.dart';
@@ -94,6 +95,11 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             pokemon: pokemon,
           ),
         ),
+      );
+    } else {
+      BotToast.showText(
+        duration: Duration(seconds: 3),
+        text: pokemonStore.erroMessageSeacrhPokemon,
       );
     }
   }
