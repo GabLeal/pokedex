@@ -73,20 +73,22 @@ main() {
       expect(store.statusRequest, StatusRequest.success);
     });
 
-    // test('should return null when not finding the searched pokemon ', () async {
-    //   when(
-    //     () => pokemonUseCase.searchPokemonByName(
-    //       any(),
-    //     ),
-    //   ).thenAnswer(
-    //     (_) async => Left(
-    //       Failure(''),
-    //     ),
-    //   );
+    test('should return null when not finding the searched pokemon.', () async {
+      when(
+        () => pokemonUseCase.searchPokemonByName(
+          any(),
+        ),
+      ).thenAnswer(
+        (_) async => Left(
+          Failure('any message'),
+        ),
+      );
 
-    //   var result = await store.searchPokemonByName('anyNamePokemon');
-    //   expect(result, null);
-    // });
+      var result = await store.searchPokemonByName('anyNamePokemon');
+      expect(store.statusRequest, StatusRequest.empty);
+      expect(store.erroMessageSeacrhPokemon, 'any message');
+      expect(result, null);
+    });
 
     test('should return pokemonEntity when finding the searched pokemon ',
         () async {
@@ -246,6 +248,38 @@ main() {
       await store.removeMyTeamPokemon(pokemonEntityMock);
 
       expect(store.myTeamPokemon.length, 0);
+    });
+
+    test('should return true if pokemon is in my team pokemon.', () async {
+      store.myTeamPokemon.add(pokemonEntityMock);
+      var result = store.pokemonIsInMyTeam(1);
+
+      expect(result, true);
+    });
+
+    test('should return false if pokemon is not in my team pokemon.', () async {
+      store.myTeamPokemon.add(pokemonEntityMock);
+      var result = store.pokemonIsInMyTeam(100);
+
+      expect(result, false);
+    });
+
+    test('should return true if pokemon Team is Complete.', () async {
+      store.myTeamPokemon.add(pokemonEntityMock);
+      store.myTeamPokemon.add(pokemonEntityMock);
+      store.myTeamPokemon.add(pokemonEntityMock);
+      store.myTeamPokemon.add(pokemonEntityMock);
+      store.myTeamPokemon.add(pokemonEntityMock);
+      store.myTeamPokemon.add(pokemonEntityMock);
+
+      expect(store.pokemonTeamIsComplete, true);
+    });
+
+    test('should return false if pokemon Team is not Complete.', () async {
+      store.myTeamPokemon.add(pokemonEntityMock);
+      store.myTeamPokemon.add(pokemonEntityMock);
+
+      expect(store.pokemonTeamIsComplete, false);
     });
   });
 }
