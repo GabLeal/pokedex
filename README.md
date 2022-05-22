@@ -90,7 +90,9 @@ Criar um objeto responsável por identificar se o aparelho do usuário consegue 
 ### Armazenamento de dados
 Uma solução para melhorar o armazenamento de dados poderia ser integrar os dados com o firebase. Dessa forma o usuário poderia ter seus dados mesmo offiline e/ou acessando outros dispositivos.
 
+### Monitoramento de logs ou algum recurso como crashlytics
+Uma outra questão interessante seria implementar um sistema para monitoramento de logs do sistema que poderia ser usada para entender melhor possíveis erros que a aplicação pode ter ou ate mesmo usados para auditoria.
+
 ### Testes
 Apesar da grande maioria dos cenários terem sido testados acredito que daria pra chegar a uma cobertura de 100% nos testes de unidade e cobrir mais alguns casos nos testes de integração que não foram realizados.
-
 
