@@ -34,9 +34,9 @@ O código foi criado com base nos principios de Clean Architecture propostos pel
 ## Features e diagramas
 Nesta sessão é possivel ver quais as funcionalidades da pokedex e alguns [diagramas BPNM](https://www.totvs.com/blog/gestao-industrial/bpmn/#:~:text=O%20BPMN%20%C3%A9%20uma%20representa%C3%A7%C3%A3o,etapa%20do%20processo%20de%20produ%C3%A7%C3%A3o.) que exemplificam como elas funcionam.
 
-1 - Listar pokemons: por padrao a pokedex exibe 20 pokemons e conforme o scroll é realizada ela vai carregando mais pokemons.
+1 - Listar pokemons: por padrão a pokedex exibe 20 pokemons e conforme o scroll é realizada ela vai carregando mais pokemons.
 
-2 - Ver detalhes de um pokemon e obter: Informações básicas, habilidade e movimentos, bem como saber suas vantagens e fraquezas em relação a outros tipos de pokemon.
+2 - Ver detalhes de um pokemon e obter: Informações básicas, habilidades e movimentos, bem como saber suas vantagens e fraquezas em relação a outros tipos de pokemon.
 
 3 - Marcar/Desmarcar um pokemon como favorito.
 
@@ -44,7 +44,7 @@ Nesta sessão é possivel ver quais as funcionalidades da pokedex e alguns [diag
 
 5 - Adicionar/remover pokemon do "my team".
 
-6 - exibir time pokemon.
+6 - Exibir time pokemon.
 
 7 - Pesquisar um pokemon pelo seu nome.
 
@@ -74,10 +74,10 @@ flutter test integration_test/app_test.dart
 ```
 ## Proximos passos e melhorias que podem ser feitas
 
-Por conta do tempo, algumas funcionalidades ainda não contemplam com profundidades todos os cenarios que eu gostaria. Alguns pontos para serem melhorados:
+Por conta do tempo, algumas funcionalidades ainda não contemplam com profundidade todos os cenários que eu gostaria. Alguns pontos para serem melhorados:
 
 ##### Modelagem do dados
-Entender melhor o mapeamento dos dados para saber se realmente todos os dados da api podem vir nulos em algum momento
+Entender melhor o mapeamento dos dados para saber se realmente todos os dados da api podem vir nulos em algum momento.
 
 ### Tratamento de falhas
 Tratar melhor os erros da aplicação e reproduzi-los de uma forma mais coerente na interface do usuário.
@@ -89,6 +89,6 @@ Criar um objeto responsável por identifiar se o aparelho do usuário consegue s
 Uma solução para melhorar o armazenamento de dados poderia ser integrar os dados com o firebase. Dessa forma o usuário poderia ter seus dados mesmo offiline e/ou acessando outros dispositivos.
 
 ### Testes
-Apesar da grande maioria dos cenarios terem sido testados acredito que daria pra chegar a uma cobertura de 100% nos testes de unidade e cobrir mais alguns casos nos testes de integração que não foram realizados.
+Apesar da grande maioria dos cenários terem sido testados acredito que daria pra chegar a uma cobertura de 100% nos testes de unidade e cobrir mais alguns casos nos testes de integração que não foram realizados.
 
 
