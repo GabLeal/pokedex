@@ -18,7 +18,7 @@ class _TabFavoritesState extends State<TabFavorites> {
       if (_pokemonStore.favoritesPokemons.isEmpty) {
         return Center(
           child: Text(
-            'Você ainda não possuim pokemons favoritos. Adicone eles a sua lista.',
+            'You dont have any favorite pokemons yet. Add them to your list.',
             textAlign: TextAlign.center,
           ),
         );
