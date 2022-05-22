@@ -47,6 +47,10 @@ Nesta sessão é possivel ver quais as funcionalidades da pokedex e alguns [diag
 
 7 - Pesquisar um pokemon pelo seu nome.
 
+<div align='center'>
+  <img src="screenshot-readme/giagramas.png" height="600">
+</div>
+
 ### Testes
 Para obter uma maior segurança em relação ao que foi desenvolvido essa aplicaçao conta com dois tipos de testes: testes de unidade e testes de integração. Abaixo temos uma imagem que mostrar a cobertura atual de testes do aplicativo.
 
